@@ -1,8 +1,8 @@
 {
-  "version": "0.5.0",
-  "tag": "v0.5.0",
-  "apkUrl": "https://github.com/jemangr/mochi-pop-puzzle-releases/releases/download/v0.5.0/mochi-pop-puzzle.apk",
-  "releaseUrl": "https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.5.0",
+  "version": "0.5.5",
+  "tag": "v0.5.5",
+  "apkUrl": "https://github.com/jemangr/mochi-pop-puzzle-releases/releases/download/v0.5.5/mochi-pop-puzzle.apk",
+  "releaseUrl": "https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.5.5",
   "remoteConfig": {
     "interstitialCooldownSec": 210,
     "interstitialMinRuns": 3,
