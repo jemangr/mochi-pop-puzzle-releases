@@ -9,13 +9,13 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk">
-    <img src="https://img.shields.io/badge/Download%20Latest%20APK-mochi--pop--puzzle.apk-ff6b8b?style=for-the-badge&logo=android&logoColor=white" alt="Download Latest APK" />
+  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases">
+    <img src="assets/download-badge.svg" alt="Download Latest APK: mochi-pop-puzzle.apk" height="38" />
   </a>
 </p>
 
 <p align="center">
-  <strong>Direct Download (Always Latest):</strong>
+  <strong>Direct Download (Once First Release Is Published):</strong>
   <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk">
     <code>mochi-pop-puzzle.apk</code>
   </a>
