@@ -1,5 +1,12 @@
 # Changelog — Mochi Pop!
 
+## [0.4.5] - 2026-11-14
+### Changed & Removed
+- **Removed Supporter Pass & Play Billing References (`index.html`, `main.js`, `monetization.js`, `i18n.js`, `styles.css`, `version.json`, `PRIVACY_POLICY.md`, `privacy.html`):**
+  - Removed the paid/demo **Cozy Supporter Pass** UI, state fields (`supporterPass`, `supporterBowlDate`), CSS rules, translations across all 6 languages, and `remoteConfig.supporterDailyFish`.
+  - Updated Settings **📖 Guide & Stats** tab label and simplified interstitial copy (`interstitial_sub`).
+  - Removed Google Play Billing & Supporter Pass mentions from `PRIVACY_POLICY.md`, `privacy.html`, `README.md`, and `TODO.md` (keeping only Google AdMob disclosures for future Play Store releases plus live `api.jemangr.app` Leaderboard / Cloud Save).
+
 ## [0.4.4] - 2026-11-14
 ### Added
 - **Live Cloud Leaderboard & Cross-Device Cloud Save (`https://api.jemangr.app`, `server/`, `monetization.js`, `main.js`):**

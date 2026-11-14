@@ -1,4 +1,4 @@
-# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.4.4`)
+# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.4.5`)
 
 > **Private Repository** — Closed Source / All Rights Reserved (`support@jemangr.app`)
 
@@ -11,6 +11,10 @@
 </p>
 
 ---
+
+## ✨ What's New in v0.4.5
+
+- **🧹 Supporter Pass & Billing Removal (`index.html`, `main.js`, `monetization.js`, `version.json`, `PRIVACY_POLICY.md`, `privacy.html`):** Removed the Cozy Supporter Pass UI, daily bowl bonus, `supporterDailyFish` remote-config key, and Google Play Billing references; updated Settings tab to **📖 Guide & Stats** and kept AdMob + live `api.jemangr.app` disclosures.
 
 ## ✨ What's New in v0.4.4
 
@@ -32,7 +36,7 @@
 - **🛡️ Smart Interstitial Gate, Remote Config & Funnel Analytics (`monetization.js`):** Zero forced ads on Day 0, `≥3`-run & `210s` cooldown gate, `120s` **Rewarded Immunity Shield**, live `version.json` Remote Config merge, native `MochiAdBridge` / `MochiNativeAnalytics` hooks, and an in-game **📊 Stats & Funnel** inspector in Settings (`⚙️`).
 - **🎡 Lucky Tuna Wheel & 📸 12-Card Sticker Album:** 1 Free daily spin + up to 3 Bonus Ad spins/day for Golden Fish, `↻` Rotates, or **Mochi Moments** sticker cards (`3 sets × 4 cards` with `+12/+18/+24 🐟` set completion bonuses in Daily → `📸 Album`).
 - **💖 Friendship Level (`Lv.1–50`), 🎉 Mini-Events & 🏆 Purr League:** Earn Friendship XP for permanent `+1`/`+2` starting `↻ Rotate` perks, enjoy **🐟 Fish Frenzy (`2×`)** weekends & **🚀 Rocket Surge (`2×`)** Wednesdays, and compete in Daily/Weekly Purr League standings with your Nickname.
-- **📺 High-ROI Rewarded & Hybrid Flows:** **2× Run Fish** + **Rescue Pack (`+3 ↻ + 1 💣`)** on Game Over, once-per-run **🎁 Upgrade (`+4 🐟 + Card`)**, **Closet `Watch-Ad (0/3)`** alternative unlock on premium items, and **👑 Cozy Supporter Pass (`Demo €2.99`)** removing Interstitials + unlocking the **🥣 Daily Golden Bowl (`+2 🐟/day`)**.
+- **📺 High-ROI Rewarded Flows:** **2× Run Fish** + **Rescue Pack (`+3 ↻ + 1 💣`)** on Game Over, once-per-run **🎁 Upgrade (`+4 🐟 + Card`)**, and **Closet `Watch-Ad (0/3)`** alternative unlocks on premium items.
 - **🔔 Native Android Scheduled Care Alarms (`MochiAlarmReceiver.java`):** Localized (`el/en/de/es/fr/tr`) background reminders when Mochi is hungry or sulking.
 
 ## ✨ Earlier Releases (`v0.2.0` + `v0.3.0`)
@@ -69,9 +73,9 @@
 - `scripts/build-apk.py` — Zero-dependency Python builder using `aapt2`, `javac`, `d8`, `zipalign`, and `apksigner` to produce signed `dist/mochi-pop-puzzle.apk`.
 - `server/` — Cloudflare Workers API (`src/worker.js`, `wrangler.toml`) + D1 SQL schema (`schema.sql`) powering live leaderboards & cloud saves at `https://api.jemangr.app`.
 - `PRIVACY_POLICY.md` & `privacy.html` — Bilingual (EN/EL) Privacy Policy (also embedded offline inside Settings → App).
-- `CHANGELOG.md` — Version history (`v0.4.4`, `v0.4.3`, `v0.4.2`, `v0.4.1`, `v0.4.0`, `v0.3.0`, `v0.2.0`, `v0.1.0`).
+- `CHANGELOG.md` — Version history (`v0.4.5`, `v0.4.4`, `v0.4.3`, `v0.4.2`, `v0.4.1`, `v0.4.0`, `v0.3.0`, `v0.2.0`, `v0.1.0`).
 - `version.json` — Remote auto-update manifest & live `remoteConfig` values.
-- `TODO.md` — Roadmap for live AdMob SDK, Play Store launch & Post-Launch IAP.
+- `TODO.md` — Roadmap for live AdMob SDK & Play Store launch.
 - `assets/` — Compiled `sprites/*.webp`, `sounds/*.mp3`, reference art, and documentation screenshots.
 
 ---
@@ -84,7 +88,7 @@
 python "scripts/build-apk.py"
 ```
 
-Outputs a v2+v3 signed, zipaligned APK (`dist/mochi-pop-puzzle.apk` and `dist/mochi-pop-puzzle-v0.4.4.apk`).
+Outputs a v2+v3 signed, zipaligned APK (`dist/mochi-pop-puzzle.apk` and `dist/mochi-pop-puzzle-v0.4.5.apk`).
 
 ### 2. Local Web Preview
 

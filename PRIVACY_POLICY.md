@@ -13,7 +13,7 @@
 
 **Mochi Pop!** is an offline-first cozy block puzzle and virtual pet game developed by **jemangr**. We respect your privacy and collect as little information as possible.
 
-This Privacy Policy explains what data the app stores locally on your device, what network requests it makes (including our live Leaderboard and Cloud Save API), how permissions are used, and how future Google Play online features (Google AdMob and Google Play Billing) are handled.
+This Privacy Policy explains what data the app stores locally on your device, what network requests it makes (including our live Leaderboard and Cloud Save API), how permissions are used, and how future Google Play advertising (Google AdMob) is handled.
 
 ---
 
@@ -45,11 +45,9 @@ If you choose to tap **Report a Bug / Error**, Mochi Pop! opens your device's em
 ### 3.3 External Links
 Links such as **Our Other Apps (`https://jemangr.app`)** open in your external browser and are governed by the privacy policy of the destination page.
 
-### 3.4 Advertising & In-App Purchases (Google Play Releases)
-- **Current Preview / Direct APK Builds:** Rewarded and interstitial ads are **simulated locally (demo mode)** and **no real ad network SDK** or real payment processing is active in the preview build.
-- **Future Google Play Store Releases:** When published on Google Play with **Google AdMob** and **Google Play Billing** enabled:
-  - **Google AdMob** may collect device identifiers (such as the Android Advertising ID), IP address, coarse location, and ad interaction data in accordance with Google's Privacy Policy and EU/EEA **UMP (User Messaging Platform) GDPR consent** prompts where required.
-  - **Cozy Supporter Pass** purchases are processed exclusively by **Google Play Billing**. We do not receive or store your credit card or payment details.
+### 3.4 Advertising (Google Play Releases)
+- **Current Preview / Direct APK Builds:** Rewarded and interstitial ads are **simulated locally (demo mode)** and **no real ad network SDK** is active in the preview build.
+- **Future Google Play Store Releases:** When published on Google Play with **Google AdMob** enabled, **Google AdMob** may collect device identifiers (such as the Android Advertising ID), IP address, coarse location, and ad interaction data in accordance with Google's Privacy Policy and EU/EEA **UMP (User Messaging Platform) GDPR consent** prompts where required.
 
 ### 3.5 Online Leaderboard (`Purr League`) & Cloud Save (`https://api.jemangr.app`)
 Mochi Pop! uses our Cloudflare Workers + D1 API (`https://api.jemangr.app`) to power live leaderboards and optional cross-device Cloud Save backups **without requiring an email address or password**:
@@ -84,7 +82,7 @@ Mochi Pop! is a general-audience casual puzzle game and is **not directed at chi
 
 ## 7. Changes to This Policy
 
-We may update this Privacy Policy as new online features (such as AdMob, Google Play Billing, or Cloud Leaderboards) are rolled out. Updates will be reflected by the Effective Date above.
+We may update this Privacy Policy as new online features (such as Google AdMob) or service updates are rolled out. Updates will be reflected by the Effective Date above.
 
 ---
 
