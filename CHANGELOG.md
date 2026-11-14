@@ -1,5 +1,19 @@
 # Changelog — Mochi Pop!
 
+## [0.3.0] - 2026-11-14
+### Added
+- **6-Language Localization (`i18n.js`):** Full interface, HUD, Settings, Closet Tile Skins, Daily Challenge card, and Onboarding Guide in **Greek (`el`)**, **English (`en`)**, **German (`de`)**, **Spanish (`es`)**, **French (`fr`)**, and **Turkish (`tr`)**, with live switching and browser auto-detection.
+- **Player Nickname & Personalization:** Added Nickname input inside First-Run Onboarding Step 1 and Settings (`⚙️`), printed onto exported PNG Score Cards (`by <nickname>`) and diagnostic reports in preparation for future leaderboards.
+- **5-Step First-Run Onboarding & Permissions Wizard (`#welcomeGuideModal`):** Automatically introduces new players to Language + Nickname first, followed by Mochi care & energy multiplier, 8×8 puzzle tiles & tactical moves, Closet & progression rewards, and interactive app permission controls (Notifications, Vibration test, and Android APK auto-update install permission), also reopenable anytime from Settings (`📖 Game Guide & Permissions`).
+- **New Special Tiles (`puzzle.js`):**
+  - `🥫` **Golden Tuna** (`+2 🐟` on 5+ cell pieces)
+  - `🎁` **Mystery Gift Box** (`+2 🐟`, `+300 pts`, or `+1 ↻ Rotate` from score 150+)
+  - `🚀` **Yarn Rocket** (clears full intersecting perpendicular line on clear from score 350+)
+  - `🌈` **Rainbow Color-Clear** (clears all matching color cells across the board from score 550+)
+- **Hold Pocket (`HOLD / ΤΣΕΠΗ`) & 90° Tray Rotation (`↻`):** Drag any tray piece into/out of the Hold slot (`1 swap/turn`), and rotate remaining tray pieces `90° CW` starting with `3` charges (`+1` charge every 5 cleared lines, plus `+3 ↻` Rewarded Ad refill).
+- **Gameplay Depth & Modes:** **Color Harmony** (`×1.5` when ≥6 cleared blocks match color), **Perfect Full-Board Clear** (`+1000 pts +3 🐟`), **Milestone Waves** (every `1500` pts rewards `+2 🐟`), **1-Turn Combo Grace**, **🧘 Zen Mode** toggle (relaxed play without Game Over), **Smart Magnetic Snap**, **Live Clear Score/Fish Preview Pill**, **15ms Cascade Wave**, and **4 Unlockable Tile Skins** (`Classic`, `Cat Paws 🐾`, `Choco Cookies 🍪`, `Cyber Neon ⚡`) in Mochi's Closet.
+- **Android Notification Bridge (`MainActivity.java`):** Native runtime `POST_NOTIFICATIONS` request + `canRequestPackageInstalls()` check for `v0.3.0` (`versionCode 3`).
+
 ## [0.2.0] - 2026-11-14
 ### Added
 - **Pixar-Style 3D Mochi Sprite Engine (21 Animations):** Integrated 4×4 transparent WebP sprite atlases (`idle`, `walk_side`, `sleep`, `eat`, `drink`, `cry`, `sulk`, `sulk_2`, `pet_1..3`, `cheer`, `fainted`, `groom`, `nervous`, `dance`, `yawn`, `tickle`, `play_pounce`, `track_toy`, `fever_party`) with accessories & bell collars attached to bone offsets.
