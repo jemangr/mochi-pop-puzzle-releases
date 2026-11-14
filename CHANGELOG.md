@@ -1,5 +1,19 @@
 # Changelog — Mochi Pop!
 
+## [0.4.6] - 2026-11-14
+### Added & Improved
+- **Native Android UX (`MainActivity.java`, `MochiShareProvider.java`, `AndroidManifest.xml`, `main.js`):**
+  - Modal-aware Back button (`window.onMochiBackPressed()` + Android 13+ `OnBackInvokedCallback`) closing open overlays first with double-tap exit toast confirmation.
+  - Native PNG Score Card Share Sheet (`MochiAndroid.shareScoreCard` via `MochiShareProvider`) + native `Vibrator`/`VibrationEffect` haptics bridge (`MochiAndroid.vibrate` / `vibratePattern`).
+- **Cloud Backend Security, GDPR Self-Delete & Leaderboard UX (`server/src/worker.js`, `monetization.js`, `main.js`, `index.html`):**
+  - Added per-IP Edge Cache + isolate rate limiting on `/v1/register`, `/v1/score`, `/v1/save`, `/v1/restore`, `/v1/profile`, `/v1/account/delete`.
+  - Added instant Nickname sync (`POST /v1/profile`) + inline `"MochiFan"` prompt inside `#leaderboardModal`.
+  - Added self-service **🗑️ Delete My Cloud Data** (`DELETE /v1/account` & `POST /v1/account/delete`) inside `#cloudModal` with 2-tap confirmation across all 6 languages.
+- **Cozy Night Audio & Tablet Landscape (`audio.js`, `styles.css`, `main.js`):**
+  - Night Mode (`sound.setNightMode`) cross-switches to a gentle slower lullaby loop + night shimmer chimes.
+  - Responsive 2-column Tablet/Desktop landscape layout (`@media (min-width: 840px) and (min-height: 540px)`) with `ResizeObserver` canvas auto-fit.
+- **Automated Verification (`tests/run_tests.py`):** Added repeatable unit + Playwright E2E suite (desktop tablet & mobile viewports, Back hook, Seeded Daily determinism, Privacy Policy EN/EL, Cloud backup).
+
 ## [0.4.5] - 2026-11-14
 ### Changed & Removed
 - **Removed Supporter Pass & Play Billing References (`index.html`, `main.js`, `monetization.js`, `i18n.js`, `styles.css`, `version.json`, `PRIVACY_POLICY.md`, `privacy.html`):**

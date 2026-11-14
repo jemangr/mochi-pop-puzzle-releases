@@ -1,4 +1,4 @@
-# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.4.5`)
+# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.4.6`)
 
 > **Private Repository** — Closed Source / All Rights Reserved (`support@jemangr.app`)
 
@@ -11,6 +11,13 @@
 </p>
 
 ---
+
+## ✨ What's New in v0.4.6
+
+- **📱 Native Android Polish (`MainActivity.java`, `MochiShareProvider.java`):** Modal-aware Back button + double-tap exit guard, native Score Card Share Sheet, and Android `Vibrator` haptic feedback bridge.
+- **🛡️ Cloud Backend Hardening & GDPR Self-Delete (`server/`, `monetization.js`):** IP rate limiting, live `POST /v1/profile` Nickname sync (+ inline Leaderboard Nickname prompt), and 2-tap **🗑️ Delete My Cloud Data** (`DELETE /v1/account` / `POST /v1/account/delete`).
+- **🌙 Night Mode Music & Tablet Landscape (`audio.js`, `styles.css`):** Gentle Night lullaby melody when the lamp is on, plus a responsive 2-column layout on tablets/desktops (`≥ 840px`).
+- **🧪 Automated QA Suite (`tests/run_tests.py`):** In-browser unit + E2E tests verifying Puzzle determinism, Back hook, Privacy Policy, Tablet layout & Cloud sync.
 
 ## ✨ What's New in v0.4.5
 
@@ -72,8 +79,9 @@
 - `android/` — Native Android WebView wrapper (`MainActivity.java`, `AndroidManifest.xml`, adaptive launcher icon) serving bundled assets cleanly via `https://appassets.mochi.local`.
 - `scripts/build-apk.py` — Zero-dependency Python builder using `aapt2`, `javac`, `d8`, `zipalign`, and `apksigner` to produce signed `dist/mochi-pop-puzzle.apk`.
 - `server/` — Cloudflare Workers API (`src/worker.js`, `wrangler.toml`) + D1 SQL schema (`schema.sql`) powering live leaderboards & cloud saves at `https://api.jemangr.app`.
+- `tests/run_tests.py` — Automated browser unit + E2E QA suite (`360×800` mobile, `1024×768` tablet, Cloud sync & Daily determinism).
 - `PRIVACY_POLICY.md` & `privacy.html` — Bilingual (EN/EL) Privacy Policy (also embedded offline inside Settings → App).
-- `CHANGELOG.md` — Version history (`v0.4.5`, `v0.4.4`, `v0.4.3`, `v0.4.2`, `v0.4.1`, `v0.4.0`, `v0.3.0`, `v0.2.0`, `v0.1.0`).
+- `CHANGELOG.md` — Version history (`v0.4.6`, `v0.4.5`, `v0.4.4`, `v0.4.3`, `v0.4.2`, `v0.4.1`, `v0.4.0`, `v0.3.0`, `v0.2.0`, `v0.1.0`).
 - `version.json` — Remote auto-update manifest & live `remoteConfig` values.
 - `TODO.md` — Roadmap for live AdMob SDK & Play Store launch.
 - `assets/` — Compiled `sprites/*.webp`, `sounds/*.mp3`, reference art, and documentation screenshots.
@@ -88,7 +96,7 @@
 python "scripts/build-apk.py"
 ```
 
-Outputs a v2+v3 signed, zipaligned APK (`dist/mochi-pop-puzzle.apk` and `dist/mochi-pop-puzzle-v0.4.5.apk`).
+Outputs a v2+v3 signed, zipaligned APK (`dist/mochi-pop-puzzle.apk` and `dist/mochi-pop-puzzle-v0.4.6.apk`).
 
 ### 2. Local Web Preview
 
