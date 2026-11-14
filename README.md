@@ -3,7 +3,9 @@
 > **Play, clear combos, and don't let Mochi go hungry — or he'll sulk and turn his back on you!**
 
 <p align="center">
-  <img src="assets/screenshot.svg" alt="Mochi Pop! Gameplay Screenshot" width="760" />
+  <img src="assets/screenshot-day.png" alt="Mochi Pop! Daytime Gameplay" width="320" />
+  &nbsp;&nbsp;&nbsp;
+  <img src="assets/screenshot-night.png" alt="Mochi Pop! Night Lamp Gameplay" width="320" />
 </p>
 
 <p align="center">
