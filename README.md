@@ -1,4 +1,4 @@
-# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.4.1`)
+# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.4.2`)
 
 > **Play, clear combos, spin the Lucky Wheel, climb the Purr League, and keep Mochi happy — or she'll sulk and turn her back on you!**
 
@@ -10,17 +10,17 @@
 
 <p align="center">
   <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk">
-    <img src="assets/download-badge.svg" alt="Download Mochi Pop! v0.4.1 Android APK" height="38" />
+    <img src="assets/download-badge.svg" alt="Download Mochi Pop! v0.4.2 Android APK" height="38" />
   </a>
 </p>
 
 <p align="center">
   <strong>Latest Build:</strong>
   <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk">
-    <code>v0.4.1 — Android APK (mochi-pop-puzzle.apk)</code>
+    <code>v0.4.2 — Android APK (mochi-pop-puzzle.apk)</code>
   </a>
   &nbsp;•&nbsp;
-  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.4.1">
+  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.4.2">
     <code>Web Playtest Build (.zip)</code>
   </a>
 </p>

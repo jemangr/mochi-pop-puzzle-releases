@@ -1,5 +1,10 @@
 # Changelog — Mochi Pop!
 
+## [0.4.2] - 2026-11-14
+### Fixed
+- **Full Localization Audit Across All 6 Languages (`el`, `en`, `de`, `es`, `fr`, `tr`):**
+  - Localized previously English HUD & dynamic strings in `i18n.js`, `index.html`, and `main.js`: onboarding completion bubble (`Welcome <name>` → localized welcome), `×1.5 ΠΟΝΤ.` (`PTS`), `🧘 Χαλαρά` (`Zen`), weekend/Wednesday event banner (`🐟 Πυρετός Ψαριού: 2× Χρυσά Ψάρια!` + live refresh on language switch), puzzle craving strip (`Σπάσε 2 γραμμές...`), Daily Challenge HUD, Mochi's speech bubbles (`*Χασμουρητό*...`, feeding, toys, fountain, dispenser, wheel, sneezing, purrs, sulking/fainted), Daily Calendar & Streak Saver, Daily Quests & Wall Stickers, Closet sections & cards, Audio Mixer channels, Stats cards, Rewarded/Interstitial Ad overlays, and Game Over modal.
+
 ## [0.4.1] - 2026-11-14
 ### Fixed
 - **Android APK Asset Path Fix (`scripts/build-apk.py`):** Replaced Windows `aapt2 -A` asset packing (which stored backslashes like `assets/www\index.html` inside the APK zip and caused Android's `AssetManager` to return `404 Not Found` on launch) with POSIX forward-slash packaging (`assets/www/index.html`, verified binary-clean on `zipalign` + `apksigner` v2+v3).
