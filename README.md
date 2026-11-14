@@ -1,4 +1,4 @@
-# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.4.6`)
+# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.5.0`)
 
 > **Private Repository** — Closed Source / All Rights Reserved (`support@jemangr.app`)
 
@@ -11,6 +11,12 @@
 </p>
 
 ---
+
+## ✨ What's New in v0.5.0
+- **🗓️ Daily Challenge Monthly Archive (`daily-archive.js`):** Full monthly calendar inside Daily Rewards — replay missed seeded days (`15 🐟`) and earn `7d / 15d / Full Month` milestone Fish rewards.
+- **🏆 Weekly Purr League Season Rewards (`league-rewards.js`):** Claim end-of-season Fish (`+10` to `+60 🐟`) and Season Trophies for prior ISO weeks.
+- **🎨 Colorblind Symbols & 🔋 30 FPS Power Saver:** Distinct vector geometric glyphs on every block (`#toggleColorblind`) and calm reduced-motion 30 FPS loop (`#togglePowerSaver`) across all 6 languages.
+- **⚙️ Modular Architecture & CI (`.github/workflows/ci.yml`):** Extracted `daily-archive.js` & `league-rewards.js` and added automated GitHub Actions CI + expanded `tests/run_tests.py`.
 
 ## ✨ What's New in v0.4.6
 
@@ -81,7 +87,7 @@
 - `server/` — Cloudflare Workers API (`src/worker.js`, `wrangler.toml`) + D1 SQL schema (`schema.sql`) powering live leaderboards & cloud saves at `https://api.jemangr.app`.
 - `tests/run_tests.py` — Automated browser unit + E2E QA suite (`360×800` mobile, `1024×768` tablet, Cloud sync & Daily determinism).
 - `PRIVACY_POLICY.md` & `privacy.html` — Bilingual (EN/EL) Privacy Policy (also embedded offline inside Settings → App).
-- `CHANGELOG.md` — Version history (`v0.4.6`, `v0.4.5`, `v0.4.4`, `v0.4.3`, `v0.4.2`, `v0.4.1`, `v0.4.0`, `v0.3.0`, `v0.2.0`, `v0.1.0`).
+- `CHANGELOG.md` — Version history (`v0.5.0`, `v0.4.6`, `v0.4.5`, `v0.4.4`, `v0.4.3`, `v0.4.2`, `v0.4.1`, `v0.4.0`, `v0.3.0`, `v0.2.0`, `v0.1.0`).
 - `version.json` — Remote auto-update manifest & live `remoteConfig` values.
 - `TODO.md` — Roadmap for live AdMob SDK & Play Store launch.
 - `assets/` — Compiled `sprites/*.webp`, `sounds/*.mp3`, reference art, and documentation screenshots.
@@ -96,7 +102,7 @@
 python "scripts/build-apk.py"
 ```
 
-Outputs a v2+v3 signed, zipaligned APK (`dist/mochi-pop-puzzle.apk` and `dist/mochi-pop-puzzle-v0.4.6.apk`).
+Outputs a v2+v3 signed, zipaligned APK (`dist/mochi-pop-puzzle.apk` and `dist/mochi-pop-puzzle-v0.5.0.apk`).
 
 ### 2. Local Web Preview
 

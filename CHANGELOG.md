@@ -1,5 +1,19 @@
 # Changelog — Mochi Pop!
 
+## [0.5.0] - 2026-11-14
+### Added & Improved
+- **Daily Challenge Monthly Calendar Archive (`daily-archive.js`, `index.html`, `main.js`, `styles.css`):**
+  - Added 4th tab **🗓️ Archive** inside Daily Rewards & Quests showing the full current-month calendar of seeded Daily Challenge boards.
+  - Completed dates display best score + ✅, today plays free, and missed past days can be replayed for `15 🐟` to complete **Monthly Milestones** (`7d: +25 🐟`, `15d: +60 🐟`, Full Month: `+150 🐟`).
+- **Weekly Purr League Season Rewards (`league-rewards.js`, `index.html`, `main.js`):**
+  - Tracks weekly ISO participation (`appState.leagueWeeklyBest`) and checks prior-week placement from Cloudflare D1 (with offline tier fallback) to award end-of-season Fish (`+10` to `+60 🐟`) & Season Trophies (`🏆`).
+- **Accessibility & Battery Optimization (`puzzle.js`, `main.js`, `styles.css`, `i18n.js`):**
+  - **🎨 Colorblind Symbols:** Draws crisp geometric vector shapes (`●`, `▲`, `■`, `◆`, `✚`, `✦`) across board blocks, tray pieces & hold slot (translated in all 6 languages).
+  - **🔋 Power Saver (30 FPS / Reduced Motion):** Throttles game loop to ~30 FPS and softens CSS animations (`body.power-saver`).
+- **Modular Architecture & CI/CD (`.github/workflows/ci.yml`, `scripts/build-apk.py`, `tests/run_tests.py`):**
+  - Extracted `daily-archive.js` and `league-rewards.js` modules cleanly out of `main.js` and updated `scripts/build-apk.py`.
+  - Added GitHub Actions CI workflow (`.github/workflows/ci.yml`) running `python -m py_compile` and `tests/run_tests.py`, and expanded automated unit + E2E checks for all v0.5.0 features.
+
 ## [0.4.6] - 2026-11-14
 ### Added & Improved
 - **Native Android UX (`MainActivity.java`, `MochiShareProvider.java`, `AndroidManifest.xml`, `main.js`):**
