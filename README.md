@@ -1,6 +1,6 @@
-# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.3.0`)
+# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.4.0`)
 
-> **Play, clear combos, unlock daily rewards, and keep Mochi happy — or she'll sulk and turn her back on you!**
+> **Play, clear combos, spin the Lucky Wheel, climb the Purr League, and keep Mochi happy — or she'll sulk and turn her back on you!**
 
 <p align="center">
   <img src="assets/screenshot-day.png" alt="Mochi Pop! Daytime Gameplay" width="300" />
@@ -10,37 +10,35 @@
 
 <p align="center">
   <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk">
-    <img src="assets/download-badge.svg" alt="Download Mochi Pop! v0.3.0 Android APK" height="38" />
+    <img src="assets/download-badge.svg" alt="Download Mochi Pop! v0.4.0 Android APK" height="38" />
   </a>
 </p>
 
 <p align="center">
   <strong>Latest Build:</strong>
   <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk">
-    <code>v0.3.0 — Android APK (mochi-pop-puzzle.apk)</code>
+    <code>v0.4.0 — Android APK (mochi-pop-puzzle.apk)</code>
   </a>
   &nbsp;•&nbsp;
-  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.3.0">
+  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.4.0">
     <code>Web Playtest Build (.zip)</code>
   </a>
 </p>
 
 ---
 
-## ✨ What's New in `v0.3.0`
+## ✨ What's New in `v0.4.0`
 
-- **🌍 6 Languages + Player Nickname:**
-  - Play in **Ελληνικά (`el`), English (`en`), Deutsch (`de`), Español (`es`), Français (`fr`), and Türkçe (`tr`)** — choose on first launch or anytime inside Settings (`⚙️`), along with your player nickname for exported PNG Score Cards & upcoming leaderboards!
-- **📖 5-Step Welcome Onboarding & Permissions Wizard:**
-  - Step-by-step intro covering Mochi Care & Energy Multiplier, 8×8 Puzzle Tiles & Moves, Rewards & Closet, and one-tap interactive permissions (Notifications, Haptic test, and 6h APK Auto-Updater).
-- **🥫🎁🚀🌈 New Special Tiles, Hold Slot, 90° Rotate & Zen Mode:**
-  - **Golden Tuna (`🥫`):** `+2 🐟` on 5+ cell pieces.
-  - **Mystery Gift (`🎁`), Yarn Rocket (`🚀`), Rainbow (`🌈`):** Bonus fish/points/rotates, cross-line clears, and whole-color wipes alongside Ice (`🧊`) and Paw Bombs (`💣`).
-  - **Hold Pocket (`HOLD`) & 90° Rotate (`↻`):** Stash one piece for later, rotate tray pieces cleanly, toggle **🧘 Zen Mode** for endless chill sessions, enjoy Magnetic Snap + Live Clear Score Previews + Cascade Waves, and unlock **Tile Skins** (`Cat Paws`, `Choco Cookies`, `Cyber Neon`) in Mochi's Closet!
+- **🎡 Lucky Tuna Wheel & 📸 12-Card Sticker Album:**
+  - Spin **1 Free daily** (+ up to 3 Bonus Ad spins/day) for Golden Fish, `↻` Rotate charges, or collectible **Mochi Moments** cards across `3 sets × 4 cards` inside Daily → `📸 Album` (`+12/+18/+24 🐟` set completion rewards!).
+- **💖 Friendship Level (`Lv.1–50`), 🏆 Purr League & 🎉 Mini-Events:**
+  - Earn Friendship XP with every play/care session to unlock permanent `+1`/`+2` starting `↻` Rotates, compete with your Nickname in **Daily Challenge & Weekly Purr League** standings, and catch **🐟 Fish Frenzy (`2×`)** weekends & **🚀 Rocket Surge (`2×`)** Wednesdays.
+- **📺 Smart Monetization, Hybrid Unlocks & 👑 Supporter Pass:**
+  - **2× Run Fish** & **Rescue Pack (`+3 ↻ + 1 💣`)** on Game Over, once-per-run **🎁 Mystery Upgrade (`+4 🐟 + Card`)**, **Closet `Watch-Ad (0/3)`** alternative unlock on premium items, **Supporter Pass (`Demo €2.99` — No Interstitials + `+2 🐟/day` Golden Bowl)**, Day-0/3-Run/120s-Immunity Smart Interstitial Gate, live Remote Config, **📊 Stats & Funnel** inspector, and native Android scheduled care notifications!
 
 ---
 
-## ✨ Core Features (`v0.2.0` + `v0.3.0`)
+## ✨ Earlier Highlights (`v0.2.0` + `v0.3.0`)
 
 - **Pixar-Style 3D Mochi (21 Animated Sprite Loops):**
   - Tracks your finger while you drag blocks, dances on combos & **Purr Rush**, laps water at the Water Fountain, pounces on toys, sneezes after 6 rapid nose-boops (`ACHOO!!`), sulks if hungry (`< 35%`), and dramatic-faints if ignored for `24h+`.
@@ -58,7 +56,7 @@
 
 ---
 
-## 📱 How to Install & Play (`v0.3.0`)
+## 📱 How to Install & Play (`v0.4.0`)
 
 ### Android (`.apk`)
 1. Download **[`mochi-pop-puzzle.apk`](https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk)** on your Android phone (`Android 8.0+`).
@@ -66,7 +64,7 @@
 3. Launch **Mochi Pop!** from your home screen — all sprites, audio, and saves run offline inside a full-screen portrait wrapper, with built-in 6h auto-update checks!
 
 ### Desktop / Web Browser (`.zip`)
-1. Download **`mochi-pop-v0.3.0-web.zip`** from the [v0.3.0 Release](https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.3.0).
+1. Download **`mochi-pop-v0.4.0-web.zip`** from the [v0.4.0 Release](https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.4.0).
 2. Extract the zip and open **`index.html`** (or serve the folder with `python -m http.server 8778`).
 3. Play with Mochi, earn Golden Fish, and keep your daily streak alive!
 

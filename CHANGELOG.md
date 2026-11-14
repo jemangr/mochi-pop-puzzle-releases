@@ -1,5 +1,24 @@
 # Changelog — Mochi Pop!
 
+## [0.4.0] - 2026-11-14
+### Added
+- **Smart Monetization & Remote Config (`monetization.js`):**
+  - **Interstitial Gate:** Zero forced ads on Day 0 (`d0GracePeriod`), requires ≥3 runs (`interstitialMinRuns: 3`), respects a `120s` Rewarded Ad Immunity shield after every Rewarded Ad, enforces a `210s` cooldown between Interstitials, and is completely removed by the Supporter Pass.
+  - **Remote Config + Funnel Analytics:** Live config merge from `version.json` (`remoteConfig`) + privacy-safe funnel counters (`MochiAnalytics` across sessions, runs, rewarded ad starts/completes, interstitial views, wheel spins, league opens, album unlocks), inspectable inside **Settings (`⚙️`) → 📊 Stats & Funnel**.
+  - **Production Mediation Adapter Hooks:** Clean `window.MochiAdBridge` & `window.MochiNativeAnalytics` bridge interfaces alongside offline Demo Flows.
+- **High-ROI Rewarded & Hybrid Flows:**
+  - **🎡 Lucky Tuna Wheel:** 1 Free Spin daily + up to 3 Bonus Ad Spins/day for `+2 🐟`, `+4 🐟`, `+8 🐟!`, `+1 ↻`, `+2 ↻`, or a 📸 Album Card.
+  - **Game Over `2× Run Fish` & `Rescue Pack (+3 ↻ + 1 💣)`:** Doubles all Golden Fish earned during the run (always free Bonus option or Rewarded Ad) or rescues an impossible board once per run.
+  - **Mystery `🎁` Upgrade Pill:** Once per run after clearing a Gift Box (`🎁`), watch an optional Ad for `+4 🐟 + 📸 Album Card`.
+  - **Closet `📺 Watch-Ad` Unlock Alternative (`unlockAltAd`):** Premium accessories (`🎩 Sunglasses`, `👑 Crown`), `Sunny Beach` theme, and `Cyber Neon ⚡` tile skin can now be unlocked either with Golden Fish OR `3` Rewarded Ad watches (`0/3` progress).
+  - **👑 Cozy Supporter Pass (`Demo €2.99`):** Permanently removes forced Interstitials, unlocks Supporter badge, and adds the **🥣 Daily Golden Bowl (`+2 🐟/day`)** claimable inside Settings.
+- **Retention, Progression & Social League:**
+  - **💖 Mochi Friendship Level (`Lv.1–50`):** Care actions, line clears, and feeding grant Friendship XP; reaching Lv.3/5/10/15+ grants permanent `+1` / `+2` starting `↻ Rotate` charges and Golden Fish milestone bonuses.
+  - **📸 12-Card Sticker Photo Album (`3 sets × 4 cards`):** Embedded as the 3rd tab inside the Daily modal (`📸 Album`); collect cards from Gifts, Score Milestones, and the Wheel to claim Set Completion Rewards (`+12 🐟`, `+18 🐟`, `+24 🐟`).
+  - **🗓️ Daily & Weekly Purr League Leaderboard (`🏆`):** Seeded Daily Challenge & Weekly League standings featuring the player's **Nickname** (`Cozy Bronze → Warm Silver → Golden Whisker → Cozy Legend`) and ready for remote cloud API sync.
+  - **🎉 Mini-Events:** Automatic rotating schedule (`🐟 Fish Frenzy 2× Fish` on Sat–Sun, `🚀 Rocket Surge 2× Rockets` on Wed).
+- **Native Android Scheduled Notifications (`MochiAlarmReceiver.java`, `MainActivity.java`):** Localized (`el/en/de/es/fr/tr`) 6h/18h background reminder notifications via `AlarmManager.setAndAllowWhileIdle` & `mochi_care` notification channel.
+
 ## [0.3.0] - 2026-11-14
 ### Added
 - **6-Language Localization (`i18n.js`):** Full interface, HUD, Settings, Closet Tile Skins, Daily Challenge card, and Onboarding Guide in **Greek (`el`)**, **English (`en`)**, **German (`de`)**, **Spanish (`es`)**, **French (`fr`)**, and **Turkish (`tr`)**, with live switching and browser auto-detection.
