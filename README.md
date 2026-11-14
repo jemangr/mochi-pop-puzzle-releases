@@ -21,6 +21,10 @@
 ![Languages](https://img.shields.io/badge/Languages-6-7c5cff?style=for-the-badge)
 ![Price](https://img.shields.io/badge/Free_to_Play-Offline_Friendly-ff9f43?style=for-the-badge)
 
+<br /><br />
+
+<img src="assets/flyer.png" alt="Mochi Pop! Promotional Flyer — Cute 3D Kitty & 8x8 Block Puzzle" width="760" />
+
 </div>
 
 ---
