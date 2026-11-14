@@ -1,4 +1,4 @@
-# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.5.6`)
+# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.5.7`)
 
 > **Private Repository** — Closed Source / All Rights Reserved (`support@jemangr.app`)
 
@@ -11,6 +11,10 @@
 </p>
 
 ---
+
+## ✨ What's New in v0.5.7
+- **🐱 Clean Default Mochi & Intuitive `🛍️` Closet Button (`pet.js`, `main.js`, `index.html`):** Mochi now starts clean with no accessories or collar equipped by default, and the top-right Closet button uses a clear `🛍️` icon instead of `🎩`.
+- **✨ 3D Pixar-Shaded Accessories & Collars (`pet.js`):** Completely upgraded visual detail on every crown (velvet dome + faceted gems), satin bow, glossy Wayfarer sunglasses, knitted scarf, padded headphones, pleated chef hat, plush bear ears, notched sakura blossom, seeded strawberry, star wizard hat, and stitched bell collars.
 
 ## ✨ What's New in v0.5.6
 - **🎀 Motion-Tracked Kitty Accessories (`assets/sprites/manifest.js`, `pet.js`):** Hats, crowns, bows, headphones, sunglasses, scarves, and bell collars now interpolate smoothly frame-by-frame across all 19 visible `.webp` animation loops — tilting, bobbing, and mirroring in sync with Mochi (including side-profile `shades` while walking instead of disappearing).
@@ -95,7 +99,7 @@
 - `server/` — Cloudflare Workers API (`src/worker.js`, `wrangler.toml`) + D1 SQL schema (`schema.sql`) powering live leaderboards & cloud saves at `https://api.jemangr.app`.
 - `tests/run_tests.py` — Automated browser unit + E2E QA suite (`360×800` mobile, `1024×768` tablet, Cloud sync & Daily determinism).
 - `PRIVACY_POLICY.md` & `privacy.html` — Bilingual (EN/EL) Privacy Policy (also embedded offline inside Settings → App).
-- `CHANGELOG.md` — Version history (`v0.5.6`, `v0.5.5`, `v0.5.0`, `v0.4.6`, `v0.4.5`, `v0.4.4`, `v0.4.3`, `v0.4.2`, `v0.4.1`, `v0.4.0`, `v0.3.0`, `v0.2.0`, `v0.1.0`).
+- `CHANGELOG.md` — Version history (`v0.5.7`, `v0.5.6`, `v0.5.5`, `v0.5.0`, `v0.4.6`, `v0.4.5`, `v0.4.4`, `v0.4.3`, `v0.4.2`, `v0.4.1`, `v0.4.0`, `v0.3.0`, `v0.2.0`, `v0.1.0`).
 - `version.json` — Remote auto-update manifest & live `remoteConfig` values.
 - `TODO.md` — Roadmap for live AdMob SDK & Play Store launch.
 - `assets/` — Compiled `sprites/*.webp`, `sounds/*.mp3`, reference art, and documentation screenshots.
@@ -110,7 +114,7 @@
 python "scripts/build-apk.py"
 ```
 
-Outputs a v2+v3 signed, zipaligned APK (`dist/mochi-pop-puzzle.apk` and `dist/mochi-pop-puzzle-v0.5.6.apk`).
+Outputs a v2+v3 signed, zipaligned APK (`dist/mochi-pop-puzzle.apk` and `dist/mochi-pop-puzzle-v0.5.7.apk`).
 
 ### 2. Local Web Preview
 

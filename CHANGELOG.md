@@ -1,5 +1,11 @@
 # Changelog — Mochi Pop!
 
+## [0.5.7] - 2026-11-15
+### Improved
+- **Clean Default Mochi (`pet.js`, `main.js`):** Mochi now starts without any equipped hat, accessory, or collar (`accessory: "none"`, `collar: "none"`); the free `Red Bell` collar remains unlocked in the Closet if you choose to put it on.
+- **3D Pixar-Shaded Wardrobe Accessories (`pet.js`):** Redesigned all 9 head accessories (`bow`, `crown`, `strawberry`, `shades`, `chef`, `bear`, `blossom`, `headphones`, `wizard`), `scarf`, and all 3 bell collars (`red_bell`, `pastel_bell`, `star_bell`) with 3D multi-stop gradients, cast shadows onto fur, folded seams, gemstones, golden seeds, notched sakura petals, glossy tinted lenses, and cushioned pads.
+- **Intuitive Closet HUD Icon (`index.html`):** Replaced the top-right `🎩` button on `#btnWardrobe` with a `🛍️` shopping bag icon and updated `#btnQuickHat` to `🎀`.
+
 ## [0.5.6] - 2026-11-15
 ### Fixed & Improved
 - **Per-Frame Sprite Accessory & Collar Tracking (`assets/sprites/manifest.js`, `pet.js`):**
