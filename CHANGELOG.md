@@ -1,5 +1,11 @@
 # Changelog — Mochi Pop!
 
+## [0.4.3] - 2026-11-14
+### Fixed
+- **Pet Stage Layout & HUD Clearance (`pet.js`, `styles.css`):** Shifted Mochi's anchor position rightwards (`anchorXRatio = 0.58`), constrained autonomous roaming (`-12..+24px`), compacted `.pet-meters` & `.pet-left-controls` (`max-width: 138px`), relocated `.wall-frame` next to `.room-window` (`right: 92px`), and moved `.stage-event-pill` to `top: 72px; right: 8px` so HUD badges and event banners no longer overlap Mochi, her food bowl, or floor props.
+- **Background Audio Pause (`audio.js`, `main.js`, `MainActivity.java`):** Added `visibilitychange` / `pagehide` / `freeze` lifecycle listeners, `SoundEngine.pauseForBackground()` / `resumeFromBackground()`, and native Android `onPause()` / `onResume()` hooks (`onMochiAppPause`, `onMochiAppResume`, `webView.pauseTimers()` / `resumeTimers()`) to immediately silence the Kalimba loop, WebAudio oscillators, and MP3 clips when backgrounding the app or switching tabs.
+- **Settings Modal Viewport Fit, Tab Grouping & More Apps (`index.html`, `styles.css`, `i18n.js`, `main.js`):** Fixed top/bottom clipping on `#settingsModal` by adding bounded `.modal-card` scrolling (`max-height: min(86dvh, 720px); overflow-y: auto`), organized Settings into 3 tabs (`🎮 Game`, `👑 VIP & Info`, `📱 App`) across all 6 languages, and added a **More Apps (`jemangr.app`)** card opening `https://jemangr.app` via native Android `MochiAndroid.openExternalUrl` or browser new tab.
+
 ## [0.4.2] - 2026-11-14
 ### Fixed
 - **Full Localization Audit Across All 6 Languages (`el`, `en`, `de`, `es`, `fr`, `tr`):**
