@@ -1,4 +1,4 @@
-# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.4.0`)
+# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v0.4.1`)
 
 > **Play, clear combos, spin the Lucky Wheel, climb the Purr League, and keep Mochi happy — or she'll sulk and turn her back on you!**
 
@@ -10,17 +10,17 @@
 
 <p align="center">
   <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk">
-    <img src="assets/download-badge.svg" alt="Download Mochi Pop! v0.4.0 Android APK" height="38" />
+    <img src="assets/download-badge.svg" alt="Download Mochi Pop! v0.4.1 Android APK" height="38" />
   </a>
 </p>
 
 <p align="center">
   <strong>Latest Build:</strong>
   <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk">
-    <code>v0.4.0 — Android APK (mochi-pop-puzzle.apk)</code>
+    <code>v0.4.1 — Android APK (mochi-pop-puzzle.apk)</code>
   </a>
   &nbsp;•&nbsp;
-  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.4.0">
+  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.4.1">
     <code>Web Playtest Build (.zip)</code>
   </a>
 </p>
@@ -56,7 +56,7 @@
 
 ---
 
-## 📱 How to Install & Play (`v0.4.0`)
+## 📱 How to Install & Play (`v0.4.1`)
 
 ### Android (`.apk`)
 1. Download **[`mochi-pop-puzzle.apk`](https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk)** on your Android phone (`Android 8.0+`).
@@ -64,7 +64,7 @@
 3. Launch **Mochi Pop!** from your home screen — all sprites, audio, and saves run offline inside a full-screen portrait wrapper, with built-in 6h auto-update checks!
 
 ### Desktop / Web Browser (`.zip`)
-1. Download **`mochi-pop-v0.4.0-web.zip`** from the [v0.4.0 Release](https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.4.0).
+1. Download **`mochi-pop-v0.4.1-web.zip`** from the [v0.4.1 Release](https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.4.1).
 2. Extract the zip and open **`index.html`** (or serve the folder with `python -m http.server 8778`).
 3. Play with Mochi, earn Golden Fish, and keep your daily streak alive!
 

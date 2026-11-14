@@ -1,5 +1,9 @@
 # Changelog — Mochi Pop!
 
+## [0.4.1] - 2026-11-14
+### Fixed
+- **Android APK Asset Path Fix (`scripts/build-apk.py`):** Replaced Windows `aapt2 -A` asset packing (which stored backslashes like `assets/www\index.html` inside the APK zip and caused Android's `AssetManager` to return `404 Not Found` on launch) with POSIX forward-slash packaging (`assets/www/index.html`, verified binary-clean on `zipalign` + `apksigner` v2+v3).
+
 ## [0.4.0] - 2026-11-14
 ### Added
 - **Smart Monetization & Remote Config (`monetization.js`):**
