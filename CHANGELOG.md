@@ -1,5 +1,16 @@
 # Changelog — Mochi Pop!
 
+## [0.5.8] - 2026-11-15
+### Improved
+- **Full-App Cozy Room & Toy Graphics Overhaul (`pet.js`, `styles.css`):**
+  - Added wall wainscoting/baseboard molding + subtle wooden plank floor seams strictly along the room floor, 4-pane window mullions with soft inner sills, double-stitched textured rugs, and improved wall-frame placement.
+  - Upgraded floor props & room gadgets (`_drawFoodBowl` with glazed porcelain & custom 3D vector golden fish, `_drawYarnBall`, `mouse`, `feather`, `laser` with emitter beam, `_drawWaterFountain`, `_drawAutoFeeder`, `_drawCatnipPlant`, `_drawCatTower`, `_drawBirdFeeder` with vector songbird, and `_drawCatWheel`).
+- **3D Candy Blocks & Custom Vector Special Emblems (`puzzle.js`):**
+  - Sculpted checkerboard 8×8 recessed cells with bottom catchlight rim, inlaid outer board bevel, and pulsing golden row/col clear preview highlights on hover.
+  - Multi-stop diagonal candy/jewel block gradients with top glass specular capsule, catchlight gleam dot, faceted crystal ice, and bespoke 2D vector canvas emblems for `fish`, `bomb`, `gift`, `rocket`, `rainbow`, and `tuna` instead of system emojis.
+- **UI Depth & Mobile/Tablet Layout Fixes (`styles.css`, `pet.js`):**
+  - Centered `.room-rug` directly beneath Mochi on Tablet (`≥ 840px`), increased tablet Mochi & room scale, enlarged tablet `.room-window`, separated `#petBubble` and `#eventBannerPill` cleanly from `.room-window`, fixed mobile `.demo-bar` dark backdrop contrast, and added subtle 3D highlights across HUD pills, meters, tray slots, board housing, action buttons, and Closet cards.
+
 ## [0.5.7] - 2026-11-15
 ### Improved
 - **Clean Default Mochi (`pet.js`, `main.js`):** Mochi now starts without any equipped hat, accessory, or collar (`accessory: "none"`, `collar: "none"`); the free `Red Bell` collar remains unlocked in the Closet if you choose to put it on.
