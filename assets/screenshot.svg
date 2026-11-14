@@ -12,28 +12,37 @@
       <stop offset="0%" stop-color="#ff6b8b" />
       <stop offset="100%" stop-color="#ff8e53" />
     </linearGradient>
+    <radialGradient id="furGrad" cx="38%" cy="30%" r="68%">
+      <stop offset="0%" stop-color="#ffad4e" />
+      <stop offset="60%" stop-color="#ee8228" />
+      <stop offset="100%" stop-color="#be5715" />
+    </radialGradient>
+    <linearGradient id="creamGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff1df" />
+      <stop offset="75%" stop-color="#efd5b8" />
+      <stop offset="100%" stop-color="#c9aa8b" />
+    </linearGradient>
   </defs>
 
-  <!-- Showcase Background -->
   <rect width="820" height="520" rx="24" fill="url(#bgGrad)" />
 
   <!-- Left Feature Callouts -->
   <g transform="translate(48, 72)">
-    <rect x="0" y="0" width="128" height="28" rx="14" fill="rgba(255,107,139,0.22)" stroke="#ff6b8b" stroke-width="1.2" />
-    <text x="64" y="18" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800" fill="#ff9ebb" text-anchor="middle">ANDROID PUZZLE</text>
+    <rect x="0" y="0" width="128" height="28" rx="14" fill="rgba(255,159,67,0.22)" stroke="#ff9f43" stroke-width="1.2" />
+    <text x="64" y="18" font-family="Segoe UI, sans-serif" font-size="12" font-weight="800" fill="#ffd166" text-anchor="middle">ANDROID PUZZLE</text>
 
     <text x="0" y="72" font-family="Segoe UI, sans-serif" font-size="40" font-weight="900" fill="#ffffff">Mochi Pop!</text>
-    <text x="0" y="102" font-family="Segoe UI, sans-serif" font-size="16" font-weight="600" fill="#d9cef0">Cozy Virtual Pet &amp; 8x8 Block Puzzle</text>
+    <text x="0" y="102" font-family="Segoe UI, sans-serif" font-size="16" font-weight="600" fill="#d9cef0">Soft-3D Pet &amp; Gummy Block Puzzle</text>
 
     <g transform="translate(0, 140)" font-family="Segoe UI, sans-serif" font-size="14" fill="#ebe5f8">
-      <text x="0" y="0" font-weight="700" fill="#ffd166">● Live Emotional Cat (Mochi)</text>
+      <text x="0" y="0" font-weight="700" fill="#ffd166">● Expressive 2.5D Clay Cat (Mochi)</text>
       <text x="16" y="22" font-size="12.5" fill="#c7bce0">Tracks your moves, cries on loss &amp; sulks when hungry!</text>
 
-      <text x="0" y="60" font-weight="700" fill="#72dfd5">● 8x8 Combo &amp; Golden Fish Board</text>
-      <text x="16" y="82" font-size="12.5" fill="#c7bce0">Clear lines with fish treats to feed &amp; dress up Mochi.</text>
+      <text x="0" y="60" font-weight="700" fill="#72dfd5">● 8x8 Gummy Combo &amp; Fish Board</text>
+      <text x="16" y="82" font-size="12.5" fill="#c7bce0">Clear lines with golden fish to feed &amp; unlock coat skins.</text>
 
-      <text x="0" y="120" font-weight="700" fill="#ff9ebb">● Sound, Visual FX &amp; Haptics Settings</text>
-      <text x="16" y="142" font-size="12.5" fill="#c7bce0">Customizable comfort + 1-tap bug report support.</text>
+      <text x="0" y="120" font-weight="700" fill="#ff9ebb">● Sound, Visual FX &amp; Error Reports</text>
+      <text x="16" y="142" font-size="12.5" fill="#c7bce0">Customizable comfort + 1-tap support to contact@jemangr.app.</text>
     </g>
 
     <g transform="translate(0, 326)">
@@ -42,9 +51,8 @@
     </g>
   </g>
 
-  <!-- Right Phone Mockup (Happy Gameplay) -->
+  <!-- Right Phone Mockup -->
   <g transform="translate(470, 26)">
-    <!-- Phone Frame -->
     <rect x="0" y="0" width="256" height="468" rx="26" fill="#fff8f0" stroke="#42365c" stroke-width="6" />
 
     <!-- Top HUD -->
@@ -70,12 +78,12 @@
     <rect x="3" y="138" width="250" height="26" fill="#f4c7a1" />
     <line x1="3" y1="164" x2="253" y2="164" stroke="#e6b28a" stroke-width="2.5" />
 
-    <!-- Window -->
+    <!-- Window & Sunbeam -->
     <rect x="192" y="50" width="48" height="40" rx="8" fill="#cceeff" stroke="#ffffff" stroke-width="3" />
     <line x1="216" y1="50" x2="216" y2="90" stroke="#ffffff" stroke-width="2.5" />
 
     <!-- Rug -->
-    <ellipse cx="128" cy="152" rx="64" ry="12" fill="#ffabc0" stroke="#fff0f4" stroke-width="2" />
+    <ellipse cx="128" cy="152" rx="68" ry="12" fill="#ffabc0" stroke="#fff0f4" stroke-width="2" />
 
     <!-- Bars -->
     <rect x="12" y="50" width="76" height="14" rx="7" fill="rgba(255,255,255,0.8)" />
@@ -83,83 +91,106 @@
     <rect x="12" y="68" width="76" height="14" rx="7" fill="rgba(255,255,255,0.8)" />
     <rect x="24" y="72" width="60" height="6" rx="3" fill="#ff6b8b" />
 
-    <!-- Speech Bubble -->
-    <rect x="148" y="52" width="66" height="22" rx="10" fill="#ffffff" />
-    <text x="181" y="67" font-family="Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#2f263b" text-anchor="middle">Yay! +2 🐟</text>
+    <!-- Ceramic Food Bowl -->
+    <ellipse cx="192" cy="156" rx="14" ry="4" fill="rgba(85,42,20,0.22)" />
+    <path d="M 180 148 Q 182 156 192 156 Q 202 156 204 148 Z" fill="#ff7192" />
+    <ellipse cx="192" cy="148" rx="12" ry="3.5" fill="#fff5ee" />
 
-    <!-- Mochi Cat -->
-    <g transform="translate(128, 126)">
-      <!-- Tail -->
-      <path d="M 28 12 Q 48 6 44 -14" fill="none" stroke="#523e4e" stroke-width="11" stroke-linecap="round" />
-      <path d="M 28 12 Q 48 6 44 -14" fill="none" stroke="#fffbf5" stroke-width="7" stroke-linecap="round" />
-      <!-- Ears -->
-      <path d="M -32 -28 Q -24 -52 -10 -32 Z" fill="#fffbf5" stroke="#523e4e" stroke-width="2.4" />
-      <path d="M -27 -30 Q -23 -43 -15 -31 Z" fill="#ff9ebb" />
-      <path d="M 10 -32 Q 24 -52 32 -28 Z" fill="#fffbf5" stroke="#523e4e" stroke-width="2.4" />
-      <path d="M 15 -31 Q 23 -43 27 -30 Z" fill="#ff9ebb" />
-      <!-- Chubby Body -->
-      <path d="M 0 -38 C 36 -38 40 -6 38 10 C 36 26 18 26 0 26 C -18 26 -36 26 -38 10 C -40 -6 -36 -38 0 -38 Z" fill="#fffbf5" stroke="#523e4e" stroke-width="2.5" />
-      <ellipse cx="-12" cy="-28" rx="10" ry="6" transform="rotate(-18 -12 -28)" fill="#ffd8b8" />
-      <ellipse cx="0" cy="11" rx="18" ry="11" fill="#fff1e6" />
-      <!-- Cheeks -->
-      <ellipse cx="-20" cy="-3" rx="6" ry="3.5" fill="rgba(255,138,165,0.65)" />
-      <ellipse cx="20" cy="-3" rx="6" ry="3.5" fill="rgba(255,138,165,0.65)" />
-      <!-- Glossy Eyes -->
-      <circle cx="-14" cy="-11" r="5" fill="#2d2130" />
-      <circle cx="-15.5" cy="-12.5" r="1.8" fill="#ffffff" />
-      <circle cx="14" cy="-11" r="5" fill="#2d2130" />
-      <circle cx="12.5" cy="-12.5" r="1.8" fill="#ffffff" />
-      <!-- Nose & :3 Mouth -->
-      <ellipse cx="0" cy="-6" rx="2.5" ry="1.8" fill="#ff85a1" />
-      <path d="M -6 -2 Q -3 2 0 -2 Q 3 2 6 -2" fill="none" stroke="#523e4e" stroke-width="2" stroke-linecap="round" />
+    <!-- Soft-3D Clay Orange Tabby Mochi -->
+    <g transform="translate(124, 130)">
+      <!-- Contact shadow -->
+      <ellipse cx="3" cy="21" rx="44" ry="9" fill="rgba(72,38,22,0.28)" />
+      <!-- Plump Tail -->
+      <path d="M 20 12 C 31 20 43 16 41 2 C 39 -10 27 -11 24 -1 Z" fill="url(#furGrad)" />
+      <!-- Sitting Body -->
+      <path d="M -20 -8 C -28 3 -26 20 -8 21 C 10 22 28 19 29 5 C 30 -8 19 -17 7 -17 Z" fill="url(#furGrad)" />
+      <ellipse cx="-5" cy="6" rx="16" ry="13" fill="url(#creamGrad)" />
+      <!-- Chin AO Shadow -->
+      <ellipse cx="-2" cy="-5" rx="22" ry="8" fill="rgba(110,48,18,0.28)" />
+      <!-- Chunky Paws -->
+      <ellipse cx="-22" cy="16" rx="7" ry="4.5" fill="url(#creamGrad)" />
+      <ellipse cx="-11" cy="19" rx="7.5" ry="5" fill="url(#creamGrad)" />
+      <ellipse cx="3" cy="20" rx="8" ry="5.2" fill="url(#creamGrad)" />
+      <ellipse cx="16" cy="18" rx="8" ry="5" fill="url(#creamGrad)" />
+
+      <!-- 2.5D Head -->
+      <g transform="translate(0, -16)">
+        <!-- Clay Ears -->
+        <path d="M -28 -20 Q -20 -46 -8 -22 Z" fill="url(#furGrad)" />
+        <path d="M -24 -22 Q -19 -37 -12 -23 Z" fill="#e68a7c" />
+        <path d="M 8 -22 Q 20 -46 28 -20 Z" fill="url(#furGrad)" />
+        <path d="M 12 -23 Q 19 -37 24 -22 Z" fill="#e68a7c" />
+        <!-- Round Head -->
+        <path d="M 0 -30 C 28 -30 34 -10 32 3 C 30 17 15 19 0 19 C -16 19 -32 17 -34 3 C -36 -10 -28 -30 0 -30 Z" fill="url(#furGrad)" />
+        <!-- Cream Triangular Muzzle Blaze -->
+        <path d="M -3 -18 Q -10 -1 -16 9 C -13 19 12 19 14 9 Q 7 -1 -3 -18 Z" fill="url(#creamGrad)" />
+        <!-- Tabby Stripes & Tiny Eyebrows -->
+        <path d="M -5 -28 L -5 -21 M 0 -29 L 0 -21 M 5 -28 L 5 -21" stroke="#d45d14" stroke-width="2" stroke-linecap="round" />
+        <path d="M 20 -3 Q 26 -4 30 -2 M 21 2 Q 27 2 31 4" stroke="#d45d14" stroke-width="2" stroke-linecap="round" />
+        <path d="M -15 -14 L -11 -14 M 7 -14 L 11 -14" stroke="#d45d14" stroke-width="2" stroke-linecap="round" />
+        <!-- Cheeks -->
+        <ellipse cx="-19" cy="2" rx="6" ry="3.8" fill="rgba(244,114,88,0.55)" />
+        <ellipse cx="16" cy="2" rx="6" ry="3.8" fill="rgba(244,114,88,0.55)" />
+        <!-- Glossy Dark Eyes -->
+        <circle cx="-13" cy="-5" r="5" fill="#1a110d" />
+        <circle cx="-14.5" cy="-6.5" r="1.8" fill="#ffffff" />
+        <circle cx="9" cy="-5" r="5" fill="#1a110d" />
+        <circle cx="7.5" cy="-6.5" r="1.8" fill="#ffffff" />
+        <!-- Nose & Smile -->
+        <ellipse cx="-3" cy="1" rx="2.8" ry="1.8" fill="#ef8a84" />
+        <path d="M -9 4 Q -6 7.5 -3 4 Q 0 7.5 3 4" fill="none" stroke="#4d352a" stroke-width="1.6" stroke-linecap="round" />
+        <!-- Whiskers -->
+        <path d="M -22 1 L -35 -1 M -22 5 L -34 6 M 15 1 L 28 -1 M 15 5 L 27 6" stroke="rgba(70,46,36,0.75)" stroke-width="1.2" />
+      </g>
     </g>
 
-    <!-- 8x8 Board -->
+    <!-- 8x8 Gummy Block Board -->
     <rect x="18" y="174" width="220" height="220" rx="14" fill="#3b3048" />
-    <!-- Grid Pattern -->
     <g transform="translate(24, 180)">
-      <!-- Background 8x8 dark cells (26px step, 23px cell) -->
       <rect x="0" y="0" width="208" height="208" rx="8" fill="#4d3f5e" opacity="0.5" />
-      <!-- Colorful placed blocks -->
-      <rect x="2" y="2" width="22" height="22" rx="5" fill="#ff6b8b" />
-      <rect x="28" y="2" width="22" height="22" rx="5" fill="#ff6b8b" />
-      <rect x="54" y="2" width="22" height="22" rx="5" fill="#ff6b8b" />
+      <!-- Gummy blocks with glossy top pills -->
+      <rect x="2" y="2" width="22" height="22" rx="6" fill="#ff6b8b" />
+      <rect x="5" y="4" width="16" height="5" rx="2.5" fill="rgba(255,255,255,0.35)" />
+      <rect x="28" y="2" width="22" height="22" rx="6" fill="#ff6b8b" />
+      <rect x="31" y="4" width="16" height="5" rx="2.5" fill="rgba(255,255,255,0.35)" />
+      <rect x="54" y="2" width="22" height="22" rx="6" fill="#ff6b8b" />
+      <rect x="57" y="4" width="16" height="5" rx="2.5" fill="rgba(255,255,255,0.35)" />
 
-      <rect x="106" y="28" width="22" height="22" rx="5" fill="#2ec4b6" />
-      <rect x="132" y="28" width="22" height="22" rx="5" fill="#2ec4b6" />
-      <rect x="106" y="54" width="22" height="22" rx="5" fill="#2ec4b6" />
+      <rect x="106" y="28" width="22" height="22" rx="6" fill="#2ec4b6" />
+      <rect x="132" y="28" width="22" height="22" rx="6" fill="#2ec4b6" />
+      <rect x="106" y="54" width="22" height="22" rx="6" fill="#2ec4b6" />
       <text x="143" y="44" font-size="12" text-anchor="middle">🐟</text>
 
-      <rect x="28" y="80" width="22" height="22" rx="5" fill="#ffd166" />
-      <rect x="54" y="80" width="22" height="22" rx="5" fill="#ffd166" />
-      <rect x="28" y="106" width="22" height="22" rx="5" fill="#ffd166" />
-      <rect x="54" y="106" width="22" height="22" rx="5" fill="#ffd166" />
+      <rect x="28" y="80" width="22" height="22" rx="6" fill="#ffd166" />
+      <rect x="54" y="80" width="22" height="22" rx="6" fill="#ffd166" />
+      <rect x="28" y="106" width="22" height="22" rx="6" fill="#ffd166" />
+      <rect x="54" y="106" width="22" height="22" rx="6" fill="#ffd166" />
 
-      <rect x="132" y="106" width="22" height="22" rx="5" fill="#5f85ff" />
-      <rect x="158" y="106" width="22" height="22" rx="5" fill="#5f85ff" />
-      <rect x="184" y="106" width="22" height="22" rx="5" fill="#5f85ff" />
+      <rect x="132" y="106" width="22" height="22" rx="6" fill="#5f85ff" />
+      <rect x="158" y="106" width="22" height="22" rx="6" fill="#5f85ff" />
+      <rect x="184" y="106" width="22" height="22" rx="6" fill="#5f85ff" />
 
-      <rect x="2" y="158" width="22" height="22" rx="5" fill="#ff9f43" />
-      <rect x="28" y="158" width="22" height="22" rx="5" fill="#ff9f43" />
-      <rect x="54" y="158" width="22" height="22" rx="5" fill="#b07aff" />
-      <rect x="80" y="158" width="22" height="22" rx="5" fill="#b07aff" />
-      <rect x="106" y="158" width="22" height="22" rx="5" fill="#b07aff" />
+      <rect x="2" y="158" width="22" height="22" rx="6" fill="#ff9f43" />
+      <rect x="28" y="158" width="22" height="22" rx="6" fill="#ff9f43" />
+      <rect x="54" y="158" width="22" height="22" rx="6" fill="#b07aff" />
+      <rect x="80" y="158" width="22" height="22" rx="6" fill="#b07aff" />
+      <rect x="106" y="158" width="22" height="22" rx="6" fill="#b07aff" />
     </g>
 
     <!-- Bottom Tray -->
     <rect x="18" y="402" width="54" height="50" rx="10" fill="#f2e8df" stroke="#e4d5c7" stroke-width="1.5" />
-    <rect x="30" y="416" width="14" height="14" rx="3" fill="#2ec4b6" />
-    <rect x="46" y="416" width="14" height="14" rx="3" fill="#2ec4b6" />
+    <rect x="30" y="416" width="14" height="14" rx="4" fill="#2ec4b6" />
+    <rect x="46" y="416" width="14" height="14" rx="4" fill="#2ec4b6" />
 
     <rect x="78" y="402" width="54" height="50" rx="10" fill="#f2e8df" stroke="#e4d5c7" stroke-width="1.5" />
-    <rect x="92" y="412" width="13" height="13" rx="3" fill="#ff9f43" />
-    <rect x="92" y="427" width="13" height="13" rx="3" fill="#ff9f43" />
-    <rect x="107" y="427" width="13" height="13" rx="3" fill="#ff9f43" />
+    <rect x="92" y="412" width="13" height="13" rx="4" fill="#ff9f43" />
+    <rect x="92" y="427" width="13" height="13" rx="4" fill="#ff9f43" />
+    <rect x="107" y="427" width="13" height="13" rx="4" fill="#ff9f43" />
 
     <rect x="138" y="402" width="54" height="50" rx="10" fill="#f2e8df" stroke="#e4d5c7" stroke-width="1.5" />
-    <rect x="150" y="420" width="10" height="10" rx="2" fill="#b07aff" />
-    <rect x="162" y="420" width="10" height="10" rx="2" fill="#b07aff" />
-    <rect x="174" y="420" width="10" height="10" rx="2" fill="#b07aff" />
+    <rect x="150" y="420" width="10" height="10" rx="3" fill="#b07aff" />
+    <rect x="162" y="420" width="10" height="10" rx="3" fill="#b07aff" />
+    <rect x="174" y="420" width="10" height="10" rx="3" fill="#b07aff" />
 
     <rect x="198" y="402" width="40" height="50" rx="10" fill="#2ec4b6" />
     <text x="218" y="428" font-size="16" text-anchor="middle">🔄</text>
