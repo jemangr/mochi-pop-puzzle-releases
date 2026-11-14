@@ -1,5 +1,21 @@
 # Changelog — Mochi Pop!
 
+## [0.4.4] - 2026-11-14
+### Added
+- **Live Cloud Leaderboard & Cross-Device Cloud Save (`https://api.jemangr.app`, `server/`, `monetization.js`, `main.js`):**
+  - Deployed Cloudflare Workers + D1 backend (`mochi-pop-api` / `mochi-pop-db` bound as `DB`) at `https://api.jemangr.app` (`/v1/health`, `/v1/register`, `/v1/score`, `/v1/leaderboard`, `/v1/save`, `/v1/restore`).
+  - Wired **🏆 Purr League** Daily, Weekly (`YYYY-Www`), and All-Time live standings with graceful offline fallback.
+  - Added optional **☁️ Cloud Save & Device Transfer** (`MOCHI-XXXX-XXXX` sync code, `#cloudModal` in Settings → App) across all 6 languages (`el`, `en`, `de`, `es`, `fr`, `tr`) with auto-sync and zero email/password requirements.
+- **In-App & Standalone Bilingual Privacy Policy (`PRIVACY_POLICY.md`, `privacy.html`):**
+  - Added offline-capable EN/EL `privacy.html` modal (`#privacyModal` in Settings → App) covering local storage, `api.jemangr.app` leaderboard & cloud save, email split (`privacy@jemangr.app` & `support@jemangr.app`), and future Play Store ad/billing disclosures.
+- **Squeezy Ball Toy & Per-Toy Sounds (`main.js`, `audio.js`, `i18n.js`):**
+  - Unlocked distinct audio profiles per interactive toy and wired `toy_squeak.mp3` exclusively to the **🟡 Squeezy Ball**.
+
+### Fixed & Changed
+- **Google Play Protect False-Positive Removal (`AndroidManifest.xml`, `MainActivity.java`, `main.js`):**
+  - Completely removed `REQUEST_INSTALL_PACKAGES`, `DownloadManager`, `BroadcastReceiver`, `ACTION_MANAGE_UNKNOWN_APP_SOURCES`, and in-app APK sideloading code; **Check for App Update** now opens the official release page cleanly in the external browser (`openExternalUrl`).
+- **Support & Privacy Emails (`index.html`, `main.js`, `PRIVACY_POLICY.md`, `privacy.html`):** Routed bug reports & general support to `support@jemangr.app` and privacy/GDPR requests to `privacy@jemangr.app`.
+
 ## [0.4.3] - 2026-11-14
 ### Fixed
 - **Pet Stage Layout & HUD Clearance (`pet.js`, `styles.css`):** Shifted Mochi's anchor position rightwards (`anchorXRatio = 0.58`), constrained autonomous roaming (`-12..+24px`), compacted `.pet-meters` & `.pet-left-controls` (`max-width: 138px`), relocated `.wall-frame` next to `.room-window` (`right: 92px`), and moved `.stage-event-pill` to `top: 72px; right: 8px` so HUD badges and event banners no longer overlap Mochi, her food bowl, or floor props.
