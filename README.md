@@ -27,8 +27,10 @@
 
 ---
 
-## ✨ What's New in `v0.4.0`
+## ✨ What's New in `v0.4.2`
 
+- **🌍 Full 6-Language UI Polish (`el`, `en`, `de`, `es`, `fr`, `tr`):**
+  - Localized onboarding welcome (`"Καλώς ήρθες <όνομα>!"`), Mochi speech bubbles, HUD multipliers/cravings, weekend/Wednesday event banners, Daily Calendar/Quests/Stickers, Closet headers, Audio Mixer, Stats, Rewarded/Interstitial Ad overlays, and Game Over modal — plus **`v0.4.1`** Android POSIX asset path packaging fix.
 - **🎡 Lucky Tuna Wheel & 📸 12-Card Sticker Album:**
   - Spin **1 Free daily** (+ up to 3 Bonus Ad spins/day) for Golden Fish, `↻` Rotate charges, or collectible **Mochi Moments** cards across `3 sets × 4 cards` inside Daily → `📸 Album` (`+12/+18/+24 🐟` set completion rewards!).
 - **💖 Friendship Level (`Lv.1–50`), 🏆 Purr League & 🎉 Mini-Events:**
@@ -56,7 +58,7 @@
 
 ---
 
-## 📱 How to Install & Play (`v0.4.1`)
+## 📱 How to Install & Play (`v0.4.2`)
 
 ### Android (`.apk`)
 1. Download **[`mochi-pop-puzzle.apk`](https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk)** on your Android phone (`Android 8.0+`).
@@ -64,7 +66,7 @@
 3. Launch **Mochi Pop!** from your home screen — all sprites, audio, and saves run offline inside a full-screen portrait wrapper, with built-in 6h auto-update checks!
 
 ### Desktop / Web Browser (`.zip`)
-1. Download **`mochi-pop-v0.4.1-web.zip`** from the [v0.4.1 Release](https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.4.1).
+1. Download **`mochi-pop-v0.4.2-web.zip`** from the [v0.4.2 Release](https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.4.2).
 2. Extract the zip and open **`index.html`** (or serve the folder with `python -m http.server 8778`).
 3. Play with Mochi, earn Golden Fish, and keep your daily streak alive!
 
