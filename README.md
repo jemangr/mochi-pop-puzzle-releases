@@ -15,9 +15,9 @@
 </p>
 
 <p align="center">
-  <strong>Direct Download (Once First Release Is Published):</strong>
-  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk">
-    <code>mochi-pop-puzzle.apk</code>
+  <strong>Android Releases:</strong>
+  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases">
+    <code>View Releases (mochi-pop-puzzle.apk — first build coming soon)</code>
   </a>
 </p>
 
