@@ -9,17 +9,20 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest">
-    <img src="assets/download-badge.svg" alt="Latest Release v0.2.0" height="38" />
+  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk">
+    <img src="assets/download-badge.svg" alt="Download Mochi Pop! v0.2.0 Android APK" height="38" />
   </a>
 </p>
 
 <p align="center">
   <strong>Latest Build:</strong>
-  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.2.0">
-    <code>v0.2.0 — Web Playtest Build (.zip)</code>
+  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk">
+    <code>v0.2.0 — Android APK (mochi-pop-puzzle.apk)</code>
   </a>
-  &nbsp;•&nbsp; <em>Android APK wrapper coming next</em>
+  &nbsp;•&nbsp;
+  <a href="https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.2.0">
+    <code>Web Playtest Build (.zip)</code>
+  </a>
 </p>
 
 ---
@@ -42,13 +45,17 @@
 
 ---
 
-## 💻 How to Play `v0.2.0` (Web Bundle)
+## 📱 How to Install & Play (`v0.2.0`)
 
+### Android (`.apk`)
+1. Download **[`mochi-pop-puzzle.apk`](https://github.com/jemangr/mochi-pop-puzzle-releases/releases/latest/download/mochi-pop-puzzle.apk)** on your Android phone (`Android 8.0+`).
+2. Tap the downloaded APK and allow *"Install unknown apps"* if prompted.
+3. Launch **Mochi Pop!** from your home screen — all sprites, audio, and saves run offline inside a full-screen portrait wrapper!
+
+### Desktop / Web Browser (`.zip`)
 1. Download **`mochi-pop-v0.2.0-web.zip`** from the [v0.2.0 Release](https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.2.0).
 2. Extract the zip and open **`index.html`** (or serve the folder with `python -m http.server 8778`).
 3. Play with Mochi, earn Golden Fish, and keep your daily streak alive!
-
-*(Compiled Android `.apk` releases via Capacitor + AdMob will be uploaded to this same repo under `mochi-pop-puzzle.apk`.)*
 
 ---
 
