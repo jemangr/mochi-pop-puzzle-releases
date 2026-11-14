@@ -1,5 +1,11 @@
 # Changelog — Mochi Pop!
 
+## [0.5.6] - 2026-11-15
+### Fixed & Improved
+- **Per-Frame Sprite Accessory & Collar Tracking (`assets/sprites/manifest.js`, `pet.js`):**
+  - Added smoothed 16-frame `frameHeadAnchors` (`[dx, dy, rot, eyeDy, profile]`) and `frameNeckAnchors` (`[dx, dy]`) measured directly from all 19 visible Pixar Mochi `.webp` sprite sheets.
+  - Updated `_drawSpriteMochi`, `_drawAccessory`, `_drawCollarAndBell`, and `_drawScarf` to interpolate sub-frame anchors smoothly at 60 FPS, apply head tilt (`rotate`) and walk mirroring (`scale(flipSign, 1)`), track eye pitch (`eyeDy`) for `shades` on upward/downward poses (`cheer`, `track_toy`, `drink`, `pet_3`), and draw foreshortened side-profile `shades` / `scarf` / `bow` instead of hiding or skewing them during walks and side turns.
+
 ## [0.5.5] - 2026-11-14
 ### Added & Improved
 - **UI & Mobile/Tablet Ergonomics (`index.html`, `styles.css`, `puzzle.js`, `main.js`):**
