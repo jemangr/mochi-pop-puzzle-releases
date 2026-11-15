@@ -16,7 +16,7 @@
 
 <br /><br />
 
-![Latest Version](https://img.shields.io/badge/Latest_Version-v0.5.8-ff6b8b?style=for-the-badge&logo=android&logoColor=white)
+![Latest Version](https://img.shields.io/badge/Latest_Version-v0.8.0-ff6b8b?style=for-the-badge&logo=android&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-8.0%2B-3ddc84?style=for-the-badge&logo=android&logoColor=white)
 ![Languages](https://img.shields.io/badge/Languages-6-7c5cff?style=for-the-badge)
 ![Price](https://img.shields.io/badge/Free_to_Play-Offline_Friendly-ff9f43?style=for-the-badge)
@@ -39,11 +39,13 @@
 
 ---
 
-## ✨ What's New in v0.5.8
+## ✨ What's New in v0.8.0 (including v0.6.0 & v0.7.0)
 
-- **🏠 Cozy Room & 3D Props Overhaul:** Crisp baseboard trim, wooden plank flooring, 4-pane day/night windows with seasonal weather, stitched textured rugs, glazed porcelain bowls with golden fish, and richly shaded interactive toys & room gadgets.
-- **🍬 Jewel 3D Candy Blocks & Vector Emblems:** Sculpted checkerboard 8×8 puzzle board, multi-stop glossy blocks, golden row/column clear preview highlights on hover, faceted crystal ice, and crisp vector icons for special tiles (`Fish`, `Bomb`, `Gift`, `Rocket`, `Rainbow`, `Tuna`).
-- **📐 Tablet Alignment & UI Polish:** Larger hero scale and centered rug layout for Mochi on tablets, uncluttered window & speech-bubble spacing, and tactile highlights across HUD pills, meters, tray slots, and Closet cards.
+- **🔨 Toy Hammer Power-Up:** Tap any block on the 8×8 board to smash it on demand or crack 1 layer of crystal Ice / Wooden Berry Crate (`+2 🔨` from Rewarded Ad when empty).
+- **🌙 Adventure Story Chapters (`Ch.1–Ch.5`, 20 Levels / 60⭐):** Progress across **Cozy Morning**, **Frosty Window**, **Starry Attic**, **Garden Terrace**, and **Moonlit Loft** with wooden crates, targeted color clears, and star rewards.
+- **📖 Mochi's Diary, Chin-Scratch Petting & Photo Studio Stickers:** Log Mochi's meals, Story wins, mini-games & postcards in **Mochi's Diary**, trigger extra blissful chin-scratch purrs, and stamp unlocked Album stickers onto `540×680` custom Postcards.
+- **🔁 Seeded Classic Rematches & Live Point Preview:** Replay exact Classic piece sequences via **Rematch Same Seed**, see live `+pts` point previews inside hover line-clear badges, and open **Keyboard Controls** (`⌨️`) anytime.
+- **🍪 2 Cozy Mini-Games & 🏅 Trophy Room:** Play **Laser Dash** and **Cozy Bakery** with custom upbeat Web Audio loops, unlock 10 permanent Medals, and enjoy Lv.15–50 Friendship perks + 60 FPS board rendering.
 
 ---
 
@@ -51,13 +53,13 @@
 
 | Feature | Highlights |
 | :--- | :--- |
-| 🧩 **Tactile 8×8 Block Puzzle** | Drag & drop glossy blocks, trigger multi-line **Combos**, fill **Purr Rush**, use **Hold / Rotate / Refresh / Bomb / Undo**, or chill anytime in **Zen Mode**. |
-| 💥 **Special Tiles** | Crack 2-hit **Ice** blocks, detonate **3×3 Kitty Bombs**, launch **Rockets**, pop **Rainbow** crystals, and open **Gift** & **Tuna** bonuses. |
-| 🐾 **Living 3D Pet (Mochi)** | Pet, feed, drag treats straight to Mochi, play with 5 toys (Yarn, Mouse, Feather Wand, Squeaky Ball, Laser), and level up **Friendship Lv.1–50**. |
-| 🛍️ **Closet & Cozy Room** | Clean bare default look with dozens of unlockable hats, scarves, bell collars, fur coats, rugs, room themes, tile skins & animated gadgets. |
-| 🗓️ **Daily Quests & Monthly Archive** | Seeded daily boards, Streak bonuses, plus a full Monthly Calendar to replay missed days and claim `7d / 15d / Full Month` milestone Fish rewards. |
-| 🏆 **Purr League & Cloud Backup** | Weekly themed competitive leagues with end-of-season trophy rewards, plus instant cross-device `MOCHI-XXXX-XXXX` cloud transfer. |
-| 🔊 **Audio Mixer & Accessibility** | Independent Music, Puzzle SFX & Cat voice sliders, 6 languages (`EN / EL / ES / FR / DE / JA`), **Colorblind Shapes**, **30 FPS Power Saver**, and adjustable **Touch Drag Height**. |
+| 🧩 **Tactile 8×8 Block Puzzle** | Drag & drop glossy 3D blocks (or play via Keyboard!), trigger multi-line **Combos**, fill **Purr Rush**, use **Hold / Rotate / Hammer / Refresh / Bomb / Undo**, or chill anytime in **Zen Mode**. |
+| 💥 **Special Tiles & Crates** | Crack 2-hit **Ice** blocks & **Wooden Crates**, detonate **3×3 Kitty Bombs**, launch **Rockets**, pop **Rainbow** crystals, and open **Gift** & **Tuna** bonuses. |
+| 🗺️ **Adventure Story & Mini-Games** | Beat 20 curated goal levels (`60⭐`) + **Purr League ⭐ Stars**, or jump into **Laser Dash** & **Cozy Bakery** 15-second mini-games. |
+| 🐾 **Living 3D Pet (Mochi)** | Pet Mochi's ears, chin & belly, feed fish treats, play with interactive toys, check **Mochi's Diary**, and level up **Friendship Lv.1–50**. |
+| 🛍️ **Closet, Photo Studio & Trophy Room** | Dozens of unlockable hats, scarves, bell collars, fur coats, rugs, room themes, tile skins, `540×680` **Postcard Studio** & **10 Trophy Medals**. |
+| 🗓️ **Daily Quests, Challenge Links & Cloud Backup** | Seeded daily boards, **Month Archive**, shareable `MCH:<seed>:<score>:<name>` Friend Challenges, and cross-device `MOCHI-XXXX-XXXX` cloud transfer + `.json` export. |
+| 🔊 **Audio Mixer & Accessibility** | Independent Music, Puzzle SFX & Cat voice sliders, 6 languages (`EN / EL / DE / ES / FR / TR`), **Colorblind Shapes**, **30 FPS Power Saver**, and adjustable **Touch Drag Height**. |
 
 ---
 
