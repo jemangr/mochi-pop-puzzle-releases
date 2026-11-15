@@ -1,8 +1,8 @@
 {
-  "version": "0.5.8",
-  "tag": "v0.5.8",
-  "apkUrl": "https://github.com/jemangr/mochi-pop-puzzle-releases/releases/download/v0.5.8/mochi-pop-puzzle.apk",
-  "releaseUrl": "https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.5.8",
+  "version": "0.8.0",
+  "tag": "v0.8.0",
+  "apkUrl": "https://github.com/jemangr/mochi-pop-puzzle-releases/releases/download/v0.8.0/mochi-pop-puzzle.apk",
+  "releaseUrl": "https://github.com/jemangr/mochi-pop-puzzle-releases/releases/tag/v0.8.0",
   "remoteConfig": {
     "interstitialCooldownSec": 210,
     "interstitialMinRuns": 3,
@@ -11,6 +11,7 @@
     "wheelMaxAdSpinsPerDay": 3,
     "giftAdBonusFish": 4,
     "weekendEventMode": "auto",
-    "leaderboardApiUrl": "https://api.jemangr.app"
+    "leaderboardApiUrl": "https://api.jemangr.app",
+    "leaderboardStarsLive": false
   }
 }
