@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Mochi Pop!</title>
+  <style>
+    :root {
+      --bg: #fdf6ef;
+      --card: #ffffff;
+      --ink: #2c2137;
+      --muted: #695a78;
+      --accent: #7c3aed;
+      --accent-soft: #f3e8ff;
+      --border: #eadfce;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 18px 14px 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.58;
+    }
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 22px 20px;
+      box-shadow: 0 10px 28px rgba(44, 33, 55, 0.08);
+    }
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .brand h1 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--ink);
+    }
+    .brand small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .lang-switch {
+      display: inline-flex;
+      gap: 6px;
+      background: #f5efe6;
+      padding: 4px;
+      border-radius: 12px;
+    }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 12px;
+      padding: 6px 11px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+    .lang-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+    }
+    h2 {
+      margin: 20px 0 8px;
+      font-size: 16px;
+      color: var(--accent);
+    }
+    p, li {
+      font-size: 14px;
+      color: var(--ink);
+    }
+    ul {
+      margin: 6px 0 12px;
+      padding-left: 20px;
+    }
+    li { margin-bottom: 6px; }
+    code {
+      background: #f5efe6;
+      padding: 1px 5px;
+      border-radius: 6px;
+      font-size: 12.5px;
+    }
+    .meta-box {
+      background: var(--accent-soft);
+      border: 1px solid #d8b4fe;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    .hidden { display: none; }
+    a { color: var(--accent); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <h1>🐾 Mochi Pop! — Privacy Policy</h1>
+        <small>Effective Date: 2026-11-14 • Developer: jemangr</small>
+      </div>
+      <div class="lang-switch" role="tablist" aria-label="Language">
+        <button type="button" class="lang-btn active" data-lang="en">🇬🇧 English</button>
+        <button type="button" class="lang-btn" data-lang="el">🇬🇷 Ελληνικά</button>
+      </div>
+    </div>
+
+    <div id="contentEn">
+      <div class="meta-box">
+        <strong>Developer:</strong> jemangr &bull;
+        <strong>App ID:</strong> <code>app.jemangr.mochipop</code> &bull;
+        <strong>Privacy:</strong> <a href="mailto:privacy@jemangr.app">privacy@jemangr.app</a> &bull;
+        <strong>Support:</strong> <a href="mailto:support@jemangr.app">support@jemangr.app</a> &bull;
+        <strong>Website:</strong> <a href="https://jemangr.app" target="_blank" rel="noopener noreferrer">jemangr.app</a>
+      </div>
+
+      <h2>1. Summary</h2>
+      <p><strong>Mochi Pop!</strong> is an offline-first cozy block puzzle and virtual cat game. By default, your game saves, scores, and settings remain strictly on your own device.</p>
+
+      <h2>2. Data Stored Locally on Your Device</h2>
+      <ul>
+        <li><code>mochi_pop_save_v1</code>: Puzzle state, high scores, daily challenge progress, cat stats, Golden Fish, accessories, language, audio volumes, and your chosen display <strong>Nickname</strong>.</li>
+        <li><code>mochi_pop_onboarded_v030</code>: Onboarding completion flag.</li>
+        <li><code>mochi_pop_analytics_v1</code>: Local session/run counters and ad-pacing timestamps stored on your device.</li>
+        <li><code>mochi_pop_remote_cfg_v1</code>, <code>mochi_pop_cloud_v1</code> &amp; <code>mochi_pop_update_meta_v1</code>: Cached update timestamps, gameplay configuration, and anonymous cloud transfer credentials.</li>
+      </ul>
+      <p>Clearing app storage or uninstalling the app removes all local data immediately.</p>
+
+      <h2>3. Network Requests &amp; Online Services</h2>
+      <ul>
+        <li><strong>App Updates (Direct APK):</strong> Checks GitHub Releases (<code>api.github.com</code> / <code>raw.githubusercontent.com</code>) for new versions and remote configuration. No personal profile or save data is sent.</li>
+        <li><strong>Bug Reports:</strong> Only when you tap <em>Report a Bug / Error</em>, your device's email app opens a draft to <code>support@jemangr.app</code>. Nothing is sent automatically.</li>
+        <li><strong>Google AdMob (Google Play Builds):</strong> Current preview/browser builds use simulated demo ads. When Google Play builds enable Google AdMob, Google may collect Advertising ID, IP address, and diagnostics under Google's Privacy Policy and EEA/UK GDPR consent prompts (UMP).</li>
+        <li><strong>Purr League Leaderboard &amp; Cloud Save (<code>api.jemangr.app</code>):</strong> Powered by Cloudflare Workers + D1 without email or password login. Stores only an anonymous random <code>playerId</code>, transfer code (<code>MOCHI-XXXX-XXXX</code>), chosen <strong>Nickname</strong> (avoid real names/emails), scores, tier, and backed-up game progress JSON.</li>
+      </ul>
+
+      <h2>4. Permissions Used</h2>
+      <ul>
+        <li><code>INTERNET</code> &amp; <code>ACCESS_NETWORK_STATE</code>: Version checks, external links, and (in Google Play builds) ads or online leaderboards.</li>
+        <li><code>VIBRATE</code>: Optional tactile feedback (toggleable in Settings).</li>
+        <li><code>POST_NOTIFICATIONS</code>: Optional local daily pet care reminders via Android <code>AlarmManager</code>.</li>
+      </ul>
+
+      <h2>5. Children's Privacy &amp; Data Deletion</h2>
+      <p>Mochi Pop! is not directed at children under 13. To request deletion of any leaderboard nickname or support emails, contact <a href="mailto:privacy@jemangr.app">privacy@jemangr.app</a>.</p>
+    </div>
+
+    <div id="contentEl" class="hidden">
+      <div class="meta-box">
+        <strong>Δημιουργός:</strong> jemangr &bull;
+        <strong>App ID:</strong> <code>app.jemangr.mochipop</code> &bull;
+        <strong>Απόρρητο:</strong> <a href="mailto:privacy@jemangr.app">privacy@jemangr.app</a> &bull;
+        <strong>Υποστήριξη:</strong> <a href="mailto:support@jemangr.app">support@jemangr.app</a> &bull;
+        <strong>Ιστοσελίδα:</strong> <a href="https://jemangr.app" target="_blank" rel="noopener noreferrer">jemangr.app</a>
+      </div>
+
+      <h2>1. Σύνοψη</h2>
+      <p>Το <strong>Mochi Pop!</strong> είναι ένα offline-first cozy puzzle παιχνίδι με εικονικό γατάκι. Από προεπιλογή, η πρόοδος, τα σκορ και οι ρυθμίσεις σου αποθηκεύονται <strong>αποκλειστικά στη συσκευή σου</strong>.</p>
+
+      <h2>2. Τοπικά Δεδομένα στη Συσκευή</h2>
+      <ul>
+        <li><code>mochi_pop_save_v1</code>: Κατάσταση πίστας, σκορ &amp; ρεκόρ, ημερήσια πρόκληση, ενέργεια/διάθεση γάτας, χρυσά ψάρια, αξεσουάρ, γλώσσα, εντάσεις ήχου και το <strong>Nickname</strong> σου.</li>
+        <li><code>mochi_pop_onboarded_v030</code>: Ένδειξη ολοκλήρωσης οδηγού εκκίνησης.</li>
+        <li><code>mochi_pop_analytics_v1</code>: Τοπικοί μετρητές παρτίδων &amp; χρονομέτρηση διαφημίσεων.</li>
+        <li><code>mochi_pop_remote_cfg_v1</code>, <code>mochi_pop_cloud_v1</code> &amp; <code>mochi_pop_update_meta_v1</code>: Προσωρινή μνήμη ελέγχου εκδόσεων, ρυθμίσεων και ανώνυμου κωδικού μεταφοράς Cloud Save.</li>
+      </ul>
+      <p>Μπορείς να διαγράψεις όλα τα τοπικά δεδομένα ανά πάσα στιγμή από τις ρυθμίσεις του Android (Εκκαθάριση αποθηκευτικού χώρου) ή απεγκαθιστώντας την εφαρμογή.</p>
+
+      <h2>3. Δικτυακές Συνδέσεις &amp; Online Υπηρεσίες</h2>
+      <ul>
+        <li><strong>Έλεγχος Ενημερώσεων (APK έκδοση):</strong> Γίνεται έλεγχος στο GitHub Releases (<code>api.github.com</code> / <code>raw.githubusercontent.com</code>) χωρίς αποστολή προσωπικών δεδομένων ή save.</li>
+        <li><strong>Αναφορά Σφάλματος:</strong> Μόνο αν πατήσεις <em>Αναφορά Προβλήματος</em> ανοίγει η εφαρμογή email σου προς <code>support@jemangr.app</code>. Τίποτα δεν στέλνεται αυτόματα.</li>
+        <li><strong>Google AdMob (έκδοση Google Play):</strong> Στη δοκιμαστική/browser έκδοση οι διαφημίσεις είναι προσομοιωμένες. Όταν ενεργοποιηθεί το AdMob στην έκδοση Google Play, η Google ενδέχεται να επεξεργάζεται Advertising ID και IP σύμφωνα με την Πολιτική της Google και το αναδυόμενο παράθυρο συγκατάθεσης GDPR (UMP).</li>
+        <li><strong>Κατάταξη Purr League &amp; Cloud Save (<code>api.jemangr.app</code>):</strong> Λειτουργεί σε Cloudflare Workers + D1 χωρίς email ή κωδικό. Αποθηκεύει μόνο ένα τυχαίο ανώνυμο <code>playerId</code>, τον κωδικό μεταφοράς (<code>MOCHI-XXXX-XXXX</code>), το <strong>Nickname</strong> σου (μη βάζεις πραγματικό ονοματεπώνυμο ή email), τα σκορ, την κατηγορία και το backup προόδου.</li>
+      </ul>
+
+      <h2>4. Δικαιώματα Android</h2>
+      <ul>
+        <li><code>INTERNET</code> &amp; <code>ACCESS_NETWORK_STATE</code>: Έλεγχος ενημερώσεων, εξωτερικοί σύνδεσμοι και (στο Google Play) διαφημίσεις / online high scores.</li>
+        <li><code>VIBRATE</code>: Προαιρετική δόνηση αφής (απενεργοποιείται στις Ρυθμίσεις).</li>
+        <li><code>POST_NOTIFICATIONS</code>: Προαιρετικές τοπικές υπενθυμίσεις φροντίδας μέσω Android <code>AlarmManager</code>.</li>
+      </ul>
+
+      <h2>5. Προστασία Παιδιών &amp; Διαγραφή Δεδομένων</h2>
+      <p>Η εφαρμογή δεν απευθύνεται σε παιδιά κάτω των 13 ετών. Για αίτημα διαγραφής nickname κατάταξης ή email επικοινωνίας, στείλε μήνυμα στο <a href="mailto:privacy@jemangr.app">privacy@jemangr.app</a>.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const initialLang = params.get("lang") === "el" ? "el" : "en";
+      const contentEn = document.getElementById("contentEn");
+      const contentEl = document.getElementById("contentEl");
+      const btns = document.querySelectorAll(".lang-btn");
+
+      function setLang(lang) {
+        const isEl = lang === "el";
+        contentEn.classList.toggle("hidden", isEl);
+        contentEl.classList.toggle("hidden", !isEl);
+        btns.forEach((b) => b.classList.toggle("active", b.dataset.lang === lang));
+      }
+
+      btns.forEach((b) => {
+        b.addEventListener("click", () => setLang(b.dataset.lang));
+      });
+      setLang(initialLang);
+    })();
+  </script>
+</body>
+</html>

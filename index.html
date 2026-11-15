@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff8fa3" />
+  <title>Mochi Pop! — Cozy Pet &amp; Block Puzzle</title>
+  <link rel="icon" href="assets/mochi-ref.jpg" />
+  <link rel="apple-touch-icon" href="assets/mochi-ref.jpg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css?v=20261115g" />
+</head>
+<body>
+  <!-- Desktop Demo Controls (outside the phone frame so you can test states easily) -->
+  <div class="demo-bar" id="demoBar">
+    <span class="demo-label">Playtest Tools:</span>
+    <button type="button" class="demo-btn" id="btnSim6h" title="Simulate 6 hours away">+6h Away</button>
+    <button type="button" class="demo-btn" id="btnSim14h" title="Simulate 14 hours away (Mochi sulks)">+14h Sulk</button>
+    <button type="button" class="demo-btn" id="btnSim48h" title="Simulate 48 hours away (Mochi faints -> Ad Revive)">+48h Faint</button>
+    <button type="button" class="demo-btn" id="btnSimNextDay" title="Advance 1 calendar day for Daily Streak testing">⏭️ +1 Day</button>
+    <button type="button" class="demo-btn" id="btnToggleDayNight" title="Switch Day / Night lighting">☀️/🌙 Day/Night</button>
+    <button type="button" class="demo-btn" id="btnTestWake" title="Replay Sleep -> Wake Up animation">😴 Wake</button>
+    <button type="button" class="demo-btn" id="btnSimLose" title="Trigger a near-full board / lose test">Test Cry/Lose</button>
+    <button type="button" class="demo-btn" id="btnAddTreats" title="Give +5 fish treats">+5 Fish</button>
+    <button type="button" class="demo-btn danger" id="btnReset" title="Reset saved game">Reset</button>
+  </div>
+
+  <!-- Mobile App Viewport -->
+  <main class="phone-shell" id="phoneShell">
+    <!-- Top Status HUD -->
+    <header class="top-hud">
+      <div class="score-group">
+        <div class="stat-pill score-pill">
+          <span class="stat-label" data-i18n="hud_score">SCORE</span>
+          <span class="stat-value" id="scoreVal">0</span>
+        </div>
+        <div class="stat-pill best-pill">
+          <span class="stat-label" data-i18n="hud_best">BEST</span>
+          <span class="stat-value" id="bestVal">0</span>
+        </div>
+        <button type="button" class="stat-pill streak-pill" id="btnDailyCalendar" title="Daily Rewards &amp; Quests">
+          <span class="stat-label" data-i18n="hud_streak">STREAK</span>
+          <span class="stat-value" id="streakVal">🔥1</span>
+          <span class="daily-badge-dot hidden" id="dailyBadgeDot"></span>
+        </button>
+      </div>
+
+      <div class="hud-actions">
+        <button type="button" class="treat-pill" id="btnFeed" title="Feed Mochi 1 Fish">
+          <span class="fish-icon">🐟</span>
+          <span id="treatsVal">3</span>
+          <span class="feed-hint" id="feedHint" data-i18n="hud_feed">FEED</span>
+        </button>
+        <button type="button" class="icon-btn" id="btnWardrobe" title="Mochi's Closet &amp; Room">🛍️</button>
+        <button type="button" class="icon-btn" id="btnAudio" title="Sound Mixer (Music, Game SFX &amp; Cat)">🔊</button>
+        <button type="button" class="icon-btn" id="btnSettings" title="Settings &amp; Updates">
+          ⚙️
+          <span class="daily-badge-dot hidden" id="settingsBadgeDot"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Upper 32%: Mochi's Cozy Room -->
+    <section class="pet-stage" id="petStage">
+      <div class="wall-frame" id="wallFrame" aria-hidden="true"><span id="wallStickerIcon">🐾</span></div>
+      <div class="room-window" id="roomWindow" role="button" tabindex="0" title="Tap window to look outside">
+        <span class="window-celestial" id="windowCelestial">☀️</span>
+        <div class="window-clouds" aria-hidden="true"><span>☁️</span><span>☁️</span></div>
+        <div class="window-stars" aria-hidden="true"><span>✦</span><span>·</span><span>✧</span><span>·</span></div>
+        <div class="window-weather" id="windowWeather" aria-hidden="true"></div>
+      </div>
+      <div class="sunbeam" id="sunbeam"></div>
+      <div class="hanging-lamp" id="hangingLamp" role="button" tabindex="0" title="Tap lamp to toggle Day/Night ambience">
+        <div class="lamp-cord"></div>
+        <div class="lamp-shade"></div>
+        <div class="lamp-bulb"></div>
+        <div class="lamp-cone"></div>
+      </div>
+      <div class="room-rug" id="roomRug"></div>
+
+      <!-- Mood & Hunger Bars -->
+      <div class="pet-meters">
+        <div class="meter-row">
+          <span class="meter-icon" title="Hunger">🍖</span>
+          <div class="meter-track">
+            <div class="meter-fill hunger-fill" id="hungerBar"></div>
+          </div>
+          <span class="meter-pct" id="hungerPct">100%</span>
+        </div>
+        <div class="meter-row">
+          <span class="meter-icon" id="moodIcon" title="Mood">💖</span>
+          <div class="meter-track">
+            <div class="meter-fill mood-fill" id="moodBar"></div>
+          </div>
+          <span class="meter-pct" id="moodPct">100%</span>
+        </div>
+      </div>
+
+      <!-- Energy Score Multiplier, Friend Level, Wheel & League -->
+      <div class="pet-left-controls">
+        <div class="left-top-pills">
+          <button type="button" class="energy-mult-pill mult-max" id="energyMultPill" title="Mochi Energy Score Bonus">
+            ⚡ ×2.0 PTS
+          </button>
+          <button type="button" class="friend-lv-pill" id="friendLevelPill" title="Mochi Friendship Level">
+            💖 Lv.1
+          </button>
+        </div>
+        <div class="purr-rush-badge hidden" id="purrRushBadge">🔥 PURR RUSH</div>
+        <div class="left-btn-row">
+          <button type="button" class="play-toy-btn" id="btnPlayToy" title="Play with Mochi's active toy">
+            <span id="playToyIcon">🧶</span> <span data-i18n="btn_play">Play</span>
+          </button>
+          <button type="button" class="overdrive-ad-btn" id="btnOverdriveAd" title="Watch Ad for ×3.0 Score Overdrive (15 moves)">
+            ⚡×3 AD
+          </button>
+        </div>
+        <div class="left-btn-row left-social-row">
+          <button type="button" class="mini-stage-btn" id="btnLuckyWheel" title="Lucky Tuna Wheel">
+            🎡
+            <span class="daily-badge-dot hidden" id="wheelBadgeDot"></span>
+          </button>
+          <button type="button" class="mini-stage-btn" id="btnLeague" title="Daily & Weekly Purr League">
+            🏆
+          </button>
+          <button type="button" class="mini-stage-btn" id="btnTrophies" title="Trophy Room & Medals">
+            🏅
+            <span class="daily-badge-dot hidden" id="trophyBadgeDot"></span>
+          </button>
+          <button type="button" class="mini-stage-btn" id="btnMiniGame" title="Mini-Games">
+            🎮
+          </button>
+          <button type="button" class="mini-stage-btn" id="btnPhotoMode" title="Mochi Photo Studio">
+            📸
+          </button>
+          <button type="button" class="mini-stage-btn" id="btnDiary" title="Mochi's Diary">
+            📖
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Weekend / Midweek Mini-Event & Gift Upgrade Pill -->
+      <div class="stage-event-pill hidden" id="eventBannerPill">🐟 2× Fish!</div>
+      <button type="button" class="gift-upgrade-pill hidden" id="btnGiftUpgradeAd" data-i18n="gift_upgrade_pill">
+        🎁 Upgrade 📺 +4 🐟
+      </button>
+
+      <!-- Speech / Emotion Bubble -->
+      <div class="pet-bubble hidden" id="petBubble">Feed me! 🐟</div>
+
+      <!-- Mochi Canvas -->
+      <canvas id="petCanvas"></canvas>
+
+      <!-- Free Snack Ad Button when hungry/sulking -->
+      <button type="button" class="snack-ad-btn hidden" id="btnSnackAd">
+        <span>🎬</span> Free 3× 🐟
+      </button>
+
+      <!-- Revive Ad Button when Mochi fainted after days away -->
+      <button type="button" class="fainted-revive-btn hidden" id="btnReviveFaintedAd">
+        <span>💫</span> Revive Mochi (Ad)
+      </button>
+
+      <!-- Combo Banner -->
+      <div class="combo-toast hidden" id="comboToast">COMBO x2!</div>
+
+      <!-- Tablet Landscape Quick-Care Dock -->
+      <div class="tablet-quick-care" id="tabletQuickCare">
+        <button type="button" class="quick-care-btn" id="btnQuickPet" title="Pet Mochi">💕</button>
+        <button type="button" class="quick-care-btn" id="btnQuickToy" title="Switch Toy">🧶</button>
+        <button type="button" class="quick-care-btn" id="btnQuickHat" title="Cycle Accessory">🎀</button>
+        <button type="button" class="quick-care-btn" id="btnQuickTheme" title="Cycle Room Theme">🎨</button>
+        <button type="button" class="quick-care-btn" id="btnQuickMiniGame" title="Mini-Games">🎮</button>
+        <button type="button" class="quick-care-btn" id="btnQuickTrophies" title="Trophy Room">🏅</button>
+        <button type="button" class="quick-care-btn" id="btnQuickPhoto" title="Photo Studio">📸</button>
+        <button type="button" class="quick-care-btn" id="btnQuickDiary" title="Mochi's Diary">📖</button>
+      </div>
+    </section>
+
+    <!-- Lower 68%: 8x8 Puzzle Area -->
+    <section class="puzzle-area" id="puzzleArea">
+      <div class="challenge-strip">
+        <div class="craving-pill" id="cravingPill">
+          <span class="craving-icon">🎯</span>
+          <span id="cravingText">Clear 1 line (+2 🐟)</span>
+        </div>
+        <button type="button" class="zen-pill" id="btnZenMode" title="Relaxed Zen Mode (No Game Over)" data-i18n="btn_zen_off">
+          🧘 Zen
+        </button>
+        <button type="button" class="adventure-pill" id="btnAdventureMode" title="Adventure Story Chapters" data-i18n="btn_adventure">
+          🗺️ Story
+        </button>
+        <button type="button" class="daily-pill" id="btnDailyMode" title="Daily Challenge" data-i18n="btn_daily">
+          📅 Daily
+        </button>
+        <button type="button" class="blitz-pill" id="btnBlitzMode" title="90s Timed Blitz Mode" data-i18n="btn_blitz">
+          ⏱️ Blitz
+        </button>
+      </div>
+
+      <div class="board-wrapper" id="boardWrapper">
+        <canvas id="boardCanvas"></canvas>
+      </div>
+
+      <!-- Hold Slot + 3-Piece Tray + Rotate/Undo/Refresh/Bomb -->
+      <div class="tray-row">
+        <div class="tray-slots" id="traySlots">
+          <div class="hold-slot empty" id="holdSlot" title="Drag a piece here to Hold it for later">
+            <span class="hold-badge" data-i18n="hold_label">HOLD</span>
+            <canvas class="slot-canvas" id="holdCanvas"></canvas>
+          </div>
+          <div class="tray-slot" data-slot="0"><canvas class="slot-canvas"></canvas></div>
+          <div class="tray-slot" data-slot="1"><canvas class="slot-canvas"></canvas></div>
+          <div class="tray-slot" data-slot="2"><canvas class="slot-canvas"></canvas></div>
+        </div>
+        <div class="tray-actions">
+          <button type="button" class="tray-action-btn rotate-btn" id="btnRotatePieces" data-i18n-title="rotate_title" title="Rotate tray pieces 90°">
+            <span>↻</span>
+            <span class="ad-tag" id="rotateCountBadge">3</span>
+          </button>
+          <button type="button" class="tray-action-btn hammer-btn" id="btnHammer" data-i18n-title="hammer_title" title="Toy Hammer: smash 1 block or crack ice">
+            <span>🔨</span>
+            <span class="ad-tag" id="hammerCountBadge">1</span>
+          </button>
+          <button type="button" class="tray-action-btn undo-btn" id="btnUndoAd" title="Watch Ad to undo last move" disabled>
+            <span>↩️</span>
+            <span class="ad-tag" data-i18n="ad_tag">AD</span>
+          </button>
+          <button type="button" class="tray-action-btn refresh-btn" id="btnRefreshAd" title="Watch Ad to swap pieces">
+            <span>🔄</span>
+            <span class="ad-tag" data-i18n="ad_tag">AD</span>
+          </button>
+          <button type="button" class="tray-action-btn bomb-btn" id="btnBombAd" title="Watch Ad for an Emergency Paw Bomb">
+            <span>💣</span>
+            <span class="ad-tag" data-i18n="ad_tag">AD</span>
+          </button>
+          <button type="button" class="tray-action-btn keys-btn" id="btnKeyLegend" data-i18n-title="keys_title" title="Keyboard Shortcuts">
+            <span>⌨️</span>
+            <span class="ad-tag">?</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Dragged Piece Canvas Overlay -->
+    <canvas id="fxCanvas"></canvas>
+
+    <!-- Game Over / Revive Modal -->
+    <div class="modal-backdrop game-over-backdrop hidden" id="gameOverModal">
+      <div class="modal-card">
+        <div class="modal-emoji" id="goEmoji">😿</div>
+        <h2 id="goTitle">Oh no! No moves left!</h2>
+        <p id="goSubtitle">Mochi is crying... Don't leave him sad!</p>
+        <div class="go-stats">
+          <div><span data-i18n="go_score">Score</span><strong id="goScore">0</strong></div>
+          <div><span data-i18n="go_best">Best</span><strong id="goBest">0</strong></div>
+        </div>
+        <div class="go-run-summary hidden" id="goRunSummary">+0 🐟 earned this run</div>
+        <button type="button" class="bonus-fish-ad-btn hidden" id="btnDoubleRunFishAd">
+          <span class="ad-badge" data-i18n="ad_tag">AD</span>
+          <span id="goDoubleFishLabel" data-i18n="go_double_fish">2× Run Fish!</span>
+        </button>
+        <button type="button" class="primary-ad-btn" id="btnReviveAd">
+          <span class="ad-badge" data-i18n="ad_tag">AD</span>
+          <span data-i18n="go_revive">Clear Center &amp; Revive Mochi!</span>
+        </button>
+        <button type="button" class="secondary-ad-btn" id="btnRescuePackAd">
+          <span class="ad-badge" data-i18n="ad_tag">AD</span>
+          <span data-i18n="go_rescue_pack">+3 ↻ Rotate &amp; 💣 Bomb</span>
+        </button>
+        <button type="button" class="share-btn" id="btnShareCard" data-i18n="go_share">
+          📸 Save Score Card
+        </button>
+        <button type="button" class="challenge-friend-btn" id="btnChallengeFriend" data-i18n="go_challenge_friend">
+          🤝 Challenge a Friend
+        </button>
+        <button type="button" class="secondary-btn rematch-seed-btn" id="btnRematchSeed" data-i18n="go_rematch_seed">
+          🔁 Rematch Same Seed
+        </button>
+        <button type="button" class="secondary-btn" id="btnPlayAgain" data-i18n="go_play_again">
+          Start New Game
+        </button>
+      </div>
+    </div>
+
+    <!-- Wardrobe Modal -->
+    <div class="modal-backdrop hidden" id="wardrobeModal">
+      <div class="modal-card">
+        <h2 data-i18n="closet_title">Mochi's Closet &amp; Room 🎀</h2>
+        <p class="small-note" data-i18n="closet_sub">Unlock with 🐟, Rewarded Ads, or Daily Streaks!</p>
+        <div class="closet-preview-box" id="closetPreviewBox">
+          <canvas id="closetPreviewCanvas"></canvas>
+          <button type="button" class="closet-snap-btn" id="btnClosetPhoto" title="Open Photo Studio">📸</button>
+        </div>
+        <div class="closet-tabs" id="closetTabs">
+          <button type="button" class="closet-tab active" data-tab="all" data-i18n="tab_all">All</button>
+          <button type="button" class="closet-tab" data-tab="style" data-i18n="tab_style">Style</button>
+          <button type="button" class="closet-tab" data-tab="toys" data-i18n="tab_toys">Toys</button>
+          <button type="button" class="closet-tab" data-tab="room" data-i18n="tab_room">Room</button>
+        </div>
+        <div class="closet-grid" id="closetGrid"></div>
+        <button type="button" class="secondary-btn" id="btnCloseWardrobe" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Simulated Rewarded Ad Overlay -->
+    <div class="modal-backdrop hidden" id="adModal">
+      <div class="modal-card ad-sim-card">
+        <div class="ad-sim-header">
+          <span class="ad-pill" data-i18n="ad_demo_pill">REWARDED AD DEMO</span>
+          <span id="adTimer">3s</span>
+        </div>
+        <div class="ad-sim-body">
+          <div class="ad-spinner">📺</div>
+          <p id="adRewardText">Playing AdMob Rewarded Video...</p>
+          <small data-i18n="ad_demo_sub">In the real Google Play build, AdMob plays here.</small>
+        </div>
+        <button type="button" class="primary-ad-btn hidden" id="btnClaimAd" data-i18n="ad_claim_btn">
+          Claim Reward! ✨
+        </button>
+      </div>
+    </div>
+
+    <!-- Audio Mixer Modal -->
+    <div class="modal-backdrop hidden" id="audioModal">
+      <div class="modal-card audio-modal-card">
+        <h2 data-i18n="audio_title">Sound Mixer 🎛️</h2>
+        <p class="small-note" data-i18n="audio_sub">Adjust music, game effects &amp; Mochi separately</p>
+        <div class="audio-channels">
+          <div class="audio-channel">
+            <div class="audio-channel-top">
+              <span class="setting-info">
+                <strong data-i18n="audio_music_t">🎵 Music Carpet</strong>
+                <small data-i18n="audio_music_d">Cozy kalimba background loop</small>
+              </span>
+              <input type="checkbox" class="toggle-input" id="toggleMusic" checked />
+            </div>
+            <div class="audio-slider-row">
+              <input type="range" class="audio-slider" id="sliderMusicVol" min="0" max="100" value="70" />
+              <span class="audio-vol-val" id="valMusicVol">70%</span>
+            </div>
+          </div>
+
+          <div class="audio-channel">
+            <div class="audio-channel-top">
+              <span class="setting-info">
+                <strong data-i18n="audio_sfx_t">🎮 Game Effects</strong>
+                <small data-i18n="audio_sfx_d">Blocks, pops, combos &amp; bombs</small>
+              </span>
+              <input type="checkbox" class="toggle-input" id="toggleSfx" checked />
+            </div>
+            <div class="audio-slider-row">
+              <input type="range" class="audio-slider" id="sliderSfxVol" min="0" max="100" value="85" />
+              <span class="audio-vol-val" id="valSfxVol">85%</span>
+            </div>
+          </div>
+
+          <div class="audio-channel">
+            <div class="audio-channel-top">
+              <span class="setting-info">
+                <strong data-i18n="audio_cat_t">🐱 Cat Sounds</strong>
+                <small data-i18n="audio_cat_d">Mochi meows, purrs, eating &amp; cries</small>
+              </span>
+              <input type="checkbox" class="toggle-input" id="toggleCat" checked />
+            </div>
+            <div class="audio-slider-row">
+              <input type="range" class="audio-slider" id="sliderCatVol" min="0" max="100" value="90" />
+              <span class="audio-vol-val" id="valCatVol">90%</span>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="secondary-btn" id="btnCloseAudio" data-i18n="btn_done">Done</button>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-backdrop hidden" id="settingsModal">
+      <div class="modal-card settings-modal-card">
+        <h2 data-i18n="settings_title">Settings ⚙️</h2>
+        <div class="settings-tabs" id="settingsTabs">
+          <button type="button" class="settings-tab active" data-settings-tab="general" data-i18n="set_tab_game">🎮 Game</button>
+          <button type="button" class="settings-tab" data-settings-tab="vip" data-i18n="set_tab_vip">📖 Guide &amp; Stats</button>
+          <button type="button" class="settings-tab" data-settings-tab="app" data-i18n="set_tab_app">📱 App</button>
+        </div>
+
+        <div class="settings-pane" id="settingsPaneGeneral">
+          <div class="settings-list">
+            <div class="setting-row setting-lang-row">
+              <span class="setting-info">
+                <strong data-i18n="settings_language">🌍 Language</strong>
+                <small data-i18n="settings_language_sub">Interface &amp; guide language</small>
+              </span>
+              <select class="lang-select" id="selectLanguage" aria-label="Language">
+                <option value="el">🇬🇷 Ελληνικά</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="de">🇩🇪 Deutsch</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="tr">🇹🇷 Türkçe</option>
+              </select>
+            </div>
+            <div class="setting-row setting-nick-row">
+              <span class="setting-info">
+                <strong data-i18n="settings_nickname">🏷️ Player Nickname</strong>
+                <small data-i18n="settings_nickname_sub">Used for Leaderboard &amp; Score Cards</small>
+              </span>
+              <input
+                type="text"
+                class="nick-input"
+                id="inputSettingsNickname"
+                maxlength="18"
+                data-i18n-placeholder="nickname_placeholder"
+                placeholder="Enter nickname"
+              />
+            </div>
+            <button type="button" class="setting-row setting-action-row" id="btnOpenAudioFromSettings">
+              <span class="setting-info">
+                <strong data-i18n="settings_sound">🔊 Sound &amp; Volume Mixer</strong>
+                <small data-i18n="settings_sound_sub">Separate Music, Game SFX &amp; Cat controls</small>
+              </span>
+              <span class="setting-chevron">›</span>
+            </button>
+            <label class="setting-row">
+              <span class="setting-info">
+                <strong data-i18n="settings_fx">✨ Visual Effects</strong>
+                <small data-i18n="settings_fx_sub">Particles, hearts &amp; score popups</small>
+              </span>
+              <input type="checkbox" class="toggle-input" id="toggleFx" checked />
+            </label>
+            <label class="setting-row">
+              <span class="setting-info">
+                <strong data-i18n="settings_haptics">📳 Vibration</strong>
+                <small data-i18n="settings_haptics_sub">Tactile feedback on Android</small>
+              </span>
+              <input type="checkbox" class="toggle-input" id="toggleHaptics" checked />
+            </label>
+            <label class="setting-row">
+              <span class="setting-info">
+                <strong data-i18n="settings_colorblind">🎨 Colorblind Symbols</strong>
+                <small data-i18n="settings_colorblind_sub">Draw distinct shapes on every block</small>
+              </span>
+              <input type="checkbox" class="toggle-input" id="toggleColorblind" />
+            </label>
+            <label class="setting-row">
+              <span class="setting-info">
+                <strong data-i18n="settings_powersaver">🔋 Power Saver (30 FPS)</strong>
+                <small data-i18n="settings_powersaver_sub">Calm animations &amp; lower battery use</small>
+              </span>
+              <input type="checkbox" class="toggle-input" id="togglePowerSaver" />
+            </label>
+            <div class="setting-row setting-lang-row">
+              <span class="setting-info">
+                <strong data-i18n="settings_drag_offset">👆 Touch Drag Height</strong>
+                <small data-i18n="settings_drag_offset_sub">Lift pieces above your finger</small>
+              </span>
+              <select class="lang-select" id="selectDragOffset" aria-label="Touch Drag Height">
+                <option value="low" data-i18n="drag_low">Low</option>
+                <option value="normal" data-i18n="drag_normal">Normal</option>
+                <option value="high" data-i18n="drag_high">High</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-pane hidden" id="settingsPaneVip">
+          <div class="settings-list">
+            <button type="button" class="setting-row setting-action-row" id="btnOpenGuide">
+              <span class="setting-info">
+                <strong data-i18n="settings_guide">📖 Game Guide &amp; Permissions</strong>
+                <small data-i18n="settings_guide_sub">How to play, tiles, rewards &amp; app permissions</small>
+              </span>
+              <span class="setting-chevron">›</span>
+            </button>
+            <button type="button" class="setting-row setting-action-row" id="btnOpenStats">
+              <span class="setting-info">
+                <strong data-i18n="settings_analytics">📊 Gameplay Stats &amp; Ad Funnel</strong>
+                <small data-i18n="settings_analytics_sub">Sessions, Rewarded Opt-Ins &amp; Remote Config</small>
+              </span>
+              <span class="setting-chevron">›</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="settings-pane hidden" id="settingsPaneApp">
+          <button type="button" class="more-apps-btn" id="btnMoreApps">
+            <span class="setting-info">
+              <strong data-i18n="settings_more_apps">🚀 Our Other Apps</strong>
+              <small data-i18n="settings_more_apps_sub">Discover more apps at jemangr.app</small>
+            </span>
+            <span class="setting-chevron">↗</span>
+          </button>
+          <div class="update-box">
+            <button type="button" class="update-btn" id="btnCheckUpdates" data-i18n="settings_check_update">
+              🔄 Check for App Update
+            </button>
+            <p class="update-status" id="updateStatusText">Auto-checks every 6 hours • v0.5.8</p>
+          </div>
+          <button type="button" class="report-btn" id="btnOpenBugReport" data-i18n="settings_report_bug">
+            🐞 Report a Bug / Error
+          </button>
+          <button type="button" class="setting-row setting-action-row cloud-link-row" id="btnOpenCloudSync">
+            <span class="setting-info">
+              <strong data-i18n="settings_cloud">☁️ Cloud Save &amp; Device Transfer</strong>
+              <small id="settingsCloudSub" data-i18n="settings_cloud_sub">Sync progress &amp; get transfer code</small>
+            </span>
+            <span class="setting-chevron">›</span>
+          </button>
+          <button type="button" class="setting-row setting-action-row privacy-link-row" id="btnPrivacyPolicy">
+            <span class="setting-info">
+              <strong data-i18n="settings_privacy">🔒 Privacy Policy</strong>
+              <small data-i18n="settings_privacy_sub">Data storage, permissions &amp; ads info</small>
+            </span>
+            <span class="setting-chevron">›</span>
+          </button>
+          <p class="version-note">Mochi Pop! v0.5.8 • support@jemangr.app</p>
+          <p class="privacy-note" data-i18n="privacy_note">Local save stays on your device. Demo Ads are simulated in browser.</p>
+        </div>
+
+        <button type="button" class="secondary-btn" id="btnCloseSettings" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Daily Calendar & Quests Modal -->
+    <div class="modal-backdrop hidden" id="dailyModal">
+      <div class="modal-card daily-modal-card">
+        <div class="daily-modal-head">
+          <h2 data-i18n="daily_title">Daily Rewards &amp; Quests 🎁</h2>
+          <span class="daily-streak-pill" id="dailyStreakTag">🔥 Day 1</span>
+        </div>
+        <div class="closet-tabs" id="dailyTabs">
+          <button type="button" class="closet-tab active" data-daily-tab="calendar" data-i18n="daily_tab_cal">📅 Calendar</button>
+          <button type="button" class="closet-tab" data-daily-tab="archive" data-i18n="daily_tab_archive">🗓️ Archive</button>
+          <button type="button" class="closet-tab" data-daily-tab="quests" data-i18n="daily_tab_quests">📜 Quests</button>
+          <button type="button" class="closet-tab" data-daily-tab="album" data-i18n="tab_album">📸 Album</button>
+        </div>
+
+        <div id="dailyCalendarPane">
+          <div class="streak-saver-banner hidden" id="streakSaverBanner">
+            <div>
+              <strong data-i18n="streak_saver_title">Missed yesterday! Don't lose your 🔥 streak!</strong>
+              <small id="streakSaverSub">Restore your streak with 1 quick Ad</small>
+            </div>
+            <button type="button" class="streak-saver-btn" id="btnStreakSaverAd" data-i18n="streak_saver_btn">📺 Save Streak</button>
+          </div>
+          <p class="small-note" id="dailyCalendarSub" data-i18n="daily_cal_sub">Play every day for bigger treats, Dispenser &amp; Day 7 Grand Prize!</p>
+          <div class="daily-grid" id="dailyGrid"></div>
+        </div>
+
+        <div id="dailyArchivePane" class="hidden">
+          <p class="small-note" id="archiveMonthSummary">Monthly Archive</p>
+          <div class="archive-milestones" id="archiveMilestonesRow"></div>
+          <div class="archive-replay-choice hidden" id="archiveReplayChoice">
+            <span id="archiveChoiceLabel">📅</span>
+            <div class="archive-choice-btns">
+              <button type="button" class="daily-card-btn" id="btnArchivePayFish">🐟 15</button>
+              <button type="button" class="daily-card-btn ad-bonus" id="btnArchiveWatchAd" data-i18n="archive_ad_free">📺 Ad Free</button>
+            </div>
+          </div>
+          <div class="archive-grid" id="archiveMonthGrid"></div>
+          <p class="privacy-note" data-i18n="archive_hint">Tap today to play free, or missed days (15 🐟 / Ad) to hit Monthly Milestones!</p>
+        </div>
+
+        <div id="dailyQuestsPane" class="hidden">
+          <p class="small-note" data-i18n="daily_quests_sub">Complete cozy quests for 🐟 &amp; unlock Wall Frame Stickers!</p>
+          <div class="quests-list" id="questsList"></div>
+          <div class="sticker-picker-head" data-i18n="daily_wall_sticker">🖼️ Room Wall Sticker</div>
+          <div class="sticker-row" id="stickerRow"></div>
+        </div>
+
+        <div id="dailyAlbumPane" class="hidden">
+          <p class="small-note" id="albumSummaryNote">Collect Mochi Moments from 🎁 Gift Boxes, Milestones &amp; Lucky Wheel!</p>
+          <div class="album-tokens-bar" id="albumTokensBar">
+            <span id="albumTokensText">🎟️ 0 Tokens • Pity 0/3</span>
+            <div class="album-token-btns">
+              <button type="button" class="album-claim-btn" id="btnTradeTokenHammer" data-i18n="album_trade_hammer">-2🎟️ → +1🔨</button>
+              <button type="button" class="album-claim-btn" id="btnTradeTokenRotate" data-i18n="album_trade_rotate">-2🎟️ → +1↻</button>
+            </div>
+          </div>
+          <div class="album-sets" id="albumSetsList"></div>
+        </div>
+
+        <button type="button" class="secondary-btn" id="btnCloseDaily" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Error Report Modal -->
+    <div class="modal-backdrop hidden" id="bugReportModal">
+      <div class="modal-card">
+        <h2 data-i18n="bug_title">Report an Error 🐞</h2>
+        <p class="small-note" data-i18n="bug_sub">Sends diagnostics to support@jemangr.app</p>
+        <textarea
+          id="bugNoteInput"
+          class="bug-textarea"
+          rows="3"
+          data-i18n-placeholder="bug_placeholder"
+          placeholder="Describe what happened (optional)..."
+        ></textarea>
+        <pre class="bug-diag" id="bugDiagPreview"></pre>
+        <button type="button" class="primary-ad-btn" id="btnSendBugEmail" data-i18n="bug_send">
+          📧 Open Email App to Send
+        </button>
+        <button type="button" class="secondary-btn copy-btn" id="btnCopyBugDiag" data-i18n="bug_copy">
+          📋 Copy Diagnostics
+        </button>
+        <button type="button" class="secondary-btn" id="btnCloseBugReport" data-i18n="btn_cancel">Cancel</button>
+      </div>
+    </div>
+    <!-- Welcome Onboarding Guide & Permissions Modal -->
+    <div class="modal-backdrop hidden" id="welcomeGuideModal">
+      <div class="modal-card guide-modal-card">
+        <div class="guide-topbar">
+          <span class="guide-step-pill" id="guideStepBadge">Step 1 of 5</span>
+          <button type="button" class="guide-skip-btn" id="btnGuideSkip" data-i18n="guide_skip">Skip</button>
+        </div>
+
+        <div class="guide-body" id="guideBodyScroll">
+          <!-- Step 1: Language & Nickname -->
+          <div class="guide-step" data-step="0">
+            <div class="guide-hero-emoji">🐱✨</div>
+            <h2 data-i18n="g1_title">Welcome to Mochi Pop! 🐱</h2>
+            <p class="small-note" data-i18n="g1_sub">Pick your language &amp; player nickname (for Score Cards &amp; upcoming Leaderboard).</p>
+
+            <div class="guide-section-label" data-i18n="g1_lang_label">Choose Language</div>
+            <div class="guide-lang-grid" id="guideLangGrid">
+              <button type="button" class="guide-lang-btn" data-lang="el">🇬🇷 Ελληνικά</button>
+              <button type="button" class="guide-lang-btn" data-lang="en">🇬🇧 English</button>
+              <button type="button" class="guide-lang-btn" data-lang="de">🇩🇪 Deutsch</button>
+              <button type="button" class="guide-lang-btn" data-lang="es">🇪🇸 Español</button>
+              <button type="button" class="guide-lang-btn" data-lang="fr">🇫🇷 Français</button>
+              <button type="button" class="guide-lang-btn" data-lang="tr">🇹🇷 Türkçe</button>
+            </div>
+
+            <label class="guide-nick-box">
+              <span class="guide-section-label" data-i18n="g1_nick_label">Your Nickname (optional)</span>
+              <input
+                type="text"
+                class="nick-input guide-nick-input"
+                id="inputGuideNickname"
+                maxlength="18"
+                data-i18n-placeholder="nickname_placeholder"
+                placeholder="Enter nickname"
+              />
+            </label>
+            <p class="guide-tip-note" data-i18n="g1_tip">You can change Language or Nickname anytime inside Settings ⚙️.</p>
+          </div>
+
+          <!-- Step 2: Caring for Mochi & Energy Multiplier -->
+          <div class="guide-step hidden" data-step="1">
+            <h2 data-i18n="g2_title">Care for Mochi = Higher Score! 💛</h2>
+            <p class="small-note" data-i18n="g2_lead">Mochi's Energy directly multiplies every puzzle point you earn!</p>
+            <div class="guide-cards">
+              <div class="guide-card">
+                <strong data-i18n="g2_c1_t">🐟 Feed &amp; Boost Energy</strong>
+                <p data-i18n="g2_c1_d"></p>
+              </div>
+              <div class="guide-card">
+                <strong data-i18n="g2_c2_t">👆 Pet, Tickle &amp; 6-Tap Secret</strong>
+                <p data-i18n="g2_c2_d"></p>
+              </div>
+              <div class="guide-card">
+                <strong data-i18n="g2_c3_t">🧸 Interactive Toys &amp; Gadgets</strong>
+                <p data-i18n="g2_c3_d"></p>
+              </div>
+              <div class="guide-card">
+                <strong data-i18n="g2_c4_t">⏰ Don't Ignore Mochi!</strong>
+                <p data-i18n="g2_c4_d"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: 8x8 Puzzle & Special Tiles -->
+          <div class="guide-step hidden" data-step="2">
+            <h2 data-i18n="g3_title">8×8 Puzzle, Special Tiles &amp; Moves 🧩</h2>
+            <p class="small-note" data-i18n="g3_lead">Drag blocks onto the board to clear rows &amp; columns!</p>
+            <div class="guide-cards">
+              <div class="guide-card">
+                <strong data-i18n="g3_t1">🐟 Golden Fish &amp; 🥫 Tuna</strong>
+                <p data-i18n="g3_t1_d"></p>
+              </div>
+              <div class="guide-card">
+                <strong data-i18n="g3_t2">🎁 Gift Box &amp; 🚀 Yarn Rocket</strong>
+                <p data-i18n="g3_t2_d"></p>
+              </div>
+              <div class="guide-card">
+                <strong data-i18n="g3_t3">🌈 Rainbow, 🧊 Ice &amp; 💣 Bomb</strong>
+                <p data-i18n="g3_t3_d"></p>
+              </div>
+              <div class="guide-card">
+                <strong data-i18n="g3_t4">📦 Hold Slot &amp; ↻ Rotate</strong>
+                <p data-i18n="g3_t4_d"></p>
+              </div>
+              <div class="guide-card">
+                <strong data-i18n="g3_t5">✨ Combos, Modes &amp; Purr Rush</strong>
+                <p data-i18n="g3_t5_d"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Rewards & Closet -->
+          <div class="guide-step hidden" data-step="3">
+            <h2 data-i18n="g4_title">Rewards, Closet &amp; Progression 🎁</h2>
+            <p class="small-note" data-i18n="g4_lead">Every session unlocks cosmetics, gadgets, and room styles!</p>
+            <div class="guide-cards">
+              <div class="guide-card">
+                <strong data-i18n="g4_r1_t">📅 7-Day Daily Calendar</strong>
+                <p data-i18n="g4_r1_d"></p>
+              </div>
+              <div class="guide-card">
+                <strong data-i18n="g4_r2_t">🎀 Mochi's Closet &amp; 🐾 Tile Skins</strong>
+                <p data-i18n="g4_r2_d"></p>
+              </div>
+              <div class="guide-card">
+                <strong data-i18n="g4_r3_t">📜 Quests &amp; Wall Stickers</strong>
+                <p data-i18n="g4_r3_d"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5: Permissions & Privacy -->
+          <div class="guide-step hidden" data-step="4">
+            <h2 data-i18n="g5_title">App Permissions &amp; Privacy 🔐</h2>
+            <p class="small-note" data-i18n="g5_lead">Everything saves locally on your device. Here is what optional permissions do:</p>
+            <div class="guide-cards">
+              <div class="guide-perm-card">
+                <strong data-i18n="p_notif_t">🔔 Pet Care Reminders</strong>
+                <p data-i18n="p_notif_d"></p>
+                <button type="button" class="perm-action-btn" id="btnPermNotif" data-i18n="p_notif_btn">Allow Notifications</button>
+              </div>
+              <div class="guide-perm-card">
+                <strong data-i18n="p_vib_t">📳 Haptic Vibration</strong>
+                <p data-i18n="p_vib_d"></p>
+                <button type="button" class="perm-action-btn" id="btnPermVibrate" data-i18n="p_vib_btn">Test Vibrate</button>
+              </div>
+              <div class="guide-card">
+                <strong data-i18n="p_upd_t">🔄 Update Checks (Every 6h)</strong>
+                <p data-i18n="p_upd_d"></p>
+              </div>
+              <div class="guide-card">
+                <strong data-i18n="p_priv_t">💾 Offline Storage &amp; Exports</strong>
+                <p data-i18n="p_priv_d"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-dots" id="guideDots">
+          <span class="guide-dot active"></span>
+          <span class="guide-dot"></span>
+          <span class="guide-dot"></span>
+          <span class="guide-dot"></span>
+          <span class="guide-dot"></span>
+        </div>
+
+        <div class="guide-footer">
+          <button type="button" class="secondary-btn guide-back-btn hidden" id="btnGuideBack" data-i18n="guide_back">← Back</button>
+          <button type="button" class="primary-ad-btn guide-next-btn" id="btnGuideNext" data-i18n="guide_next">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lucky Tuna Wheel Modal -->
+    <div class="modal-backdrop hidden" id="luckyWheelModal">
+      <div class="modal-card wheel-modal-card">
+        <h2 data-i18n="wheel_title">Lucky Tuna Wheel 🎡</h2>
+        <p class="small-note" data-i18n="wheel_sub">1 Free spin daily + up to 3 Bonus Ad spins!</p>
+        <div class="wheel-wrap">
+          <div class="wheel-pointer">▼</div>
+          <canvas id="wheelCanvas" width="240" height="240"></canvas>
+        </div>
+        <div class="wheel-result-note" id="wheelResultText" data-i18n="wheel_ready">Ready to spin!</div>
+        <button type="button" class="primary-ad-btn" id="btnSpinWheel" data-i18n="wheel_spin_free">🎁 Free Daily Spin</button>
+        <button type="button" class="secondary-btn" id="btnCloseWheel" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Daily Challenge & Weekly Purr League Modal -->
+    <div class="modal-backdrop hidden" id="leaderboardModal">
+      <div class="modal-card league-modal-card">
+        <h2 data-i18n="league_title">Daily &amp; Weekly Purr League 🏆</h2>
+        <p class="small-note" data-i18n="league_sub">Compete with your Nickname across seeded boards!</p>
+        <div class="league-my-tier" id="leagueTierBanner">🥉 Cozy Bronze • MochiFan</div>
+        <div class="league-nick-box hidden" id="leagueNickBox">
+          <span data-i18n="league_nick_prompt">✨ Pick a Nickname for the Leaderboard:</span>
+          <div class="cloud-restore-row">
+            <input type="text" class="nick-input" id="inputLeagueNick" maxlength="18" placeholder="MochiFan" />
+            <button type="button" class="secondary-btn cloud-restore-btn" id="btnSaveLeagueNick" data-i18n="league_nick_save">Save</button>
+          </div>
+        </div>
+        <div class="league-season-box hidden" id="leagueSeasonBox">
+          <div class="league-season-info">
+            <strong id="leagueSeasonTitle" data-i18n="season_reward_title">🏆 Weekly Season Reward Ready!</strong>
+            <small id="leagueSeasonSub"></small>
+          </div>
+          <button type="button" class="streak-saver-btn" id="btnClaimSeasonReward" data-i18n="season_claim_btn">🎁 Claim</button>
+        </div>
+        <div class="closet-tabs" id="leagueTabs">
+          <button type="button" class="closet-tab active" data-league-tab="daily" data-i18n="league_tab_daily">📅 Today's Challenge</button>
+          <button type="button" class="closet-tab" data-league-tab="weekly" data-i18n="league_tab_weekly">🏆 Weekly League</button>
+          <button type="button" class="closet-tab" data-league-tab="alltime" data-i18n="league_tab_alltime">🌐 All-Time</button>
+          <button type="button" class="closet-tab" data-league-tab="stars" data-i18n="league_tab_stars">⭐ Stars</button>
+        </div>
+        <div class="league-list" id="leagueList"></div>
+        <div class="friend-chal-box">
+          <span class="friend-chal-title" data-i18n="chal_box_title">🤝 Challenge a Friend (Same Board)</span>
+          <div class="friend-chal-row">
+            <input
+              type="text"
+              class="nick-input friend-chal-input"
+              id="inputChallengeCode"
+              placeholder="MCH:... or ?challenge=..."
+            />
+            <button type="button" class="secondary-btn friend-chal-go" id="btnPlayChallengeCode" data-i18n="chal_play_btn">Play</button>
+          </div>
+          <button type="button" class="challenge-friend-btn compact" id="btnShareChallengeFromLeague" data-i18n="chal_create_btn">
+            📤 Create &amp; Copy My Challenge Link
+          </button>
+        </div>
+        <p class="privacy-note" id="leagueNoteText" data-i18n="league_note">Live global leaderboard via api.jemangr.app</p>
+        <button type="button" class="secondary-btn" id="btnCloseLeague" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Stats, Ad Funnel & Remote Config Preview Modal -->
+    <div class="modal-backdrop hidden" id="statsModal">
+      <div class="modal-card stats-modal-card">
+        <h2 data-i18n="stats_title">Stats &amp; Funnel Preview 📊</h2>
+        <div class="stats-grid" id="statsGrid"></div>
+        <div class="stats-config-box">
+          <strong data-i18n="stats_config_hdr">Remote Config &amp; Ad Gate</strong>
+          <pre class="bug-diag" id="remoteConfigPreview"></pre>
+        </div>
+        <button type="button" class="secondary-btn" id="btnCloseStats" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Cloud Save & Cross-Device Transfer Modal -->
+    <div class="modal-backdrop hidden" id="cloudModal">
+      <div class="modal-card cloud-modal-card">
+        <h2 data-i18n="cloud_title">☁️ Cloud Save &amp; Transfer</h2>
+        <p class="small-note" data-i18n="cloud_sub">Back up Mochi, Fish &amp; scores securely without an email login.</p>
+        <div class="cloud-status-pill" id="cloudStatusBadge">⏳ Connecting...</div>
+
+        <div class="cloud-box">
+          <span class="cloud-box-label" data-i18n="cloud_code_label">Your Device Transfer Code</span>
+          <div class="cloud-code-row">
+            <code class="cloud-code-val" id="cloudSyncCodeText">MOCHI-••••-••••</code>
+            <button type="button" class="secondary-btn cloud-copy-btn" id="btnCopySyncCode" data-i18n="cloud_copy">📋 Copy</button>
+          </div>
+          <small class="cloud-hint" data-i18n="cloud_code_hint">Save this code safely to restore progress on another phone.</small>
+        </div>
+
+        <button type="button" class="primary-ad-btn" id="btnCloudSyncNow" data-i18n="cloud_sync_btn">☁️ Sync Progress Now</button>
+
+        <div class="cloud-box">
+          <span class="cloud-box-label" data-i18n="cloud_restore_label">Restore on New Device</span>
+          <div class="cloud-restore-row">
+            <input
+              type="text"
+              class="nick-input cloud-restore-input"
+              id="inputRestoreCode"
+              maxlength="16"
+              placeholder="MOCHI-XXXX-XXXX"
+              autocapitalize="characters"
+            />
+            <button type="button" class="secondary-btn cloud-restore-btn" id="btnRestoreByCode" data-i18n="cloud_restore_btn">Restore</button>
+          </div>
+        </div>
+
+        <div class="cloud-box">
+          <span class="cloud-box-label" data-i18n="cloud_local_label">Offline JSON Backup File</span>
+          <div class="cloud-restore-row">
+            <button type="button" class="secondary-btn cloud-copy-btn" id="btnExportSaveJson" data-i18n="cloud_export_json">📤 Export (.json)</button>
+            <button type="button" class="secondary-btn cloud-copy-btn" id="btnImportSaveJson" data-i18n="cloud_import_json">📥 Import (.json)</button>
+            <input type="file" id="inputImportSaveJson" accept="application/json,.json" hidden />
+          </div>
+        </div>
+
+        <p class="cloud-feedback hidden" id="cloudFeedbackText"></p>
+        <button type="button" class="cloud-delete-btn" id="btnDeleteCloudData" data-i18n="cloud_delete_btn">🗑️ Delete My Cloud Data</button>
+        <button type="button" class="secondary-btn" id="btnCloseCloud" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- In-App Privacy Policy Viewer Modal (works 100% offline & required for Google Play) -->
+    <div class="modal-backdrop hidden" id="privacyModal">
+      <div class="modal-card privacy-modal-card">
+        <h2 data-i18n="privacy_modal_title">🔒 Privacy Policy</h2>
+        <iframe id="privacyFrame" class="privacy-frame" title="Privacy Policy"></iframe>
+        <button type="button" class="secondary-btn" id="btnClosePrivacy" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Adventure Chapters Modal -->
+    <div class="modal-backdrop hidden" id="adventureModal">
+      <div class="modal-card adventure-modal-card">
+        <h2 data-i18n="adv_title">🗺️ Mochi's Adventure</h2>
+        <p class="small-note" data-i18n="adv_sub">Beat curated goal levels to earn Stars ⭐ &amp; 🐟!</p>
+        <div class="adv-stars-summary" id="advStarsSummary">⭐ 0 / 60</div>
+        <div class="adventure-list" id="adventureList"></div>
+        <button type="button" class="secondary-btn" id="btnCloseAdventure" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Interactive Care Mini-Game Modal -->
+    <div class="modal-backdrop hidden" id="miniGameModal">
+      <div class="modal-card minigame-modal-card">
+        <h2 data-i18n="mg_title">🎮 Catch the Laser!</h2>
+        <div class="mg-mode-chips" id="mgModeChips">
+          <button type="button" class="mg-mode-chip active" data-mg-mode="laser" data-i18n="mg_mode_laser">🔴 Laser Dash</button>
+          <button type="button" class="mg-mode-chip" data-mg-mode="bakery" data-i18n="mg_mode_bakery">🍪 Cozy Bakery</button>
+          <button type="button" class="mg-mode-chip" data-mg-mode="rain" data-i18n="mg_mode_rain">🐟 Fish Rain</button>
+        </div>
+        <p class="small-note" id="mgSubText" data-i18n="mg_sub">Tap glowing 🔴, 🐟 &amp; ⭐ in 15s (avoid 💤)!</p>
+        <div class="mg-hud-row">
+          <span class="mg-stat" id="mgTimerBadge">⏱️ 15.0s</span>
+          <span class="mg-stat" id="mgScoreBadge">⭐ 0</span>
+          <span class="mg-stat" id="mgStreakBadge">🔥 ×1</span>
+        </div>
+        <div class="mg-canvas-wrap">
+          <canvas id="miniGameCanvas"></canvas>
+        </div>
+        <p class="mg-result-text hidden" id="mgResultText"></p>
+        <div class="mg-btn-row">
+          <button type="button" class="primary-ad-btn" id="btnStartMiniGame" data-i18n="mg_start">▶ Start 15s</button>
+          <button type="button" class="secondary-btn" id="btnCloseMiniGame" data-i18n="settings_close">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trophy Room & Long-Term Achievements Modal -->
+    <div class="modal-backdrop hidden" id="trophyModal">
+      <div class="modal-card trophy-modal-card">
+        <h2 data-i18n="trophy_title">🏅 Mochi's Trophy Room</h2>
+        <p class="small-note" data-i18n="trophy_sub">Complete milestones to claim bonus 🐟 treats!</p>
+        <div class="adv-stars-summary" id="trophySummary">🏅 0 / 10</div>
+        <div class="achievements-list" id="achievementsList"></div>
+        <button type="button" class="secondary-btn" id="btnCloseTrophy" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Mochi Photo Studio / Postcard Modal -->
+    <div class="modal-backdrop hidden" id="photoModal">
+      <div class="modal-card photo-modal-card">
+        <h2 data-i18n="photo_title">📸 Mochi Photo Studio</h2>
+        <p class="small-note" data-i18n="photo_sub">Customize a clean postcard of Mochi &amp; share it!</p>
+        <div class="photo-canvas-wrap">
+          <canvas id="photoStudioCanvas"></canvas>
+        </div>
+        <div class="photo-controls">
+          <div class="photo-chip-row" id="photoPoseChips">
+            <button type="button" class="photo-chip active" data-pose="cheer">🎉</button>
+            <button type="button" class="photo-chip" data-pose="idle">😊</button>
+            <button type="button" class="photo-chip" data-pose="dance">💃</button>
+            <button type="button" class="photo-chip" data-pose="fever_party">✨</button>
+            <button type="button" class="photo-chip" data-pose="groom">🧼</button>
+            <button type="button" class="photo-chip" data-pose="sleep">😴</button>
+          </div>
+          <div class="photo-chip-row" id="photoFrameChips">
+            <button type="button" class="photo-chip active" data-frame="cozy" data-i18n="photo_fr_cozy">Cozy</button>
+            <button type="button" class="photo-chip" data-frame="polaroid" data-i18n="photo_fr_polaroid">Polaroid</button>
+            <button type="button" class="photo-chip" data-frame="starlight" data-i18n="photo_fr_star">Starlight</button>
+            <button type="button" class="photo-chip" data-frame="comic" data-i18n="photo_fr_comic">Comic</button>
+          </div>
+          <div class="photo-chip-row" id="photoStickerChips"></div>
+          <div class="photo-caption-row">
+            <input type="text" class="nick-input" id="inputPhotoCaption" maxlength="38" value="Mochi Pop! Cozy Vibes 💕" />
+            <label class="photo-stats-toggle">
+              <input type="checkbox" id="togglePhotoStats" checked />
+              <span data-i18n="photo_stats_lbl">Stats</span>
+            </label>
+          </div>
+        </div>
+        <button type="button" class="share-btn" id="btnSharePhotoCard" data-i18n="photo_save_btn">📸 Save / Share Postcard</button>
+        <button type="button" class="secondary-btn" id="btnClosePhoto" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Mochi's Cozy Diary Modal -->
+    <div class="modal-backdrop hidden" id="diaryModal">
+      <div class="modal-card diary-modal-card">
+        <h2 data-i18n="diary_title">📖 Mochi's Diary</h2>
+        <p class="small-note" data-i18n="diary_sub">Mochi's favorite memories, snacks &amp; milestones.</p>
+        <div class="diary-list" id="diaryList"></div>
+        <button type="button" class="secondary-btn" id="btnCloseDiary" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Keyboard Shortcuts Legend Modal -->
+    <div class="modal-backdrop hidden" id="keyLegendModal">
+      <div class="modal-card keys-modal-card">
+        <h2 data-i18n="keys_title">⌨️ Keyboard Controls</h2>
+        <p class="small-note" data-i18n="keys_desc">Desktop keyboard shortcuts for fast puzzle play:</p>
+        <div class="keys-grid" id="keysLegendGrid">
+          <div class="key-row"><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd><span>Select tray piece</span></div>
+          <div class="key-row"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> / <kbd>WASD</kbd><span>Move piece cursor</span></div>
+          <div class="key-row"><kbd>Enter</kbd> / <kbd>Space</kbd><span>Place selected piece</span></div>
+          <div class="key-row"><kbd>R</kbd><span>↻ Rotate tray pieces</span></div>
+          <div class="key-row"><kbd>F</kbd><span>🐟 Feed Mochi</span></div>
+          <div class="key-row"><kbd>Esc</kbd><span>Close modals / cancel cursor</span></div>
+        </div>
+        <button type="button" class="secondary-btn" id="btnCloseKeyLegend" data-i18n="settings_close">Close</button>
+      </div>
+    </div>
+
+    <!-- Non-Blocking PWA Update Toast -->
+    <div class="pwa-update-toast hidden" id="pwaUpdateToast">
+      <span id="pwaUpdateMsg" data-i18n="pwa_update_msg">✨ New Mochi Pop update ready!</span>
+      <button type="button" class="pwa-refresh-btn" id="btnPwaRefresh" data-i18n="pwa_update_btn">Refresh</button>
+    </div>
+
+    <!-- Smart Interstitial Demo Overlay (respects D0 grace, Rewarded immunity & cooldown) -->
+    <div class="modal-backdrop hidden" id="interstitialModal">
+      <div class="modal-card ad-sim-card">
+        <div class="ad-sim-header">
+          <span class="ad-pill" data-i18n="inter_demo_pill">INTERSTITIAL AD DEMO</span>
+          <span id="interstitialTimer">3s</span>
+        </div>
+        <div class="ad-sim-body">
+          <div class="ad-sim-art">🐾</div>
+          <p data-i18n="interstitial_title">Short Break Between Runs 🐾</p>
+          <small data-i18n="interstitial_sub">Skipped on Day 1 or after Rewarded Ads!</small>
+        </div>
+        <button type="button" class="secondary-btn" id="btnSkipInterstitial" data-i18n="inter_wait" disabled>Please wait...</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="i18n.js?v=20261115g"></script>
+  <script src="monetization.js?v=20261115g"></script>
+  <script src="audio.js?v=20261115g"></script>
+  <script src="assets/sprites/manifest.js?v=20261115g"></script>
+  <script src="pet.js?v=20261115g"></script>
+  <script src="puzzle.js?v=20261115g"></script>
+  <script src="daily-archive.js?v=20261115g"></script>
+  <script src="league-rewards.js?v=20261115g"></script>
+  <script src="adventure.js?v=20261115g"></script>
+  <script src="minigame.js?v=20261115g"></script>
+  <script src="achievements.js?v=20261115g"></script>
+  <script src="main.js?v=20261115g"></script>
+</body>
+</html>
