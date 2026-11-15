@@ -22,7 +22,8 @@
     giftAdBonusFish: 4,           // +4 extra fish on Mystery Gift Ad Upgrade
     weekendEventMode: "auto",     // auto | fish_frenzy | rocket_surge | none
     leaderboardApiUrl: "https://api.jemangr.app",
-    leaderboardStarsLive: false
+    leaderboardStarsLive: false,
+    leaderboardBlitzLive: false
   };
 
   const ALBUM_SETS = [
@@ -323,8 +324,8 @@
     return { id: "bronze", name: "Cozy Bronze", icon: "🥉", color: "#b45309" };
   }
 
-  function generateLeaderboardRows({ dateKey, nickname, playerBest, playerDailyBest, mode = "daily" }) {
-    const seedBase = mode === "daily" ? `daily-${dateKey}` : `weekly-${dateKey.slice(0, 7)}`;
+  function generateLeaderboardRows({ dateKey, nickname, playerBest, playerDailyBest, playerBlitzBest = 0, mode = "daily" }) {
+    const seedBase = mode === "daily" ? `daily-${dateKey}` : (mode === "blitz" ? `blitz-${dateKey.slice(0, 7)}` : `weekly-${dateKey.slice(0, 7)}`);
     let seed = hashSeed(seedBase);
     const nextRand = () => {
       seed = (seed + 0x6d2b79f5) | 0;
@@ -333,8 +334,12 @@
       return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
     };
 
-    const maxScale = mode === "daily" ? 3600 : Math.max(4500, Math.round((playerBest || 1200) * 1.45));
-    const minScale = mode === "daily" ? 350 : 600;
+    const maxScale = mode === "daily"
+      ? 3600
+      : (mode === "blitz"
+        ? Math.max(2600, Math.round((playerBlitzBest || 900) * 1.4))
+        : Math.max(4500, Math.round((playerBest || 1200) * 1.45)));
+    const minScale = mode === "daily" ? 350 : (mode === "blitz" ? 280 : 600);
     const rows = [];
     const pool = RIVAL_NAMES.slice();
 
@@ -350,7 +355,7 @@
       });
     }
 
-    const myScore = mode === "daily" ? (playerDailyBest || 0) : (playerBest || 0);
+    const myScore = mode === "daily" ? (playerDailyBest || 0) : (mode === "blitz" ? (playerBlitzBest || 0) : (playerBest || 0));
     rows.push({
       name: (nickname && nickname.trim()) || "You (MochiFan)",
       score: myScore,
@@ -552,6 +557,16 @@
           cacheDateKeys
         }
       });
+    },
+
+    async checkHealth() {
+      const t0 = Date.now();
+      const res = await apiCall("/v1/health", { method: "GET" }, 5000);
+      return {
+        ok: Boolean(res && res.ok),
+        service: (res && res.service) || "mochi-pop-api",
+        latencyMs: Math.max(1, Date.now() - t0)
+      };
     },
 
     async deleteCloudAccount(cacheDateKeys = []) {

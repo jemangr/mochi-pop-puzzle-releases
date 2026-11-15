@@ -1,5 +1,5 @@
-/* Service Worker for Mochi Pop! Web PWA (v0.9.0) */
-const CACHE_NAME = "mochi-pop-v090";
+/* Service Worker for Mochi Pop! Web PWA (v1.0.0) */
+const CACHE_NAME = "mochi-pop-v100";
 const CORE_ASSETS = [
   "./",
   "./index.html",

@@ -3676,3 +3676,107 @@ input:focus-visible {
   display: flex;
   gap: 6px;
 }
+
+.tray-action-btn.hint-btn {
+  background: linear-gradient(180deg, #fbbf24, #d97706);
+  box-shadow: 0 3px 0 #b45309;
+}
+
+.craving-pill.is-urgent {
+  background: #ffe4e6;
+  border-color: #fb7185;
+  color: #be123c;
+  animation: blitzUrgentPulse 0.65s ease-in-out infinite alternate;
+}
+
+@keyframes blitzUrgentPulse {
+  from { transform: scale(1); box-shadow: 0 2px 6px rgba(244, 63, 94, 0.16); }
+  to { transform: scale(1.03); box-shadow: 0 3px 12px rgba(244, 63, 94, 0.38); }
+}
+
+.run-breakdown-card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  background: #fff8f0;
+  border: 1.5px solid #eadad0;
+  border-radius: 12px;
+  padding: 7px 6px;
+  margin-bottom: 10px;
+}
+
+.run-breakdown-card > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.run-breakdown-card span {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.run-breakdown-card strong {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--text-dark);
+}
+
+.closet-set-banner {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 1.5px solid #f59e0b;
+  color: #92400e;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.closet-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.closet-filter-btn {
+  flex: 1;
+  border: 1px solid #e5d5c8;
+  background: #fff;
+  color: var(--text-muted);
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 4px 6px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.closet-filter-btn.active {
+  background: #7c5cff;
+  border-color: #7c5cff;
+  color: #fff;
+}
+
+.cloud-health-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cloud-ping-val {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+
+.cloud-ping-val.ok {
+  color: #15803d;
+}
+
+.cloud-ping-val.err {
+  color: #b91c1c;
+}

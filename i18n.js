@@ -469,7 +469,20 @@
       album_tokens_txt: "🎟️ {tokens} Tokens • Pity {pity}/3",
       album_trade_hammer: "-2🎟️ → +1🔨",
       album_trade_rotate: "-2🎟️ → +1↻",
-      msg_token_traded: "🎟️ Traded 2 Tokens for +1 {item}!"
+      msg_token_traded: "🎟️ Traded 2 Tokens for +1 {item}!",
+      hint_title: "Smart Move Hint: highlights the best placement (T)",
+      msg_hint_shown: "💡 Look at the glowing gold spot!",
+      msg_hint_none: "💡 No valid hint move available right now.",
+      bd_lines: "Lines",
+      bd_combo: "Best Combo",
+      bd_specials: "Specials",
+      bd_gap: "vs Best",
+      filter_all: "All",
+      filter_owned: "Owned",
+      filter_locked: "Locked",
+      closet_set_active: "✨ Outfit Set: {name} (+10% Friend XP)",
+      league_tab_blitz: "⏱️ Blitz",
+      cloud_ping_btn: "🩺 Test API"
     },
 
     el: {
@@ -925,7 +938,20 @@
       album_tokens_txt: "🎟️ {tokens} Tokens • Εγγύηση {pity}/3",
       album_trade_hammer: "-2🎟️ → +1🔨",
       album_trade_rotate: "-2🎟️ → +1↻",
-      msg_token_traded: "🎟️ Αντάλλαξες 2 Tokens για +1 {item}!"
+      msg_token_traded: "🎟️ Αντάλλαξες 2 Tokens για +1 {item}!",
+      hint_title: "Έξυπνη Υπόδειξη: δείχνει την καλύτερη κίνηση (T)",
+      msg_hint_shown: "💡 Δες τη φωτεινή χρυσή θέση στο ταμπλό!",
+      msg_hint_none: "💡 Δεν υπάρχει διαθέσιμη υπόδειξη αυτή τη στιγμή.",
+      bd_lines: "Γραμμές",
+      bd_combo: "Καλ. Combo",
+      bd_specials: "Ειδικά",
+      bd_gap: "vs Ρεκόρ",
+      filter_all: "Όλα",
+      filter_owned: "Δικά μου",
+      filter_locked: "Κλειδωμένα",
+      closet_set_active: "✨ Σετ Ρούχων: {name} (+10% Friend XP)",
+      league_tab_blitz: "⏱️ Blitz",
+      cloud_ping_btn: "🩺 Έλεγχος API"
     },
 
     de: {
@@ -1381,7 +1407,20 @@
       album_tokens_txt: "🎟️ {tokens} Marken • Pity {pity}/3",
       album_trade_hammer: "-2🎟️ → +1🔨",
       album_trade_rotate: "-2🎟️ → +1↻",
-      msg_token_traded: "🎟️ 2 Marken gegen +1 {item} eingetauscht!"
+      msg_token_traded: "🎟️ 2 Marken gegen +1 {item} eingetauscht!",
+      hint_title: "Schlauer Zug-Tipp: zeigt besten Platz (T)",
+      msg_hint_shown: "💡 Sieh dir den gold leuchtenden Platz an!",
+      msg_hint_none: "💡 Aktuell kein Zug-Tipp verfügbar.",
+      bd_lines: "Reihen",
+      bd_combo: "Best-Combo",
+      bd_specials: "Spezial",
+      bd_gap: "vs Rekord",
+      filter_all: "Alle",
+      filter_owned: "Besitz",
+      filter_locked: "Gesperrt",
+      closet_set_active: "✨ Outfit-Set: {name} (+10% Freundes-XP)",
+      league_tab_blitz: "⏱️ Blitz",
+      cloud_ping_btn: "🩺 API testen"
     },
 
     es: {
@@ -1837,7 +1876,20 @@
       album_tokens_txt: "🎟️ {tokens} Fichas • Piedad {pity}/3",
       album_trade_hammer: "-2🎟️ → +1🔨",
       album_trade_rotate: "-2🎟️ → +1↻",
-      msg_token_traded: "🎟️ ¡2 Fichas cambiadas por +1 {item}!"
+      msg_token_traded: "🎟️ ¡2 Fichas cambiadas por +1 {item}!",
+      hint_title: "Pista inteligente: muestra la mejor jugada (T)",
+      msg_hint_shown: "💡 ¡Mira el hueco dorado brillante!",
+      msg_hint_none: "💡 No hay pistas disponibles ahora mismo.",
+      bd_lines: "Líneas",
+      bd_combo: "Mejor Combo",
+      bd_specials: "Especiales",
+      bd_gap: "vs Récord",
+      filter_all: "Todo",
+      filter_owned: "Mío",
+      filter_locked: "Bloqueado",
+      closet_set_active: "✨ Conjunto: {name} (+10% EXP Amistad)",
+      league_tab_blitz: "⏱️ Blitz",
+      cloud_ping_btn: "🩺 Probar API"
     },
 
     fr: {
@@ -2293,7 +2345,20 @@
       album_tokens_txt: "🎟️ {tokens} Jetons • Garantie {pity}/3",
       album_trade_hammer: "-2🎟️ → +1🔨",
       album_trade_rotate: "-2🎟️ → +1↻",
-      msg_token_traded: "🎟️ 2 Jetons échangés contre +1 {item} !"
+      msg_token_traded: "🎟️ 2 Jetons échangés contre +1 {item} !",
+      hint_title: "Indice malin : montre le meilleur coup (T)",
+      msg_hint_shown: "💡 Regarde la zone dorée lumineuse !",
+      msg_hint_none: "💡 Aucun indice disponible pour l'instant.",
+      bd_lines: "Lignes",
+      bd_combo: "Max Combo",
+      bd_specials: "Spéciaux",
+      bd_gap: "vs Record",
+      filter_all: "Tout",
+      filter_owned: "Acquis",
+      filter_locked: "Verrouillé",
+      closet_set_active: "✨ Tenue : {name} (+10% XP Amitié)",
+      league_tab_blitz: "⏱️ Blitz",
+      cloud_ping_btn: "🩺 Tester l'API"
     },
 
     tr: {
@@ -2749,7 +2814,20 @@
       album_tokens_txt: "🎟️ {tokens} Jeton • Garanti {pity}/3",
       album_trade_hammer: "-2🎟️ → +1🔨",
       album_trade_rotate: "-2🎟️ → +1↻",
-      msg_token_traded: "🎟️ 2 Jeton ile +1 {item} alındı!"
+      msg_token_traded: "🎟️ 2 Jeton ile +1 {item} alındı!",
+      hint_title: "Akıllı İpucu: en iyi hamleyi gösterir (T)",
+      msg_hint_shown: "💡 Parlayan altın alana bak!",
+      msg_hint_none: "💡 Şu an uygun bir ipucu yok.",
+      bd_lines: "Satırlar",
+      bd_combo: "En İyi Kombo",
+      bd_specials: "Özel",
+      bd_gap: "vs Rekor",
+      filter_all: "Tümü",
+      filter_owned: "Sahip",
+      filter_locked: "Kilitli",
+      closet_set_active: "✨ Kombin Seti: {name} (+10% Dostluk TP)",
+      league_tab_blitz: "⏱️ Blitz",
+      cloud_ping_btn: "🩺 API Test Et"
     }
   };
 

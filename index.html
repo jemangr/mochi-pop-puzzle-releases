@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/mochi-ref.jpg" />
   <link rel="apple-touch-icon" href="assets/mochi-ref.jpg" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="styles.css?v=20261115g" />
+  <link rel="stylesheet" href="styles.css?v=20261115h" />
 </head>
 <body>
   <!-- Desktop Demo Controls (outside the phone frame so you can test states easily) -->
@@ -136,6 +136,9 @@
           <button type="button" class="mini-stage-btn" id="btnDiary" title="Mochi's Diary">
             📖
           </button>
+          <button type="button" class="mini-stage-btn" id="btnKeyLegend" data-i18n-title="keys_title" title="Keyboard Shortcuts">
+            ⌨️
+          </button>
         </div>
       </div>
 
@@ -234,9 +237,9 @@
             <span>💣</span>
             <span class="ad-tag" data-i18n="ad_tag">AD</span>
           </button>
-          <button type="button" class="tray-action-btn keys-btn" id="btnKeyLegend" data-i18n-title="keys_title" title="Keyboard Shortcuts">
-            <span>⌨️</span>
-            <span class="ad-tag">?</span>
+          <button type="button" class="tray-action-btn hint-btn" id="btnHint" data-i18n-title="hint_title" title="Smart Move Hint">
+            <span>💡</span>
+            <span class="ad-tag" id="hintCountBadge">1</span>
           </button>
         </div>
       </div>
@@ -256,6 +259,12 @@
           <div><span data-i18n="go_best">Best</span><strong id="goBest">0</strong></div>
         </div>
         <div class="go-run-summary hidden" id="goRunSummary">+0 🐟 earned this run</div>
+        <div class="run-breakdown-card hidden" id="runBreakdownCard">
+          <div><span data-i18n="bd_lines">Lines</span><strong id="bdLines">0</strong></div>
+          <div><span data-i18n="bd_combo">Best Combo</span><strong id="bdCombo">0×</strong></div>
+          <div><span data-i18n="bd_specials">Specials</span><strong id="bdSpecials">0</strong></div>
+          <div><span data-i18n="bd_gap">Record Gap</span><strong id="bdGap">—</strong></div>
+        </div>
         <button type="button" class="bonus-fish-ad-btn hidden" id="btnDoubleRunFishAd">
           <span class="ad-badge" data-i18n="ad_tag">AD</span>
           <span id="goDoubleFishLabel" data-i18n="go_double_fish">2× Run Fish!</span>
@@ -292,11 +301,17 @@
           <canvas id="closetPreviewCanvas"></canvas>
           <button type="button" class="closet-snap-btn" id="btnClosetPhoto" title="Open Photo Studio">📸</button>
         </div>
+        <div class="closet-set-banner hidden" id="closetSetBanner"></div>
         <div class="closet-tabs" id="closetTabs">
           <button type="button" class="closet-tab active" data-tab="all" data-i18n="tab_all">All</button>
           <button type="button" class="closet-tab" data-tab="style" data-i18n="tab_style">Style</button>
           <button type="button" class="closet-tab" data-tab="toys" data-i18n="tab_toys">Toys</button>
           <button type="button" class="closet-tab" data-tab="room" data-i18n="tab_room">Room</button>
+        </div>
+        <div class="closet-filters" id="closetFilterChips">
+          <button type="button" class="closet-filter-btn active" data-filter="all" data-i18n="filter_all">All</button>
+          <button type="button" class="closet-filter-btn" data-filter="owned" data-i18n="filter_owned">Owned</button>
+          <button type="button" class="closet-filter-btn" data-filter="locked" data-i18n="filter_locked">Locked</button>
         </div>
         <div class="closet-grid" id="closetGrid"></div>
         <button type="button" class="secondary-btn" id="btnCloseWardrobe" data-i18n="settings_close">Close</button>
@@ -796,6 +811,7 @@
         <div class="closet-tabs" id="leagueTabs">
           <button type="button" class="closet-tab active" data-league-tab="daily" data-i18n="league_tab_daily">📅 Today's Challenge</button>
           <button type="button" class="closet-tab" data-league-tab="weekly" data-i18n="league_tab_weekly">🏆 Weekly League</button>
+          <button type="button" class="closet-tab" data-league-tab="blitz" data-i18n="league_tab_blitz">⏱️ Blitz</button>
           <button type="button" class="closet-tab" data-league-tab="alltime" data-i18n="league_tab_alltime">🌐 All-Time</button>
           <button type="button" class="closet-tab" data-league-tab="stars" data-i18n="league_tab_stars">⭐ Stars</button>
         </div>
@@ -839,6 +855,10 @@
         <h2 data-i18n="cloud_title">☁️ Cloud Save &amp; Transfer</h2>
         <p class="small-note" data-i18n="cloud_sub">Back up Mochi, Fish &amp; scores securely without an email login.</p>
         <div class="cloud-status-pill" id="cloudStatusBadge">⏳ Connecting...</div>
+        <div class="cloud-health-row">
+          <button type="button" class="secondary-btn cloud-copy-btn" id="btnTestCloudHealth" data-i18n="cloud_ping_btn">🩺 Test API</button>
+          <span class="cloud-ping-val" id="cloudHealthText">api.jemangr.app</span>
+        </div>
 
         <div class="cloud-box">
           <span class="cloud-box-label" data-i18n="cloud_code_label">Your Device Transfer Code</span>
@@ -995,6 +1015,7 @@
           <div class="key-row"><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> / <kbd>WASD</kbd><span>Move piece cursor</span></div>
           <div class="key-row"><kbd>Enter</kbd> / <kbd>Space</kbd><span>Place selected piece</span></div>
           <div class="key-row"><kbd>R</kbd><span>↻ Rotate tray pieces</span></div>
+          <div class="key-row"><kbd>T</kbd><span>💡 Smart Move Hint</span></div>
           <div class="key-row"><kbd>F</kbd><span>🐟 Feed Mochi</span></div>
           <div class="key-row"><kbd>Esc</kbd><span>Close modals / cancel cursor</span></div>
         </div>
@@ -1025,17 +1046,17 @@
     </div>
   </main>
 
-  <script src="i18n.js?v=20261115g"></script>
-  <script src="monetization.js?v=20261115g"></script>
-  <script src="audio.js?v=20261115g"></script>
-  <script src="assets/sprites/manifest.js?v=20261115g"></script>
-  <script src="pet.js?v=20261115g"></script>
-  <script src="puzzle.js?v=20261115g"></script>
-  <script src="daily-archive.js?v=20261115g"></script>
-  <script src="league-rewards.js?v=20261115g"></script>
-  <script src="adventure.js?v=20261115g"></script>
-  <script src="minigame.js?v=20261115g"></script>
-  <script src="achievements.js?v=20261115g"></script>
-  <script src="main.js?v=20261115g"></script>
+  <script src="i18n.js?v=20261115h"></script>
+  <script src="monetization.js?v=20261115h"></script>
+  <script src="audio.js?v=20261115h"></script>
+  <script src="assets/sprites/manifest.js?v=20261115h"></script>
+  <script src="pet.js?v=20261115h"></script>
+  <script src="puzzle.js?v=20261115h"></script>
+  <script src="daily-archive.js?v=20261115h"></script>
+  <script src="league-rewards.js?v=20261115h"></script>
+  <script src="adventure.js?v=20261115h"></script>
+  <script src="minigame.js?v=20261115h"></script>
+  <script src="achievements.js?v=20261115h"></script>
+  <script src="main.js?v=20261115h"></script>
 </body>
 </html>

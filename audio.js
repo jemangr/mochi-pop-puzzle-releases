@@ -445,6 +445,11 @@
       this._tone(580, 0.11, "sine", 0.11, 840, 0.04);
     }
 
+    playBlitzTick(sec = 10) {
+      const pitch = sec <= 3 ? 980 : (sec <= 5 ? 860 : 740);
+      this._tone(pitch, 0.045, "sine", 0.075, pitch * 1.06, 0);
+    }
+
     playAchievement() {
       [523.25, 659.25, 783.99, 1046.5].forEach((f, idx) => {
         this._tone(f, 0.18, "sine", 0.13, null, idx * 0.075);

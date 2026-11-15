@@ -586,7 +586,7 @@
       const targetDrowsy = (this.state === "happy" && this.idleSeconds > 12) ? 1 : 0;
       this.drowsyAmount += (targetDrowsy - this.drowsyAmount) * Math.min(1, dt * 2.5);
 
-      // Autonomous periodic movement & curiosity (roaming, nudging yarn, glances, ear twitches)
+      // Autonomous movement, window curiosity & ear twitches when player pauses 16s+
       if (this.earTwitch > 0) {
         this.earTwitch = Math.max(0, this.earTwitch - dt * 4.5);
       }
@@ -595,6 +595,17 @@
         if (this.twitchTimer <= 0) {
           this.earTwitch = 1;
           this.twitchTimer = 3.2 + Math.random() * 4.5;
+        }
+        if (this.state === "happy" && this.idleSeconds > 16 && !this.isWalking) {
+          this.curiousTimer = (this.curiousTimer ?? 2.0) - dt;
+          if (this.curiousTimer <= 0) {
+            this.curiousTimer = 18 + Math.random() * 10;
+            this.earTwitch = 1;
+            this.targetLookX = this.weather === "rain" || this.weather === "snow" ? -0.95 : (Math.random() > 0.5 ? 0.7 : -0.7);
+            this.targetLookY = -0.35;
+            if (this.idleGlanceCount !== undefined) this.idleGlanceCount++;
+            else this.idleGlanceCount = 1;
+          }
         }
       }
 
@@ -756,7 +767,7 @@
         }
       }
 
-      // Floating Zzz when sleeping & dizzy stars when fainted
+      // Floating Zzz & Night Dream bubbles when sleeping, dizzy stars when fainted
       if (this.state === "sleeping") {
         this.zzzTimer -= dt;
         if (this.zzzTimer <= 0) {
@@ -770,6 +781,23 @@
               vy: -24 - Math.random() * 8,
               life: 1.2,
               size: 13
+            });
+          }
+        }
+        this.dreamTimer = (this.dreamTimer ?? 2.4) - dt;
+        if (this.dreamTimer <= 0) {
+          this.dreamTimer = 3.6 + Math.random() * 2.2;
+          if (this.isNight && this.fxEnabled) {
+            const dreams = ["💭🐟", "💭🧶", "💭👑"];
+            this.particles.push({
+              kind: "dream",
+              text: dreams[Math.floor(Math.random() * dreams.length)],
+              x: this.width * this.anchorXRatio - 26,
+              y: this.height * 0.34,
+              vx: -6 + Math.random() * 12,
+              vy: -16,
+              life: 1.85,
+              size: 15
             });
           }
         }
@@ -4171,6 +4199,8 @@
         if (p.kind === "zzz") {
           ctx.fillStyle = this.isNight ? "#ffe885" : "#7b6d8d";
           ctx.fillText("Zzz", p.x, p.y);
+        } else if (p.kind === "dream") {
+          ctx.fillText(p.text || "💭🐟", p.x, p.y);
         } else if (p.kind === "dizzy") {
           ctx.fillText("💫", p.x, p.y);
         } else if (p.kind === "water") {

@@ -259,15 +259,19 @@
       this.scoreMultiplier = 1.0;
       this.feverMode = false;
 
-      // Offscreen static board cache, Toy Hammer & keyboard cursor
+      // Offscreen static board cache, Toy Hammer, Smart Hint & keyboard cursor
       this.bgCacheCanvas = null;
       this.hammerCharges = 1;
       this.hammerMode = false;
       this.hammerHoverCell = null;
+      this.hintCharges = 1;
+      this.hintTarget = null;
       this.blitzTimeLeft = 0;
       this.blitzFinished = false;
       this.blitzLastReportedSec = -1;
       this.currentRunSeed = "";
+      this.runMaxCombo = 0;
+      this.runSpecialPops = 0;
       this.kbCursor = { active: false, slotIndex: 0, row: 3, col: 3 };
 
       this._resizeAll();
@@ -455,6 +459,14 @@
           if (idx >= 0) this.swapHoldSlot(idx);
           return;
         }
+        if (key === "t" || key === "T") {
+          if (this.cb && this.cb.onKeyboardHint) {
+            this.cb.onKeyboardHint();
+          } else {
+            this.triggerHint();
+          }
+          return;
+        }
 
         let dr = 0;
         let dc = 0;
@@ -608,11 +620,98 @@
           maxLife: 0.9
         });
       }
+      this.runSpecialPops = (this.runSpecialPops || 0) + 1;
       if (this.cb && this.cb.onHammerSmash) this.cb.onHammerSmash();
       if (this.cb && this.cb.onBoardUpdated) {
         this.cb.onBoardUpdated({ linesCleared: 0, fishEarned, combo: this.combo, points: pts, hammered: true });
       }
       return true;
+    }
+
+    addHintCharges(count = 1) {
+      this.hintCharges = Math.min(99, Math.max(0, (this.hintCharges || 0) + count));
+    }
+
+    findBestMoveHint() {
+      let best = null;
+      const candidates = [];
+      for (let slotIdx = 0; slotIdx < this.tray.length; slotIdx++) {
+        if (this.tray[slotIdx]) candidates.push({ slotIndex: slotIdx, piece: this.tray[slotIdx] });
+      }
+      for (const { slotIndex, piece } of candidates) {
+        for (let r = 0; r < GRID_SIZE; r++) {
+          for (let c = 0; c < GRID_SIZE; c++) {
+            if (!this.canPlace(piece, r, c)) continue;
+            let evalScore = piece.cells.length * 12;
+            if (piece.kind === "bomb") {
+              let hits = 0;
+              for (let dr = -1; dr <= 1; dr++) {
+                for (let dc = -1; dc <= 1; dc++) {
+                  const rr = r + dr;
+                  const cc = c + dc;
+                  if (rr < 0 || rr >= GRID_SIZE || cc < 0 || cc >= GRID_SIZE) continue;
+                  const cell = this.grid[rr][cc];
+                  if (cell) hits += (cell.ice || cell.crate ? 140 : 95) + (cell.fish || cell.tuna ? 75 : 0);
+                }
+              }
+              evalScore += hits;
+            } else {
+              const preview = this._estimateClearPreview(piece, r, c);
+              const linesCount = preview.fullRows.length + preview.fullCols.length;
+              evalScore += linesCount * 1200 + preview.previewFish * 90 + preview.previewPts;
+              // Neighbor contact bonus encourages compact clusters when no line clear exists
+              let touch = 0;
+              for (const [dr, dc] of piece.cells) {
+                const rr = r + dr;
+                const cc = c + dc;
+                const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+                for (const [ar, ac] of dirs) {
+                  const nr = rr + ar;
+                  const nc = cc + ac;
+                  if (nr < 0 || nr >= GRID_SIZE || nc < 0 || nc >= GRID_SIZE || this.grid[nr][nc]) touch++;
+                }
+              }
+              evalScore += touch * 8;
+            }
+            if (!best || evalScore > best.evalScore) {
+              best = {
+                slotIndex,
+                row: r,
+                col: c,
+                piece,
+                evalScore,
+                cells: piece.cells.map(([dr, dc]) => [r + dr, c + dc])
+              };
+            }
+          }
+        }
+      }
+      return best;
+    }
+
+    triggerHint() {
+      if ((this.hintCharges || 0) <= 0) return null;
+      const best = this.findBestMoveHint();
+      if (!best) return null;
+      this.hintCharges = Math.max(0, (this.hintCharges || 0) - 1);
+      this.hintTarget = {
+        ...best,
+        expiresAt: performance.now() + 4500
+      };
+      this.kbCursor.slotIndex = best.slotIndex;
+      this.kbCursor.row = best.row;
+      this.kbCursor.col = best.col;
+      return best;
+    }
+
+    getRunStats() {
+      return {
+        score: this.score || 0,
+        linesCleared: this.runLinesCleared || 0,
+        maxCombo: Math.max(this.runMaxCombo || 0, this.combo || 0),
+        specialPops: this.runSpecialPops || 0,
+        fishEarned: this.runFishEarned || 0
+      };
     }
 
     setFxEnabled(enabled) {
@@ -650,6 +749,8 @@
       this.hammerMode = false;
       this.hammerHoverCell = null;
       this.hammerCharges = Math.max(1, this.hammerCharges || 1);
+      this.hintTarget = null;
+      this.hintCharges = Math.max(1, this.hintCharges || 1);
       this.grid = createEmptyGrid();
       this.holdPiece = null;
       this.swappedHoldThisTurn = false;
@@ -661,6 +762,8 @@
       this.nextMilestone = 1500;
       this.runFishEarned = 0;
       this.runLinesCleared = 0;
+      this.runMaxCombo = 0;
+      this.runSpecialPops = 0;
       this.undoSnapshot = null;
       this.particles = [];
       this.floatingTexts = [];
@@ -815,11 +918,15 @@
         this.comboGraceLeft = state.comboGraceLeft || 0;
         this.rotateCharges = Number.isFinite(state.rotateCharges) ? state.rotateCharges : 3;
         this.hammerCharges = Number.isFinite(state.hammerCharges) ? state.hammerCharges : 1;
+        this.hintCharges = Number.isFinite(state.hintCharges) ? state.hintCharges : 1;
+        this.hintTarget = null;
         this.currentRunSeed = state.currentRunSeed || this.currentRunSeed || `m${Math.random().toString(36).slice(2, 8)}`;
         this.linesForRotate = state.linesForRotate || 0;
         this.nextMilestone = state.nextMilestone || (Math.floor(this.score / 1500) + 1) * 1500;
         this.runFishEarned = state.runFishEarned || 0;
         this.runLinesCleared = state.runLinesCleared || 0;
+        this.runMaxCombo = state.runMaxCombo || 0;
+        this.runSpecialPops = state.runSpecialPops || 0;
         if (this.tray.every((p) => !p)) {
           this.dealTray();
         } else {
@@ -841,11 +948,14 @@
         comboGraceLeft: this.comboGraceLeft,
         rotateCharges: this.rotateCharges,
         hammerCharges: this.hammerCharges,
+        hintCharges: this.hintCharges,
         currentRunSeed: this.currentRunSeed,
         linesForRotate: this.linesForRotate,
         nextMilestone: this.nextMilestone,
         runFishEarned: this.runFishEarned,
-        runLinesCleared: this.runLinesCleared
+        runLinesCleared: this.runLinesCleared,
+        runMaxCombo: this.runMaxCombo,
+        runSpecialPops: this.runSpecialPops
       };
     }
 
@@ -1252,9 +1362,11 @@
         };
       }
 
+      this.hintTarget = null;
       this.swappedHoldThisTurn = false;
       let cleared;
       if (piece.kind === "bomb") {
+        this.runSpecialPops = (this.runSpecialPops || 0) + 1;
         cleared = this._detonateBomb(hoverRow, hoverCol);
       } else {
         // Place piece onto grid with jelly bounce
@@ -1275,8 +1387,24 @@
           }
         });
 
-        this.score += Math.round(piece.cells.length * 10 * this.scoreMultiplier);
+        const placePts = Math.round(piece.cells.length * 10 * this.scoreMultiplier);
+        this.score += placePts;
         cleared = this._resolveLineClears();
+        if (this.fxEnabled && cleared && !cleared.linesCleared && this.boardCanvas && this.fxCanvas) {
+          const rect = this.boardCanvas.getBoundingClientRect();
+          const shellRect = this.fxCanvas.getBoundingClientRect();
+          const cx = (rect.left - shellRect.left) + (hoverCol + piece.cols * 0.5) * this.cellPx;
+          const cy = (rect.top - shellRect.top) + (hoverRow + piece.rows * 0.5) * this.cellPx;
+          this.floatingTexts.push({
+            text: `+${placePts}`,
+            color: "#f8fafc",
+            scale: 0.78,
+            x: Math.max(40, Math.min(this.fxW - 40, cx)),
+            y: Math.max(24, cy),
+            life: 0.65,
+            maxLife: 0.65
+          });
+        }
       }
 
       const milestoneReached = this._checkMilestoneWave();
@@ -1286,6 +1414,9 @@
       if (cleared) {
         this.runFishEarned = (this.runFishEarned || 0) + (cleared.fishEarned || 0);
         this.runLinesCleared = (this.runLinesCleared || 0) + (cleared.linesCleared || 0);
+        if ((cleared.combo || 0) > (this.runMaxCombo || 0)) {
+          this.runMaxCombo = cleared.combo;
+        }
       }
 
       if (slotIndex === -1) {
@@ -1703,6 +1834,7 @@
       if (crateCracked > 0 && this.cb && this.cb.onCrateCrack) {
         this.cb.onCrateCrack();
       }
+      this.runSpecialPops = (this.runSpecialPops || 0) + chainTriggered + giftsCleared;
 
       // Check Perfect Full-Board Clear!
       let perfectBoard = true;
@@ -1754,6 +1886,17 @@
           life: lifeMain,
           maxLife: lifeMain
         });
+        if (this.combo >= 2 && !perfectBoard) {
+          this.floatingTexts.push({
+            text: `🔥 COMBO ×${this.combo}!`,
+            color: "#fda4af",
+            scale: 1.06,
+            x: safeX,
+            y: Math.max(36, avgY - 26),
+            life: 1.15,
+            maxLife: 1.15
+          });
+        }
         if (iceCracked > 0) {
           this.floatingTexts.push({
             text: `❄️ -${iceCracked} ICE`,
@@ -2068,6 +2211,27 @@
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
           ctx.fillText(badgeText, bx, by);
+          ctx.restore();
+        }
+      }
+
+      // Smart Move Hint glowing guide
+      if (this.hintTarget) {
+        if (performance.now() > this.hintTarget.expiresAt) {
+          this.hintTarget = null;
+        } else if (this.hintTarget.cells) {
+          const pulse = 0.55 + 0.45 * Math.sin(performance.now() * 0.008);
+          ctx.save();
+          ctx.fillStyle = `rgba(255, 225, 102, ${0.22 + pulse * 0.24})`;
+          ctx.strokeStyle = `rgba(255, 232, 130, ${0.7 + pulse * 0.3})`;
+          ctx.lineWidth = 2.8;
+          for (const [hr, hc] of this.hintTarget.cells) {
+            const hx = hc * cs + 2;
+            const hy = hr * cs + 2;
+            this._roundRect(ctx, hx, hy, cs - 4, cs - 4, 8);
+            ctx.fill();
+            ctx.stroke();
+          }
           ctx.restore();
         }
       }

@@ -6,7 +6,7 @@
   const SAVE_KEY = "mochi_pop_save_v1";
   const UPDATE_META_KEY = "mochi_pop_update_meta_v1";
   const ONBOARD_KEY = "mochi_pop_onboarded_v030";
-  const APP_VERSION = "0.9.0";
+  const APP_VERSION = "1.0.0";
   const SUPPORT_EMAIL = "support@jemangr.app";
   const UPDATE_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
   const RELEASES_API_URL = "https://api.github.com/repos/jemangr/mochi-pop-puzzle-releases/releases/latest";
@@ -174,6 +174,8 @@
   const btnBombAd = document.getElementById("btnBombAd");
   const btnHammer = document.getElementById("btnHammer");
   const hammerCountBadge = document.getElementById("hammerCountBadge");
+  const btnHint = document.getElementById("btnHint");
+  const hintCountBadge = document.getElementById("hintCountBadge");
   const btnKeyLegend = document.getElementById("btnKeyLegend");
   const cravingPill = document.getElementById("cravingPill");
   const cravingText = document.getElementById("cravingText");
@@ -204,6 +206,11 @@
   const goScore = document.getElementById("goScore");
   const goBest = document.getElementById("goBest");
   const goRunSummary = document.getElementById("goRunSummary");
+  const runBreakdownCard = document.getElementById("runBreakdownCard");
+  const bdLines = document.getElementById("bdLines");
+  const bdCombo = document.getElementById("bdCombo");
+  const bdSpecials = document.getElementById("bdSpecials");
+  const bdGap = document.getElementById("bdGap");
   const btnDoubleRunFishAd = document.getElementById("btnDoubleRunFishAd");
   const goDoubleFishLabel = document.getElementById("goDoubleFishLabel");
   const btnReviveAd = document.getElementById("btnReviveAd");
@@ -216,7 +223,9 @@
   const wardrobeModal = document.getElementById("wardrobeModal");
   const closetPreviewCanvas = document.getElementById("closetPreviewCanvas");
   const btnClosetPhoto = document.getElementById("btnClosetPhoto");
+  const closetSetBanner = document.getElementById("closetSetBanner");
   const closetTabs = document.getElementById("closetTabs");
+  const closetFilterChips = document.getElementById("closetFilterChips");
   const closetGrid = document.getElementById("closetGrid");
   const btnCloseWardrobe = document.getElementById("btnCloseWardrobe");
 
@@ -308,6 +317,8 @@
   const settingsCloudSub = document.getElementById("settingsCloudSub");
   const cloudModal = document.getElementById("cloudModal");
   const cloudStatusBadge = document.getElementById("cloudStatusBadge");
+  const btnTestCloudHealth = document.getElementById("btnTestCloudHealth");
+  const cloudHealthText = document.getElementById("cloudHealthText");
   const cloudSyncCodeText = document.getElementById("cloudSyncCodeText");
   const btnCopySyncCode = document.getElementById("btnCopySyncCode");
   const btnCloudSyncNow = document.getElementById("btnCloudSyncNow");
@@ -591,6 +602,7 @@
   let savedClassicState = null;
   let audioUnlocked = false;
   let activeClosetTab = "all";
+  let activeClosetFilter = "all";
   let movesSinceHungerTick = 0;
   let lastToyMoodAt = 0;
   let lastFountainSipAt = 0;
@@ -668,10 +680,32 @@
     }
   }
 
+  function getActiveOutfitSet() {
+    const acc = appState.equippedAcc || "none";
+    const collar = appState.equippedCollar || "red_bell";
+    const decor = appState.equippedDecor || "pink";
+    const skin = appState.equippedSkin || "orange";
+    if (acc === "crown" && (collar === "star_bell" || decor === "star")) {
+      return { id: "royal", name: "👑 Royal Party" };
+    }
+    if ((acc === "blossom" || acc === "bow") && (collar === "pastel_bell" || decor === "pink")) {
+      return { id: "sakura", name: "🌸 Cozy Sakura" };
+    }
+    if ((acc === "headphones" || acc === "shades" || acc === "chef") && (skin === "latte" || skin === "tuxedo")) {
+      return { id: "chill", name: "🎧 Cool Café" };
+    }
+    if ((acc === "bear" || acc === "scarf" || acc === "wizard") && (decor === "box" || collar === "red_bell")) {
+      return { id: "cozy", name: "🧸 Cozy Knit" };
+    }
+    return null;
+  }
+
   function grantFriendXp(amount) {
     if (!Mon || !amount || puzzle.mode === "daily") return;
+    const outfitBonus = getActiveOutfitSet() ? 1.1 : 1;
+    const xpGain = Math.max(1, Math.round(amount * outfitBonus));
     const before = Mon.computeFriendLevel(appState.friendXp || 0).level;
-    appState.friendXp = (appState.friendXp || 0) + amount;
+    appState.friendXp = (appState.friendXp || 0) + xpGain;
     const afterInfo = Mon.computeFriendLevel(appState.friendXp);
     if (afterInfo.level > before) {
       appState.treats += 2;
@@ -995,6 +1029,24 @@
     return window.MochiI18n ? window.MochiI18n.t(key, vars) : key;
   }
 
+  function renderRunBreakdown(score, bestScore) {
+    if (!runBreakdownCard) return;
+    const stats = typeof puzzle.getRunStats === "function"
+      ? puzzle.getRunStats()
+      : { linesCleared: puzzle.runLinesCleared || 0, maxCombo: puzzle.combo || 0, specialPops: 0 };
+    if (bdLines) bdLines.textContent = String(stats.linesCleared || 0);
+    if (bdCombo) bdCombo.textContent = `${stats.maxCombo || 0}×`;
+    if (bdSpecials) bdSpecials.textContent = String(stats.specialPops || 0);
+    if (bdGap) {
+      if ((bestScore || 0) <= 0 || score >= bestScore) {
+        bdGap.textContent = score > 0 ? "🏆 NEW!" : "—";
+      } else {
+        bdGap.textContent = `-${bestScore - score}`;
+      }
+    }
+    runBreakdownCard.classList.remove("hidden");
+  }
+
   function updateChallengeUI() {
     if (btnAdventureMode) {
       btnAdventureMode.classList.toggle("active", puzzle.mode === "adventure");
@@ -1007,11 +1059,14 @@
       btnDailyMode.classList.remove("active");
       btnDailyMode.textContent = i18n("btn_daily");
       cravingPill.classList.remove("completed");
+      const secLeft = Math.max(0, Math.ceil(puzzle.blitzTimeLeft || 0));
+      cravingPill.classList.toggle("is-urgent", secLeft > 0 && secLeft <= 10);
       cravingText.textContent = i18n("blitz_hud_label", {
-        sec: Math.max(0, Math.ceil(puzzle.blitzTimeLeft || 0)),
+        sec: secLeft,
         best: appState.blitzBestScore || 0
       });
     } else if (puzzle.mode === "daily") {
+      cravingPill.classList.remove("is-urgent");
       btnDailyMode.classList.add("active");
       btnDailyMode.textContent = i18n("btn_daily_exit");
       cravingPill.classList.remove("completed");
@@ -1093,6 +1148,10 @@
       const hCharges = puzzle.hammerCharges || 0;
       hammerCountBadge.textContent = hCharges > 0 ? String(hCharges) : `+${i18n("ad_tag")}`;
       btnHammer.classList.toggle("is-active", !!puzzle.hammerMode);
+    }
+    if (hintCountBadge) {
+      const hintCh = puzzle.hintCharges || 0;
+      hintCountBadge.textContent = hintCh > 0 ? String(hintCh) : `+${i18n("ad_tag")}`;
     }
     syncPurrRushState();
 
@@ -1315,6 +1374,17 @@
           runDurationSec: durSec
         });
       }
+      const blitzLive = Boolean(Mon.loadRemoteConfig().leaderboardBlitzLive);
+      const myBlitz = appState.blitzBestScore || 0;
+      if (blitzLive && myBlitz > 0) {
+        await Mon.MochiCloud.submitScore({
+          mode: "blitz",
+          dateKey: "all",
+          score: myBlitz,
+          nickname: nick,
+          runDurationSec: 90
+        });
+      }
     } catch (_) {
       /* Offline mode: local best remains safely stored on device */
     }
@@ -1477,9 +1547,43 @@
     }
   }
 
+  function triggerHintFlow() {
+    ensureAudioUnlocked();
+    pet.noteActivity();
+    if ((puzzle.hintCharges || 0) <= 0) {
+      openRewardedAd(i18n("hint_title"), () => {
+        puzzle.addHintCharges(2);
+        const h = puzzle.triggerHint();
+        if (h) {
+          sound.playMilestoneUnlock();
+          showBubble(i18n("msg_hint_shown"), 2200);
+        } else {
+          sound.playInvalid();
+          showBubble(i18n("msg_hint_none"), 1800);
+        }
+        updateHUD();
+        saveGame();
+      });
+      return;
+    }
+    const hint = puzzle.triggerHint();
+    if (hint) {
+      sound.playSnap();
+      showBubble(i18n("msg_hint_shown"), 2200);
+    } else {
+      sound.playInvalid();
+      showBubble(i18n("msg_hint_none"), 1800);
+    }
+    updateHUD();
+    saveGame();
+  }
+
   puzzle = new window.PuzzleEngine(boardCanvas, fxCanvas, slotCanvases, {
     onSnap: () => {
       sound.playSnap();
+    },
+    onKeyboardHint: () => {
+      triggerHintFlow();
     },
     onIceCrack: () => {
       sound.playIceCrack();
@@ -1496,15 +1600,24 @@
     },
     onBlitzTick: (sec) => {
       if (puzzle.mode !== "blitz" || !cravingText) return;
+      const safeSec = Math.max(0, sec);
       cravingText.textContent = i18n("blitz_hud_label", {
-        sec: Math.max(0, sec),
+        sec: safeSec,
         best: appState.blitzBestScore || 0
       });
+      if (cravingPill) {
+        cravingPill.classList.toggle("is-urgent", safeSec > 0 && safeSec <= 10);
+      }
+      if (safeSec > 0 && safeSec <= 10 && !appState.powerSaver && typeof sound.playBlitzTick === "function") {
+        sound.playBlitzTick(safeSec);
+      }
     },
     onBlitzComplete: (finalScore) => {
-      if (finalScore > (appState.blitzBestScore || 0)) {
+      const prevBest = appState.blitzBestScore || 0;
+      if (finalScore > prevBest) {
         appState.blitzBestScore = finalScore;
       }
+      if (cravingPill) cravingPill.classList.remove("is-urgent");
       const rewardFish = Math.max(1, Math.min(8, Math.floor(finalScore / 250)));
       appState.treats += rewardFish;
       grantFriendXp(20 + Math.min(30, Math.floor(finalScore / 150)));
@@ -1516,6 +1629,7 @@
       goTitle.textContent = i18n("blitz_win_t");
       goSubtitle.textContent = i18n("blitz_win_s", { score: finalScore, fish: rewardFish });
       if (goRunSummary) goRunSummary.classList.add("hidden");
+      renderRunBreakdown(finalScore, prevBest);
       if (btnDoubleRunFishAd) btnDoubleRunFishAd.classList.add("hidden");
       if (btnRescuePackAd) btnRescuePackAd.classList.add("hidden");
       if (btnRematchSeed) btnRematchSeed.classList.add("hidden");
@@ -1525,6 +1639,7 @@
       gameOverModal.classList.remove("hidden");
       updateHUD();
       saveGame();
+      pushScoresToCloud("blitz");
     },
     onBombBlast: () => {
       sound.playBomb();
@@ -1568,6 +1683,7 @@
         appState.dailyBestScore = puzzle.score;
       }
       if (goRunSummary) goRunSummary.classList.add("hidden");
+      if (runBreakdownCard) runBreakdownCard.classList.add("hidden");
       if (btnDoubleRunFishAd) btnDoubleRunFishAd.classList.add("hidden");
       if (btnRescuePackAd) btnRescuePackAd.classList.add("hidden");
       if (btnRematchSeed) btnRematchSeed.classList.add("hidden");
@@ -1613,6 +1729,7 @@
       goScore.textContent = puzzle.score;
       goBest.textContent = appState.bestScore;
       if (goRunSummary) goRunSummary.classList.add("hidden");
+      if (runBreakdownCard) runBreakdownCard.classList.add("hidden");
       if (btnDoubleRunFishAd) btnDoubleRunFishAd.classList.add("hidden");
       if (btnRescuePackAd) btnRescuePackAd.classList.add("hidden");
       if (btnRematchSeed) btnRematchSeed.classList.add("hidden");
@@ -1763,6 +1880,7 @@
         goRunSummary.textContent = i18n("go_run_summary", { lines: runLines, fish: runFish });
         goRunSummary.classList.remove("hidden");
       }
+      renderRunBreakdown(puzzle.score, appState.bestScore || 0);
       if (btnDoubleRunFishAd) {
         const showDouble = runFish > 0 && !runFishDoubledThisRun;
         btnDoubleRunFishAd.classList.toggle("hidden", !showDouble);
@@ -2684,6 +2802,21 @@
   if (btnCloudSyncNow) {
     btnCloudSyncNow.addEventListener("click", () => performCloudSyncNow(true));
   }
+  if (btnTestCloudHealth && cloudHealthText) {
+    btnTestCloudHealth.addEventListener("click", async () => {
+      if (!Mon || !Mon.MochiCloud || typeof Mon.MochiCloud.checkHealth !== "function") return;
+      cloudHealthText.textContent = "⏳ ...";
+      cloudHealthText.classList.remove("ok", "err");
+      try {
+        const res = await Mon.MochiCloud.checkHealth();
+        cloudHealthText.textContent = `✅ Online (${res.latencyMs} ms)`;
+        cloudHealthText.classList.add("ok");
+      } catch (_) {
+        cloudHealthText.textContent = "📴 Offline / Deploy pending";
+        cloudHealthText.classList.add("err");
+      }
+    });
+  }
   if (btnExportSaveJson) {
     btnExportSaveJson.addEventListener("click", () => {
       try {
@@ -2942,6 +3075,14 @@
 
   // Wardrobe Modal (Coat Skins + Accessories + Interactive Toys + Smart Gadgets + Room Decor)
   function renderClosetSection(title, items, unlockedList, equippedIdOrList, onEquipOrBuy) {
+    const filteredItems = items.filter((item) => {
+      const unlocked = unlockedList.includes(item.id);
+      if (activeClosetFilter === "owned") return unlocked;
+      if (activeClosetFilter === "locked") return !unlocked;
+      return true;
+    });
+    if (filteredItems.length === 0) return;
+
     const heading = document.createElement("div");
     heading.className = "closet-section-title";
     heading.textContent = title;
@@ -2950,7 +3091,7 @@
     const streak = appState.streakDays || 1;
     const isMulti = Array.isArray(equippedIdOrList);
 
-    for (const item of items) {
+    for (const item of filteredItems) {
       const unlocked = unlockedList.includes(item.id);
       const equipped = isMulti ? equippedIdOrList.includes(item.id) : equippedIdOrList === item.id;
       const card = document.createElement("button");
@@ -3103,6 +3244,15 @@
 
   function renderCloset() {
     closetGrid.innerHTML = "";
+    if (closetSetBanner) {
+      const setBonus = getActiveOutfitSet();
+      if (setBonus) {
+        closetSetBanner.textContent = i18n("closet_set_active", { name: setBonus.name });
+        closetSetBanner.classList.remove("hidden");
+      } else {
+        closetSetBanner.classList.add("hidden");
+      }
+    }
     const showStyle = activeClosetTab === "all" || activeClosetTab === "style";
     const showToys = activeClosetTab === "all" || activeClosetTab === "toys";
     const showRoom = activeClosetTab === "all" || activeClosetTab === "room";
@@ -3222,6 +3372,17 @@
       if (!btn) return;
       activeClosetTab = btn.dataset.tab || "all";
       closetTabs.querySelectorAll(".closet-tab").forEach((el) => {
+        el.classList.toggle("active", el === btn);
+      });
+      renderCloset();
+    });
+  }
+  if (closetFilterChips) {
+    closetFilterChips.addEventListener("click", (e) => {
+      const btn = e.target.closest(".closet-filter-btn");
+      if (!btn) return;
+      activeClosetFilter = btn.dataset.filter || "all";
+      closetFilterChips.querySelectorAll(".closet-filter-btn").forEach((el) => {
         el.classList.toggle("active", el === btn);
       });
       renderCloset();
@@ -4087,6 +4248,9 @@
       updateHUD();
     });
   }
+  if (btnHint) {
+    btnHint.addEventListener("click", triggerHintFlow);
+  }
 
   function openDiaryModal() {
     ensureAudioUnlocked();
@@ -4468,7 +4632,10 @@
       ? window.MochiAdventure.getTotalStars(appState.adventureStars || {})
       : Object.values(appState.adventureStars || {}).reduce((a, b) => a + (Number(b) || 0), 0);
     const isStarsTab = activeLeagueTab === "stars";
-    const myScore = isStarsTab ? totalAdvStars : (activeLeagueTab === "daily" ? myDaily : (appState.bestScore || 0));
+    const isBlitzTab = activeLeagueTab === "blitz";
+    const myScore = isStarsTab
+      ? totalAdvStars
+      : (isBlitzTab ? (appState.blitzBestScore || 0) : (activeLeagueTab === "daily" ? myDaily : (appState.bestScore || 0)));
     const tier = Mon.getLeagueTier(appState.bestScore || 0);
     const nick = (appState.nickname && appState.nickname.trim()) || "MochiFan";
     if (leagueTierBanner) {
@@ -4507,11 +4674,16 @@
           nickname: nick,
           playerBest: appState.bestScore || 0,
           playerDailyBest: myDaily,
-          mode: activeLeagueTab === "daily" ? "daily" : "weekly"
+          playerBlitzBest: appState.blitzBestScore || 0,
+          mode: activeLeagueTab === "daily" ? "daily" : (isBlitzTab ? "blitz" : "weekly")
         });
     paintLeagueRows(fallbackRows, isStarsTab);
     if (isStarsTab && !Mon.loadRemoteConfig().leaderboardStarsLive) {
       if (leagueNoteText) leagueNoteText.textContent = "⭐ Adventure Story Stars Standings";
+      return;
+    }
+    if (isBlitzTab && !Mon.loadRemoteConfig().leaderboardBlitzLive) {
+      if (leagueNoteText) leagueNoteText.textContent = "⏱️ 90s Blitz Rush Standings";
       return;
     }
     if (leagueNoteText) leagueNoteText.textContent = "⏳ Connecting to api.jemangr.app...";
