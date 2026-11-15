@@ -1,5 +1,21 @@
 # Changelog — Mochi Pop!
 
+## [1.0.0] - 2026-11-15
+### Added & Improved
+- **⚡ Board Popups & Blitz Last-10s Urgency (`puzzle.js`, `audio.js`, `styles.css`, `main.js`):**
+  - Added floating score popups on normal placements (`+${pts}`), dedicated `🔥 COMBO ×N!` floating banners on multi-combos, and run metric tracking (`runMaxCombo`, `runSpecialPops`, `getRunStats()`).
+  - Added pulsing red/rose `.is-urgent` urgency highlight + `sound.playBlitzTick()` countdown ticks during the final 10 seconds of **90s Blitz**.
+- **💡 Smart Move Hint (`puzzle.js`, `main.js`, `index.html`, `i18n.js`):**
+  - Added `findBestMoveHint()` & `triggerHint()` (hotkey `T` + `#btnHint` button in `.tray-actions`, 1 free hint per run + Rewarded Ad refill) highlighting the strongest placement on the 8×8 board with a pulsing golden silhouette.
+- **📊 End-of-Run Breakdown Card (`index.html`, `styles.css`, `main.js`, `i18n.js`):**
+  - Added `#runBreakdownCard` to Classic Game Over & Blitz Complete showing **Lines**, **Best Combo**, **Specials**, and **vs Best** record gap across all 6 languages.
+- **🎀 Closet Filters & Outfit Set Bonus (`index.html`, `styles.css`, `main.js`, `i18n.js`):**
+  - Added `#closetFilterChips` (**All / Owned / Locked**) and `getActiveOutfitSet()` matching costume sets (**Royal Party**, **Cozy Sakura**, **Cool Café**, **Cozy Knit**) granting `+10% Friendship XP` with `#closetSetBanner`.
+- **🐱 Living Mochi Night Dreams & Idle Window Curiosity (`pet.js`):**
+  - Added cozy floating Night dream bubbles (`💭🐟`, `💭🧶`, `💭👑`) during night sleep and periodic autonomous window curiosity glances after 16+ idle seconds.
+- **☁️ Backend Prep for GitHub Pages & Blitz League (`server/src/worker.js`, `monetization.js`, `version.json`, `index.html`, `main.js`):**
+  - Added `https://jemangr.github.io` to Worker `corsHeaders()`, `"blitz"` to `VALID_MODES`, `"leaderboardBlitzLive": false` remote flag, `#leagueTabs` **⏱️ Blitz** tab, and `MochiCloud.checkHealth()` / **🩺 Test API** health & latency ping in Cloud Save.
+
 ## [0.9.0] - 2026-11-15
 ### Added & Improved
 - **⏱️ 90s Blitz Rush Mode (`puzzle.js`, `main.js`, `index.html`, `styles.css`, `i18n.js`):**
