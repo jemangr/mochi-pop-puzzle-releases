@@ -22,7 +22,7 @@
 
 <br /><br />
 
-![Latest Version](https://img.shields.io/badge/Latest_Version-v0.9.0-ff6b8b?style=for-the-badge&logo=android&logoColor=white)
+![Latest Version](https://img.shields.io/badge/Latest_Version-v1.0.0-ff6b8b?style=for-the-badge&logo=android&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-8.0%2B-3ddc84?style=for-the-badge&logo=android&logoColor=white)
 ![Languages](https://img.shields.io/badge/Languages-6-7c5cff?style=for-the-badge)
 ![Price](https://img.shields.io/badge/Free_to_Play-Offline_Friendly-ff9f43?style=for-the-badge)
@@ -49,14 +49,14 @@
 
 ---
 
-## ✨ What's New in v0.9.0
+## ✨ What's New in v1.0.0
 
-- **⏱️ 90s Blitz Rush Mode:** Fast-paced 90-second timed puzzle mode that awards `+2s` per cleared line (`+5s` on multi-line combos), automatically rescues deadlocked trays until time expires, and tracks its own **Blitz Best Score**.
-- **🎯 Hammer Target Reticle & 💣 3×3 Bomb Outcome Preview:** Hovering in **🔨 Hammer** mode highlights the target cell with a live `CRACK` / `SMASH` reticle; aiming a **💣 Bomb** displays exact affected block, ice, crate, and fish counts before you drop.
-- **🎟️ Album Pity System & Token Shop:** Guarantees a non-duplicate **Mochi Moments** sticker card after 2 duplicates in a row, and swaps duplicate **Tokens** (`2 🎟️ → +1 🔨 Hammer` or `+1 ↻ Rotate`) right inside the Album.
-- **🐟 3rd Mini-Game — Fish Rain Catcher:** Steer Mochi smoothly left & right with touch/mouse drag or taps to catch falling golden fish before the timer ends!
-- **💡 Interactive Hanging Lamp, Window Peek & Theme Music:** Tap the overhead **Hanging Lamp** to toggle cozy Night Mode, tap the **Window** to make Mochi inspect the weather, and enjoy distinct **Beach** & **Winter** Web Audio music loops matching your room theme.
-- **🌐 Live Play-in-Browser Web Demo:** Try the full offline-capable PWA directly on GitHub Pages at [https://jemangr.github.io/mochi-pop-puzzle-releases/](https://jemangr.github.io/mochi-pop-puzzle-releases/).
+- **⚡ Floating Board Popups & Blitz Last-10s Urgency:** Crisp floating `+pts` & `🔥 COMBO ×N!` badges right on the 8×8 board, plus a pulsing urgency timer & countdown ticks in the final 10 seconds of **90s Blitz**.
+- **💡 Smart Move Hint (`T` / `💡`):** Evaluates tray moves against clears, combos, and board fit — glowing gold over the best placement (`1 free/run` + Ad refill).
+- **📊 End-of-Run Breakdown Card:** Game Over & Blitz Complete screens summarize *Lines*, *Best Combo*, *Special Pops*, and your exact *Record Gap*.
+- **🎀 Closet Filters & Outfit Set Bonuses:** Filter by **All / Owned / Locked** and equip matching outfits (*Royal Party*, *Cozy Sakura*, *Cool Café*, *Cozy Knit*) for `+10% Friendship XP`.
+- **🐱 Living Mochi Night Dreams & Idle Curiosity:** Mochi dreams of fish, yarn, and crowns when asleep at night and peeks curiously around after idle pauses.
+- **⏱️ Blitz Purr League Tab & Cloud Health Ping:** Added dedicated **Blitz** rankings to Purr League plus a **🩺 Test API** connection & latency indicator in Cloud Save.
 
 ---
 
@@ -64,13 +64,13 @@
 
 | Feature | Highlights |
 | :--- | :--- |
-| 🧩 **8×8 Puzzle Modes** | Play **Classic**, **🧘 Zen**, **⏱️ 90s Blitz**, **📖 20 Story Levels (60⭐)**, **☀️ Daily Seeded Challenge**, or **MCH:** Friend Challenges with **Hold / Rotate / Hammer / Refresh / Bomb / Undo**. |
-| 💥 **Special Tiles & Smart Previews** | Crack 2-hit **Ice** & **Wooden Crates**, detonate **3×3 Bombs** with live area counts, launch **Rockets**, pop **Rainbow** crystals, and preview live `+pts` badges. |
-| 🐾 **Living 3D Pet (Mochi)** | Pet Mochi's ears, chin & belly, feed fish treats, tap the **Lamp** or **Window**, play with toys, log entries in **Mochi's Diary**, and climb **Friendship Lv.1–50**. |
+| 🧩 **8×8 Puzzle Modes** | Play **Classic**, **🧘 Zen**, **⏱️ 90s Blitz**, **📖 20 Story Levels (60⭐)**, **☀️ Daily Seeded Challenge**, or **MCH:** Friend Challenges with **Hold / Rotate / Hammer / Hint / Refresh / Bomb / Undo**. |
+| 💥 **Special Tiles & Smart Previews** | Crack 2-hit **Ice** & **Wooden Crates**, detonate **3×3 Bombs** with live area counts, launch **Rockets**, pop **Rainbow** crystals, and see live `+pts` / `🔥 COMBO!` popups. |
+| 🐾 **Living 3D Pet (Mochi)** | Pet Mochi's ears, chin & belly, feed fish treats, tap the **Lamp** or **Window**, watch her **Night Dreams**, log memories in **Mochi's Diary**, and climb **Friendship Lv.1–50**. |
 | 🐟 **3 Cozy Mini-Games & 🏅 Trophy Room** | Play **🔴 Laser Dash**, **🍪 Cozy Bakery**, and **🐟 Fish Rain Catcher**, and unlock **10 Trophy Medals**. |
-| 🛍️ **Closet, Album Pity & Photo Studio** | Customize hats, scarves, collars, fur coats, rugs, room themes & tile skins, unlock cards with **Duplicate Pity + Token Trades**, and design `540×680` **Postcards**. |
-| 🗓️ **Monthly Archive & Cloud Backup** | Replay missed Daily Challenges, claim **Purr League** standings & **⭐ Stars**, and transfer progress across devices with `MOCHI-XXXX-XXXX` codes or `.json` files. |
-| 🔊 **Audio Mixer & Accessibility** | Independent Music (with Peach, Night, Beach & Winter themes), SFX & Cat voice sliders, 6 languages (`EN / EL / DE / ES / FR / TR`), **Colorblind Shapes**, and **30 FPS Power Saver**. |
+| 🛍️ **Closet Sets, Album Pity & Photo Studio** | Filter outfits, activate **+10% XP Costume Sets**, unlock cards with **Duplicate Pity + Token Trades**, and design `540×680` **Postcards**. |
+| 🗓️ **Monthly Archive & Cloud Backup** | Replay missed Daily Challenges, claim **Purr League** standings (**Daily / Weekly / Blitz / All-Time / ⭐ Stars**), and transfer progress via `MOCHI-XXXX-XXXX` codes or `.json`. |
+| 🔊 **Audio Mixer & Accessibility** | Independent Music (Peach, Night, Beach & Winter loops), SFX & Cat voice sliders, 6 languages (`EN / EL / DE / ES / FR / TR`), **Colorblind Shapes**, and **30 FPS Power Saver**. |
 
 ---
 
