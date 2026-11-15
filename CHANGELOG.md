@@ -1,5 +1,20 @@
 # Changelog — Mochi Pop!
 
+## [0.9.0] - 2026-11-15
+### Added & Improved
+- **⏱️ 90s Blitz Rush Mode (`puzzle.js`, `main.js`, `index.html`, `styles.css`, `i18n.js`):**
+  - Added `#btnBlitzMode` (`startBlitzMode()`) with a 90-second arcade countdown (`+2s` / `+5s` bonus time per clear/combo), automatic board rescue keep-alive while time remains, separate `blitzBestScore`, and end-of-run `🐟` & Friend XP rewards across all 6 languages.
+- **🔨 Hammer Hover Reticle & 💣 Bomb Outcome Preview (`puzzle.js`):**
+  - Added live crosshair & target badge (`❄️ CRACK`, `📦 CRACK`, `🔨 SMASH +45`) on pointer hover during `hammerMode`, plus live `3×3` block, crystal ice & fish summary inside the hover Bomb badge.
+- **🎟️ Album Pity System & Token Exchange (`monetization.js`, `main.js`, `index.html`):**
+  - Added `pickAlbumCardWithPity()` (guarantees a missing card after 2 consecutive duplicates) + `#albumTokensBar` (`🎟️ Tokens`) inside the Sticker Album to trade `2 Tokens` for `+1 🔨` or `+1 ↻`.
+- **🐟 3rd Mini-Game (`Fish Rain`), Interactive Lamp & Window, Theme Music Chords (`minigame.js`, `audio.js`, `main.js`, `index.html`):**
+  - Added **🐟 Fish Rain Catcher** (`mode === "rain"`) to `#mgModeChips` with horizontal pointer/drag movement.
+  - Made the overhead `#hangingLamp` clickable to toggle cozy Night/Day ambience directly and `#roomWindow` clickable for an interactive weather-peek reaction.
+  - Added distinct Web Audio chord progressions per room theme (`Beach` tropical pluck & `Winter` crystal bells) via `sound.setRoomTheme()`.
+- **🌐 Public Releases Refresh & Live Web Play (`jemangr/mochi-pop-puzzle-releases`):**
+  - Updated showcase screenshots (`assets/screenshot-day.png`, `assets/screenshot-night.png`) from `v0.9.0` and deployed the live **Play in Browser** demo on GitHub Pages (`gh-pages`).
+
 ## [0.8.0] - 2026-11-15
 ### Added & Improved
 - **Toy Hammer Power-Up (`puzzle.js`, `audio.js`, `main.js`, `index.html`, `styles.css`, `i18n.js`):**
