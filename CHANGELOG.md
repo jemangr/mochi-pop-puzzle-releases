@@ -1,5 +1,18 @@
 # Changelog — Mochi Pop!
 
+## [1.0.1] - 2026-11-17
+### Added & Improved
+- **🐟 Realistic Fish Visual Unification (`pet.js`, `puzzle.js`, `minigame.js`):**
+  - Replaced the disparate flat yellow vector fish and OS-dependent emoji (`🐟`, which rendered as an inconsistent solid blue fish on Android Noto Color Emoji / Moto G54) with a unified procedural 3D vector renderer matching the realistic fish Mochi holds and eats in `assets/sprites/eat.webp`.
+  - The unified renderer features a steely iridescent ocean-blue dorsal back (`#2c5270` -> `#3d739c`), silvery-cyan lateral band (`#74a8cc`), pearlescent white/cream belly (`#e3edf5` -> `#fffaf0`), translucent warm amber/golden fins & tail (`#f59e0b` / `#fbbf24`), glossy eye with catchlight, and delicate gill/scale accents.
+  - Applied consistently across:
+    - Ceramic Food Bowl treat (`pet.js`)
+    - Interactive dragged snack from bowl to Mochi (`pet.js`)
+    - Flying snack feeding arcs (`pet.js`)
+    - Board clear flying fish arcs to bowl (`puzzle.js`)
+    - Special fish tile emblems on the 8×8 board & adventure stages (`puzzle.js`)
+    - Mini-game falling/tap fish targets (`minigame.js`)
+
 ## [1.0.0] - 2026-11-15
 ### Added & Improved
 - **⚡ Board Popups & Blitz Last-10s Urgency (`puzzle.js`, `audio.js`, `styles.css`, `main.js`):**
