@@ -59,6 +59,195 @@
     }
   };
 
+  /**
+   * Universal procedural realistic fish renderer matching assets/sprites/eat.webp:
+   * Steely iridescent ocean blue back, pearlescent silver & cream belly, warm amber translucent fins & tail,
+   * glossy eye with specular catchlight, gill arch, and fine scale sheen.
+   */
+  function drawRealisticFish(ctx, cx, cy, size, angle = 0, options = {}) {
+    ctx.save();
+    ctx.translate(cx, cy);
+    if (angle) ctx.rotate(angle);
+    if (options.flipY) ctx.scale(1, -1);
+    if (options.flipX) ctx.scale(-1, 1);
+
+    const s = size / 32; // base scale relative to 32px standard size
+
+    // Soft ambient shadow
+    if (options.shadow !== false) {
+      ctx.save();
+      ctx.shadowColor = options.shadowColor || "rgba(18, 10, 28, 0.45)";
+      ctx.shadowBlur = 8 * s;
+      ctx.shadowOffsetY = 4 * s;
+      ctx.fillStyle = "rgba(0,0,0,0.01)";
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 14 * s, 6 * s, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // 1. Tail fin (forked caudal fin with amber/golden translucence)
+    ctx.save();
+    const tailGrad = ctx.createLinearGradient(8 * s, 0, 17 * s, 0);
+    tailGrad.addColorStop(0, "#f59e0b");
+    tailGrad.addColorStop(0.6, "#fbbf24");
+    tailGrad.addColorStop(1, "rgba(245, 158, 11, 0.85)");
+    ctx.fillStyle = tailGrad;
+    ctx.beginPath();
+    ctx.moveTo(9 * s, 0);
+    ctx.quadraticCurveTo(12 * s, -4 * s, 17 * s, -7 * s);
+    ctx.quadraticCurveTo(13.5 * s, -1 * s, 14 * s, 0);
+    ctx.quadraticCurveTo(13.5 * s, 1 * s, 17 * s, 7 * s);
+    ctx.quadraticCurveTo(12 * s, 4 * s, 9 * s, 0);
+    ctx.closePath();
+    ctx.fill();
+
+    // Tail fin ray strokes
+    ctx.strokeStyle = "rgba(180, 83, 9, 0.45)";
+    ctx.lineWidth = 0.75 * s;
+    ctx.beginPath();
+    ctx.moveTo(10 * s, 0); ctx.lineTo(16 * s, -5 * s);
+    ctx.moveTo(10 * s, 0); ctx.lineTo(13.5 * s, 0);
+    ctx.moveTo(10 * s, 0); ctx.lineTo(16 * s, 5 * s);
+    ctx.stroke();
+    ctx.restore();
+
+    // 2. Dorsal fin (small top fin)
+    ctx.save();
+    const dorsalGrad = ctx.createLinearGradient(-3 * s, -6 * s, 4 * s, -6 * s);
+    dorsalGrad.addColorStop(0, "rgba(245, 158, 11, 0.9)");
+    dorsalGrad.addColorStop(1, "rgba(251, 191, 36, 0.65)");
+    ctx.fillStyle = dorsalGrad;
+    ctx.beginPath();
+    ctx.moveTo(-3 * s, -4.5 * s);
+    ctx.quadraticCurveTo(-1 * s, -8.5 * s, 4 * s, -7.2 * s);
+    ctx.quadraticCurveTo(2 * s, -4.5 * s, 1 * s, -4.2 * s);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+
+    // 3. Ventral / anal fin (small bottom fin)
+    ctx.save();
+    ctx.fillStyle = "rgba(245, 158, 11, 0.75)";
+    ctx.beginPath();
+    ctx.moveTo(3 * s, 4 * s);
+    ctx.quadraticCurveTo(5 * s, 6.8 * s, 7 * s, 5.5 * s);
+    ctx.quadraticCurveTo(5 * s, 3.8 * s, 4 * s, 3.5 * s);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+
+    // 4. Main Fish Body (Silvery Pearlescent Belly + Iridescent Ocean Blue Back)
+    ctx.save();
+    // Body shape path
+    ctx.beginPath();
+    ctx.moveTo(-15 * s, 0); // snout
+    ctx.bezierCurveTo(-12 * s, -6 * s, -2 * s, -6.5 * s, 6 * s, -4 * s);
+    ctx.bezierCurveTo(9 * s, -2.5 * s, 10 * s, -1 * s, 11 * s, 0); // peduncle
+    ctx.bezierCurveTo(10 * s, 1 * s, 9 * s, 2.5 * s, 6 * s, 4.5 * s);
+    ctx.bezierCurveTo(-2 * s, 7 * s, -12 * s, 6 * s, -15 * s, 0);
+    ctx.closePath();
+
+    // Base realistic shading: deep ocean blue top, silvery-cyan mid, pale cream belly
+    const bodyGrad = ctx.createLinearGradient(0, -7 * s, 0, 7 * s);
+    bodyGrad.addColorStop(0, "#2c5270");      // deep iridescent steely blue (top)
+    bodyGrad.addColorStop(0.28, "#3d739c");   // ocean blue
+    bodyGrad.addColorStop(0.48, "#74a8cc");   // iridescent silvery-cyan lateral line
+    bodyGrad.addColorStop(0.70, "#e3edf5");   // pearl silver
+    bodyGrad.addColorStop(0.92, "#fffaf0");   // warm cream belly
+    bodyGrad.addColorStop(1, "#fde68a");      // subtle amber warm reflection on bottom
+    ctx.fillStyle = bodyGrad;
+    ctx.fill();
+
+    // Body outline / rim definition
+    ctx.strokeStyle = "rgba(30, 58, 82, 0.65)";
+    ctx.lineWidth = 0.85 * s;
+    ctx.stroke();
+
+    // 5. Specular highlight along upper back curve
+    ctx.beginPath();
+    ctx.moveTo(-10 * s, -3.2 * s);
+    ctx.quadraticCurveTo(-2 * s, -4.8 * s, 5 * s, -2.8 * s);
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
+    ctx.lineWidth = 1.1 * s;
+    ctx.stroke();
+
+    // 6. Delicate iridescent lateral scale sheen
+    if (s >= 0.7) {
+      ctx.save();
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.28)";
+      ctx.lineWidth = 0.6 * s;
+      const scaleCols = [-5, -2, 1, 4];
+      for (const sc of scaleCols) {
+        ctx.beginPath();
+        ctx.arc(sc * s, -0.2 * s, 1.8 * s, -Math.PI * 0.4, Math.PI * 0.4);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc((sc + 1.2) * s, 1.6 * s, 1.6 * s, -Math.PI * 0.4, Math.PI * 0.4);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    // 7. Operculum / Gill cover curve
+    ctx.beginPath();
+    ctx.arc(-8 * s, 0.5 * s, 3.8 * s, -Math.PI * 0.42, Math.PI * 0.38);
+    ctx.strokeStyle = "rgba(60, 95, 120, 0.55)";
+    ctx.lineWidth = 0.9 * s;
+    ctx.stroke();
+
+    // 8. Pectoral fin (side fin on flank)
+    ctx.save();
+    const pecGrad = ctx.createLinearGradient(-7 * s, 0, -2 * s, 3.5 * s);
+    pecGrad.addColorStop(0, "rgba(245, 158, 11, 0.9)");
+    pecGrad.addColorStop(1, "rgba(251, 191, 36, 0.6)");
+    ctx.fillStyle = pecGrad;
+    ctx.beginPath();
+    ctx.moveTo(-7 * s, 0.5 * s);
+    ctx.quadraticCurveTo(-4 * s, 1.2 * s, -2 * s, 4.2 * s);
+    ctx.quadraticCurveTo(-4.5 * s, 3.2 * s, -6.5 * s, 2 * s);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = "rgba(180, 83, 9, 0.5)";
+    ctx.lineWidth = 0.6 * s;
+    ctx.stroke();
+    ctx.restore();
+
+    // 9. Realistic glossy Eye
+    const eyeX = -10.5 * s;
+    const eyeY = -1.2 * s;
+    const eyeR = 1.65 * s;
+
+    // Outer silver/amber iris ring
+    ctx.fillStyle = "#fbbf24";
+    ctx.beginPath();
+    ctx.arc(eyeX, eyeY, eyeR * 1.15, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Deep shiny pupil
+    ctx.fillStyle = "#0f172a";
+    ctx.beginPath();
+    ctx.arc(eyeX, eyeY, eyeR * 0.85, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Crisp specular catchlight
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath();
+    ctx.arc(eyeX - eyeR * 0.3, eyeY - eyeR * 0.3, eyeR * 0.42, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 10. Tiny mouth cleft
+    ctx.strokeStyle = "rgba(30, 50, 70, 0.7)";
+    ctx.lineWidth = 0.7 * s;
+    ctx.beginPath();
+    ctx.moveTo(-15 * s, 0);
+    ctx.lineTo(-13.5 * s, 0.6 * s);
+    ctx.stroke();
+
+    ctx.restore(); // end main body
+    ctx.restore(); // end main translate/rotate
+  }
+
   class MochiPet {
     constructor(canvas) {
       this.canvas = canvas;
@@ -1006,12 +1195,9 @@
 
       if (this.draggedSnack) {
         ctx.save();
-        ctx.shadowColor = "rgba(255, 180, 60, 0.85)";
-        ctx.shadowBlur = 12;
-        ctx.font = "28px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("🐟", this.draggedSnack.x, this.draggedSnack.y);
+        ctx.shadowColor = "rgba(255, 190, 70, 0.9)";
+        ctx.shadowBlur = 14;
+        drawRealisticFish(ctx, this.draggedSnack.x, this.draggedSnack.y, 36, -0.15, { shadow: false });
         ctx.restore();
       }
     }
@@ -1731,45 +1917,11 @@
       ctx.ellipse(0, -1.7, 14.5, 4.0, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Crisp 3D vector golden fish treat inside bowl
+      // Crisp realistic fish treat inside bowl (matches eat.webp)
       if (this.treatsCount > 0) {
         ctx.save();
-        ctx.translate(-0.5, -1.9);
-        // Subtle fish contact shadow in bowl
-        ctx.fillStyle = "rgba(110, 62, 26, 0.25)";
-        ctx.beginPath();
-        ctx.ellipse(0, 1.8, 7.5, 2.1, 0, 0, Math.PI * 2);
-        ctx.fill();
-        // Tail fin
-        ctx.fillStyle = "#f59f00";
-        ctx.beginPath();
-        ctx.moveTo(4.2, 0);
-        ctx.lineTo(8.8, -3.2);
-        ctx.lineTo(8.0, 0);
-        ctx.lineTo(8.8, 3.2);
-        ctx.closePath();
-        ctx.fill();
-        // Golden fish body
-        const fishGrad = ctx.createLinearGradient(-7, -3.5, 5, 3.5);
-        fishGrad.addColorStop(0, "#fff099");
-        fishGrad.addColorStop(0.55, "#ffbe3b");
-        fishGrad.addColorStop(1, "#e67e00");
-        ctx.fillStyle = fishGrad;
-        ctx.beginPath();
-        ctx.ellipse(-0.6, 0, 6.2, 3.3, -0.06, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = "rgba(160, 82, 0, 0.45)";
-        ctx.lineWidth = 0.7;
-        ctx.stroke();
-        // Glossy dorsal catchlight & eye
-        ctx.fillStyle = "rgba(255, 255, 255, 0.68)";
-        ctx.beginPath();
-        ctx.ellipse(-1.8, -1.4, 2.8, 0.9, -0.1, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "#2b1d2e";
-        ctx.beginPath();
-        ctx.arc(-4.2, -0.4, 0.85, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.translate(0, -1.8);
+        drawRealisticFish(ctx, 0, 0, 19, -0.06, { shadow: false });
         ctx.restore();
       }
       ctx.restore();
@@ -4218,11 +4370,9 @@
         const x = s.x + (s.tx - s.x) * ease;
         const arc = Math.sin(s.t * Math.PI) * 35;
         const y = s.y + (s.ty - s.y) * ease - arc;
+        const angle = (s.tx >= s.x ? 1 : -1) * (0.25 - s.t * 0.5);
         ctx.save();
-        ctx.font = "24px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("🐟", x, y);
+        drawRealisticFish(ctx, x, y, 28, angle, { shadow: true });
         ctx.restore();
       }
     }
@@ -4230,4 +4380,6 @@
 
   global.MochiPet = MochiPet;
   global.COAT_SKINS = COAT_SKINS;
+  global.drawRealisticFish = drawRealisticFish;
+  MochiPet.drawFish = drawRealisticFish;
 })(window);

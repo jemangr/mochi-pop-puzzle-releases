@@ -2400,22 +2400,30 @@
         ctx.restore();
       }
 
-      // Draw flying golden fish arcing into Mochi's bowl!
+      // Draw flying realistic fish arcing into Mochi's bowl!
       for (const f of this.flyingFish) {
         const u = Math.min(1, f.t);
         const inv = 1 - u;
         const x = inv * inv * f.sx + 2 * inv * u * f.cx + u * u * f.tx;
         const y = inv * inv * f.sy + 2 * inv * u * f.cy + u * u * f.ty;
+        const dx = 2 * (1 - u) * (f.cx - f.sx) + 2 * u * (f.tx - f.cx);
+        const dy = 2 * (1 - u) * (f.cy - f.sy) + 2 * u * (f.ty - f.cy);
+        const angle = Math.atan2(dy, dx) + Math.PI;
         const scale = 1.0 + Math.sin(u * Math.PI) * 0.35;
         ctx.save();
         ctx.translate(x, y);
         ctx.scale(scale, scale);
-        ctx.shadowColor = "rgba(255, 200, 60, 0.9)";
-        ctx.shadowBlur = 12;
-        ctx.font = "22px sans-serif";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("🐟", 0, 0);
+        const drawFn = (window.MochiPet && window.MochiPet.drawFish) || window.drawRealisticFish;
+        if (drawFn) {
+          drawFn(ctx, 0, 0, 28, angle, { shadow: true });
+        } else {
+          ctx.shadowColor = "rgba(255, 200, 60, 0.9)";
+          ctx.shadowBlur = 12;
+          ctx.font = "22px sans-serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("🐟", 0, 0);
+        }
         ctx.restore();
       }
 
@@ -2715,40 +2723,28 @@
       ctx.translate(cx, cy);
 
       if (kind === "fish") {
-        // Tail fin
-        ctx.fillStyle = "#f59f00";
-        ctx.beginPath();
-        ctx.moveTo(u * 0.45, 0);
-        ctx.lineTo(u * 1.05, -u * 0.55);
-        ctx.lineTo(u * 0.9, 0);
-        ctx.lineTo(u * 1.05, u * 0.55);
-        ctx.closePath();
-        ctx.fill();
-        // Glossy golden fish body
-        const fg = ctx.createLinearGradient(-u, -u * 0.5, u * 0.6, u * 0.5);
-        fg.addColorStop(0, "#fff5ad");
-        fg.addColorStop(0.55, "#ffca3a");
-        fg.addColorStop(1, "#e67e00");
-        ctx.fillStyle = fg;
-        ctx.beginPath();
-        ctx.ellipse(-u * 0.14, 0, u * 0.78, u * 0.46, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = "rgba(130, 58, 0, 0.55)";
-        ctx.lineWidth = Math.max(0.8, size * 0.032);
-        ctx.stroke();
-        // Specular highlight & bright eye
-        ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-        ctx.beginPath();
-        ctx.ellipse(-u * 0.25, -u * 0.18, u * 0.35, u * 0.11, -0.1, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "#ffffff";
-        ctx.beginPath();
-        ctx.arc(-u * 0.52, -u * 0.07, u * 0.16, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "#1f1629";
-        ctx.beginPath();
-        ctx.arc(-u * 0.54, -u * 0.07, u * 0.09, 0, Math.PI * 2);
-        ctx.fill();
+        const drawFn = (window.MochiPet && window.MochiPet.drawFish) || window.drawRealisticFish;
+        if (drawFn) {
+          drawFn(ctx, 0, 0, size * 0.72, 0, { shadow: false });
+        } else {
+          // Fallback legacy vector fish
+          ctx.fillStyle = "#f59f00";
+          ctx.beginPath();
+          ctx.moveTo(u * 0.45, 0);
+          ctx.lineTo(u * 1.05, -u * 0.55);
+          ctx.lineTo(u * 0.9, 0);
+          ctx.lineTo(u * 1.05, u * 0.55);
+          ctx.closePath();
+          ctx.fill();
+          const fg = ctx.createLinearGradient(-u, -u * 0.5, u * 0.6, u * 0.5);
+          fg.addColorStop(0, "#fff5ad");
+          fg.addColorStop(0.55, "#ffca3a");
+          fg.addColorStop(1, "#e67e00");
+          ctx.fillStyle = fg;
+          ctx.beginPath();
+          ctx.ellipse(-u * 0.14, 0, u * 0.78, u * 0.46, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
       } else if (kind === "bomb") {
         // Curved fuse + spark
         ctx.strokeStyle = "#ffd8a8";

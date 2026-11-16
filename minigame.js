@@ -488,10 +488,22 @@
             ctx.lineWidth = 2.4;
             ctx.stroke();
           }
-          ctx.font = "22px 'Segoe UI Emoji', sans-serif";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText(t.kind === "ing" ? t.icon : (t.kind === "fish" ? "🐟" : (t.kind === "tuna" ? "🥫" : (t.kind === "star" ? "⭐" : "💤"))), 0, 1);
+          if (t.kind === "fish") {
+            const drawFn = (window.MochiPet && window.MochiPet.drawFish) || window.drawRealisticFish;
+            if (drawFn) {
+              drawFn(ctx, 0, 0, t.r * 1.85, 0, { shadow: false });
+            } else {
+              ctx.font = "22px 'Segoe UI Emoji', sans-serif";
+              ctx.textAlign = "center";
+              ctx.textBaseline = "middle";
+              ctx.fillText("🐟", 0, 1);
+            }
+          } else {
+            ctx.font = "22px 'Segoe UI Emoji', sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(t.kind === "ing" ? t.icon : (t.kind === "tuna" ? "🥫" : (t.kind === "star" ? "⭐" : "💤")), 0, 1);
+          }
         }
         ctx.restore();
       }

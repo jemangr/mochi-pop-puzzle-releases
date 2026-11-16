@@ -6,7 +6,7 @@
   const SAVE_KEY = "mochi_pop_save_v1";
   const UPDATE_META_KEY = "mochi_pop_update_meta_v1";
   const ONBOARD_KEY = "mochi_pop_onboarded_v030";
-  const APP_VERSION = "1.0.0";
+  const APP_VERSION = "1.0.1";
   const SUPPORT_EMAIL = "support@jemangr.app";
   const UPDATE_CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
   const RELEASES_API_URL = "https://api.github.com/repos/jemangr/mochi-pop-puzzle-releases/releases/latest";
