@@ -1,5 +1,13 @@
 # Changelog — Mochi Pop!
 
+## [1.1.0] - 2026-11-21
+### Added & Improved
+- **🎨 Cozy Honey-Wood & Glossy Candy Bouncy Cartoon 3D UI (`styles.css`, `index.html`, `main.js`):**
+  - Replaced plain flat HUD badges & OS-dependent emojis with **24 bespoke 160×160 3D cartoon `.webp` UI icons** (`assets/ui/*.webp`) sporting cocoa-chocolate `#4a2410` outlines and glossy candy shading.
+  - Upgraded the Top HUD, Pet Meters (`Hunger` & `Mood` with dynamic sad-heart feedback), floating Social/Feature medallions (`🎡`, `🏆`, `🏅`, `🎮`, `📸`, `📖`, `⌨️`), carved 8×8 wooden board bezel, recessed piece tray slots, 6 glossy 3D pillow power-up buttons, and carved honey-oak modals.
+- **🔤 Offline 6-Language Rounded Cartoon Typography (`assets/fonts/*.woff2`, `MainActivity.java`):**
+  - Bundled `M PLUS Rounded 1c` (`700/800/900`) locally across `greek`, `latin-ext`, and `latin` subsets (`MochiDisplay`) with `.woff2` WebView MIME serving so all 6 languages (`EL`, `EN`, `DE`, `ES`, `FR`, `TR`) render offline with thick cartoon outlines across HUD, modals, and Canvas.
+
 ## [1.0.1] - 2026-11-17
 ### Added & Improved
 - **🐟 Realistic Fish Visual Unification (`pet.js`, `puzzle.js`, `minigame.js`):**
