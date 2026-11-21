@@ -1,5 +1,14 @@
 # Changelog — Mochi Pop!
 
+## [1.2.0] - 2026-11-21
+### Added & Improved
+- **Clean & Spacious Cozy Honey-Wood 3D Layout**: Decluttered the main screen so Mochi's room, pet meters, puzzle board, and bottom piece tray breathe comfortably without cramped buttons or overflowing labels:
+  - Compact 4-item `.top-hud` with combined `Score + Best` wooden tablet pill, oversized bouncy emerald **Feed** pill with overflowing 3D salmon (`#btnFeed`), **Wardrobe**, and **Settings**.
+  - Moved `.wall-frame` away from `#hungerBar`/`#moodBar`, unified the status pill (`×Mult · Lv.N`), and anchored just two crisp golden 3D room medallions on the bottom-left: **Lucky Wheel** (`🎡`) and **Mochi Hub** (`🧭`).
+  - Replaced crowded vertical stacks beside the board with a clean 2-item **challenge bar** (`Craving + Modes...`) and a dedicated full-width **Honey-Oak Power Dock** below the tray with all 6 power-up buttons (**Rotate, Hammer, Undo, Refresh, Bomb, Hint**) at `≥ 48px` width.
+  - Added **Mochi Hub** (`#mochiHubModal`) organizing **Daily Check-In, Purr League, Trophy Room, Mini-Games, Photo Studio, Sticker Album, Sound Mute/Unmute, 2× Overdrive, Toy Ball, and Keyboard Shortcuts** in a spacious 2×4 wooden grid, plus a dedicated **Game Modes** (`#modesModal`) selector for **Classic, Zen, Adventure, Daily, and 90s Blitz**.
+- **Updated Day & Night Screenshots**: Refreshed `assets/screenshot-day.png` and `assets/screenshot-night.png` to showcase the clean `v1.2.0` UI.
+
 ## [1.1.0] - 2026-11-21
 ### Added & Improved
 - **🎨 Cozy Honey-Wood & Glossy Candy Bouncy Cartoon 3D UI (`styles.css`, `index.html`, `main.js`):**

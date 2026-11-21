@@ -1,4 +1,4 @@
-# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v1.1.0`)
+# 🐱 Mochi Pop! — Cozy Pet & Block Puzzle (`v1.2.0`)
 
 > **Private Repository** — Closed Source / All Rights Reserved (`support@jemangr.app`)
 
@@ -9,6 +9,17 @@
   &nbsp;&nbsp;&nbsp;
   <img src="assets/screenshot-night.png" alt="Mochi Pop! Night Lamp & Fairy Lights" width="300" />
 </p>
+
+---
+
+## ✨ What's New in v1.2.0
+
+- **🪵 Clean & Spacious Honey-Wood 3D Layout**:
+  - **4-Item Top HUD**: Combined `Score + Best` tablet, bouncy oversized **Feed** pill with overflowing 3D salmon, **Wardrobe**, and **Settings** — zero cramped labels or overflowing text.
+  - **Breathe-Easy Pet Stage**: Clear `Hunger` & `Mood` meters, unified `×Mult · Lv.N` badge, and just two crisp golden medallions (**Lucky Wheel** & **Mochi Hub**).
+  - **Edge-to-Edge Honey-Oak Power Dock**: All 6 power-ups (**Rotate, Hammer, Undo, Refresh, Bomb, Hint**) now sit in a dedicated spacious bottom dock (`≥ 48px` buttons) instead of squishing the piece tray.
+  - **🧭 Mochi Hub & 🎮 Game Modes Modals**: Clean 2×4 wooden launcher for **Daily Check-In, Purr League, Trophy Room, Mini-Games, Photo Studio, Sticker Album, Sound Mute, 2× Overdrive, Toy Ball & Shortcuts**, plus a dedicated switcher for **Classic, Zen, Adventure, Daily & 90s Blitz**.
+- **📸 Fresh Screenshots**: Updated Day & Night showcase captures for `v1.2.0`.
 
 ---
 
