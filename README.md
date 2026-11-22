@@ -72,7 +72,7 @@
 
 ## ✨ What's New in v0.5.5
 - **👆 UI & Touch Ergonomics (`puzzle.js`, `styles.css`):** Live `✨ 1 LINE!` / `🔥 2 LINES!` ghost clear indicator, configurable **Touch Drag Height** (`Low / Normal / High`), compact narrow-phone HUD, and **Tablet Quick-Care Dock** (`💕 / 🧶 / 🎩 / 🎨`).
-- **🌤️ Seasonal Window Weather, Ad-Free Archive & Special Tips:** Dynamic seasonal weather + Winter Heater cozy buff, `🐟 15 / 📺 Ad Free` Archive choice bar, and 1-time tooltips for special blocks.
+- **🌤️ Seasonal Window Weather, Monthly Archive & Special Tips:** Dynamic seasonal weather + Winter Heater cozy buff, `🐟 15 / 📺 Watch Ad` Archive choice bar, and 1-time tooltips for special blocks.
 - **🌐 Installable Web PWA & Local `.json` Backup (`manifest.webmanifest`, `sw.js`):** Full offline browser precaching + JSON Save Export/Import inside Cloud & Backup.
 
 ## ✨ What's New in v0.5.0

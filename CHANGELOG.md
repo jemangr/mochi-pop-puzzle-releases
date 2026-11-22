@@ -138,7 +138,7 @@
   - **Touch Drag Height Setting:** Configurable `Low / Normal / High` finger lift offset (`#selectDragOffset`) across all 6 languages.
   - **Tablet Landscape Quick-Care Dock (`≥ 840px`):** Instant 1-tap `💕 Pet`, `🧶 Cycle Toy`, `🎩 Cycle Hat`, `🎨 Cycle Room Theme` buttons anchored cleanly on the pet stage.
 - **Gameplay, PWA & Offline Backup (`manifest.webmanifest`, `sw.js`, `i18n.js`, `main.js`):**
-  - **Free Ad Alternative in Monthly Archive:** Tapping a missed past day presents a dual choice bar (`🐟 15` or `📺 Ad Free`).
+  - **Free Ad Alternative in Monthly Archive:** Tapping a missed past day presents a dual choice bar (`🐟 15` or `📺 Watch Ad`).
   - **Seasonal Window Weather & Winter Cozy Buff:** Displays animated seasonal weather (`❄️ / 🌸 / ☀️ / 🍂`) inside `.room-window` and adds `+15%` Mood warmth when Winter + Heater gadget are active.
   - **1-Time Special Block Tutorials:** Automatic localized Mochi speech-bubble tips the first time `💣`, `🧊`, `🚀`, `🌈`, `🥫`, or `🎁` appears in the tray.
   - **Installable Web PWA & Offline JSON Backup:** Added `manifest.webmanifest`, `sw.js` precaching, and **📤 Export (.json) / 📥 Import (.json)** buttons inside Cloud & Backup.
